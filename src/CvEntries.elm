@@ -22,19 +22,19 @@ bekkBody =
 
 cvEntries : List CvEntry
 cvEntries =
-    [ { year = "2007"
-      , title = "NTNU / Kaist"
-      , subTitle = "(From August 2007 to July 2012)"
-      , body = ntnuBody
+    [ { year = "2018 - still here"
+      , title = "Bekk"
+      , subTitle = "(From January 2018. Still working here :))"
+      , body = bekkBody
       }
-    , { year = "2012"
+    , { year = "2012 - 2017"
       , title = "TechnipFMC (former FMC Technologies)"
       , subTitle = "(From August 2012 to December 2017)"
       , body = fmcBody
       }
-    , { year = "2018"
-      , title = "Bekk"
-      , subTitle = "(From January 2018. Still working here :))"
-      , body = bekkBody
+    , { year = "2007 - 2012"
+      , title = "NTNU / Kaist"
+      , subTitle = "(From August 2007 to July 2012)"
+      , body = ntnuBody
       }
     ]

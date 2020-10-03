@@ -30,11 +30,10 @@ view model =
                     [ getTitleRow viewport
                     , pictureRow
                     , introductionTextRow (viewportToScreenWidth viewport)
+                    , debugSizeValuesRow viewport model.y
                     , Element.image [ centerX ] { description = "Link to gitlab site", src = "/images/gitlab-color.jpg" }
                     , Element.image [ centerX, Element.width fill ] { description = "Link to github site", src = "/images/mark-github-512.png" }
                     , cv cvEntries
-
-                    --, debugSizeValuesRow viewport
                     ]
                 )
 
@@ -70,15 +69,16 @@ textFont =
     ]
 
 
-viewportToString : Viewport -> String
-viewportToString viewport =
-    "Viewport values: " ++ String.fromFloat viewport.viewport.width
-
-
-debugSizeValuesRow : Viewport -> Element msg
-debugSizeValuesRow viewport =
-    row ([ Element.width fill ] ++ dotted)
-        [ el [ alignLeft, centerY ] (Element.text (viewportToString viewport))
+debugSizeValuesRow : Viewport -> String -> Element msg
+debugSizeValuesRow viewport y =
+    column [ Element.width fill ]
+        [ paragraph [ alignLeft, centerY ] [ Element.text ("Scene, width = " ++ String.fromFloat viewport.scene.width) ]
+        , paragraph [ alignLeft, centerY ] [ Element.text ("Scene, height = " ++ String.fromFloat viewport.scene.height) ]
+        , paragraph [ alignLeft, centerY ] [ Element.text ("Viewport, x = " ++ String.fromFloat viewport.viewport.x) ]
+        , paragraph [ alignLeft, centerY ] [ Element.text ("Viewport, y = " ++ String.fromFloat viewport.viewport.y) ]
+        , paragraph [ alignLeft, centerY ] [ Element.text ("Viewport, width = " ++ String.fromFloat viewport.viewport.width) ]
+        , paragraph [ alignLeft, centerY ] [ Element.text ("Viewport, height = " ++ String.fromFloat viewport.viewport.height) ]
+        , paragraph [ alignLeft, centerY ] [ Element.text ("y = " ++ y) ]
         ]
 
 

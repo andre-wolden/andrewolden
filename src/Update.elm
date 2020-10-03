@@ -1,5 +1,6 @@
 module Update exposing (..)
 
+import Commands exposing (cmdGetViewport)
 import Messages exposing (Msg(..))
 import Model exposing (Model)
 import Utils exposing (focusSearchBox)
@@ -16,3 +17,11 @@ update message model =
 
         GotViewport viewport ->
             ( { model | viewport = Just viewport }, Cmd.none )
+
+        Resized ->
+            ( model, cmdGetViewport )
+
+        RecieveY y ->
+            ( { model | y = y }
+            , Cmd.none
+            )
