@@ -22,6 +22,6 @@ update message model =
             ( model, cmdGetViewport )
 
         RecieveY y ->
-            ( { model | y = y }
+            ( { model | maybeY = String.toInt y }
             , Cmd.none
             )

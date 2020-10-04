@@ -7,10 +7,10 @@ import Messages exposing (Msg)
 
 type alias Model =
     { viewport : Maybe Viewport
-    , y : String
+    , maybeY : Maybe Int
     }
 
 
 init : () -> ( Model, Cmd Msg )
 init flags =
-    ( { viewport = Nothing, y = "0" }, cmdGetViewport )
+    ( { viewport = Nothing, maybeY = Just 0 }, cmdGetViewport )
