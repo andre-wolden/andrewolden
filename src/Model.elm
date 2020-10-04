@@ -7,7 +7,7 @@ import Messages exposing (Msg)
 
 type alias Model =
     { viewport : Maybe Viewport
-    , maybeY : Maybe Int
+    , maybeY : Maybe Float
     }
 
 

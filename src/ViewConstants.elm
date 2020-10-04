@@ -1,6 +1,15 @@
-module ViewConstants exposing (maxContentWidth)
+module ViewConstants exposing (wContent, wContentMax)
 
 
-maxContentWidth : Int
-maxContentWidth =
-    500
+wContentMax : Float
+wContentMax =
+    1000
+
+
+wContent : Float -> Float
+wContent wScene =
+    if wScene <= wContentMax then
+        wScene
+
+    else
+        wContentMax
