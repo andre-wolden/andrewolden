@@ -2,39 +2,40 @@ module Menubar exposing (..)
 
 import Basics as Math
 import Browser.Dom exposing (Viewport)
-import Element exposing (Attr, Attribute, Element, Length, centerX, centerY, clip, column, el, fill, height, image, inFront, none, padding, paddingXY, px, rgb255, row, spacing, text, width)
+import Element exposing (Attr, Attribute, Element, Length, centerX, centerY, clip, el, fill, height, image, inFront, none, paddingXY, px, rgb255, row, spacing, text, width)
 import Element.Background exposing (color)
 import Element.Border as Border
 import Element.Font as Font
 import Messages exposing (Msg)
-import TitleRow exposing (getTitleRow)
-import ViewConstants exposing (wContent, wContentMax)
-import ViewUtils exposing (dotted)
+import ViewConstants exposing (wContent)
+import ViewTypes exposing (ViewData)
+import ViewUtils exposing (debugSizeValuesRow, dotted)
 
 
 
 -- Element.explain Debug.todo,
 
 
-menubar : Viewport -> Float -> List (Attribute Msg)
-menubar viewport y =
-    [ whiteBackgroundBox viewport y
+menubar : ViewData -> List (Attribute Msg)
+menubar viewData =
+    [ whiteBackgroundBox viewData
+    , title viewData
+    , debugSizeValuesRow viewData |> inFront
 
     --, bottomLine viewport y
-    , title viewport y
-    , picture viewport y
+    --, picture viewport y
     ]
 
 
-whiteBackgroundBox : Viewport -> Float -> Attribute Msg
-whiteBackgroundBox viewport y =
-    el [ width fill, whiteBackgroundColor, heightMenuBarAttribute viewport y, Element.explain Debug.todo ] none
+whiteBackgroundBox : ViewData -> Attribute Msg
+whiteBackgroundBox viewData =
+    el ([ width (viewData.w |> Math.floor |> px), whiteBackgroundColor, heightMenuBarAttribute viewData ] ++ dotted) none
         |> inFront
 
 
-heightMenuBarAttribute : Viewport -> Float -> Attribute msg
-heightMenuBarAttribute viewport y =
-    heightMenuBar viewport.scene.width y
+heightMenuBarAttribute : ViewData -> Attribute msg
+heightMenuBarAttribute viewData =
+    viewData.hMB
         |> Math.floor
         |> px
         |> height
@@ -43,6 +44,7 @@ heightMenuBarAttribute viewport y =
 hMax : Float -> Float
 hMax wContent =
     let
+        max : Float
         max =
             (10 / 8) * wContent + 300
     in
@@ -73,10 +75,46 @@ bottomLine viewport y =
         |> inFront
 
 
-title : Viewport -> Float -> Attribute Msg
-title viewport y =
-    el [ paddingXY 0 700, centerX, Font.size 70 ] (text "André Wolden")
+maxInt : Int -> Int -> Int
+maxInt max value =
+    if value > max then
+        max
+
+    else
+        value
+
+
+title : ViewData -> Attribute Msg
+title viewData =
+    el [ centerX, paddingXY 0 (viewData.hMB * 0.5 |> Math.floor), Font.size (viewData.hMB |> Math.floor |> maxInt 45) ] (text "André Wolden")
         |> inFront
+
+
+titleFontSize : ViewData -> Int
+titleFontSize viewData =
+    ((70 - 12) / (hMax viewData.w - hMin viewData.w))
+        * viewData.hMB
+        |> Math.floor
+
+
+titlePaddingY : ViewData -> Int
+titlePaddingY viewData =
+    viewData.hMB * 2 / 3 |> Math.floor
+
+
+titlePaddingX : ViewData -> Int
+titlePaddingX viewData =
+    viewData.w / 2 |> Math.floor
+
+
+titleBoxHeight : Viewport -> Float -> Float
+titleBoxHeight viewport y =
+    32
+
+
+totalPadding : Viewport -> Float -> Float
+totalPadding viewport y =
+    64
 
 
 picture : Viewport -> Float -> Attribute Msg
@@ -90,16 +128,6 @@ picture viewport y =
                 , Element.width (px (Math.floor (pictureDiameter (wContent viewport.scene.width))))
                 ]
                 { description = "Picture of me.", src = "/images/4.jpg" }
-
-
-titleBoxHeight : Viewport -> Float -> Float
-titleBoxHeight viewport y =
-    32
-
-
-totalPadding : Viewport -> Float -> Float
-totalPadding viewport y =
-    64
 
 
 pictureRow : Viewport -> Element msg

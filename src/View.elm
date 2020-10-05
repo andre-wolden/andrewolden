@@ -4,36 +4,41 @@ import Basics as Math
 import Browser.Dom exposing (Viewport)
 import Cv exposing (cv)
 import CvEntries exposing (cvEntries)
-import Element exposing (Element, alignLeft, centerX, centerY, column, fill, maximum, padding, paddingXY, paragraph, row)
+import Element exposing (Element, centerX, column, fill, maximum, paddingXY, paragraph, row)
 import Element.Font as Font
 import Html exposing (..)
-import Maybe exposing (map2)
-import Menubar exposing (hMax, heightMenuBar, menubar, pictureRow)
+import Maybe exposing (map2, map3)
+import Menubar exposing (hMax, menubar)
+import MenubarUtils exposing (calculateViewData)
 import Messages exposing (Msg(..))
 import Model exposing (Model)
-import String exposing (fromFloat, fromInt)
 import Types exposing (ScreenWidth)
 import ViewConstants exposing (wContentMax)
-import ViewUtils exposing (dotted, dottedGreen)
+import ViewTypes exposing (ViewData)
+import ViewUtils exposing (dotted)
 import ViewportAndSceneUtils exposing (viewportToScreenWidth)
 
 
 view : Model -> Html Msg
 view model =
     let
-        a : Maybe ( Viewport, Float )
+        a : Maybe { viewport : Viewport, y : Float, initialH : Float }
         a =
-            map2 (\viewport y -> ( viewport, y )) model.viewport model.maybeY
+            map3 (\viewport y initialH -> { viewport = viewport, y = y, initialH = initialH }) model.viewport model.maybeY model.initialH
     in
     case a of
         Nothing ->
             Element.layout [] Element.none
 
-        Just ( viewport, y ) ->
-            Element.layout (textFont ++ menubar viewport y)
+        Just { viewport, y, initialH } ->
+            let
+                viewData : ViewData
+                viewData =
+                    calculateViewData viewport y initialH
+            in
+            Element.layout (textFont ++ menubar viewData)
                 (column ([ paddingXY 0 (floor (hMax viewport.scene.width) + 72), Element.width (fill |> maximum (Math.floor wContentMax)), centerX ] ++ dotted)
                     [ introductionTextRow (viewportToScreenWidth viewport)
-                    , debugSizeValuesRow viewport y
                     , Element.image [ centerX ] { description = "Link to gitlab site", src = "/images/gitlab-color.jpg" }
                     , Element.image [ centerX, Element.width fill ] { description = "Link to github site", src = "/images/mark-github-512.png" }
                     , cv cvEntries
@@ -50,19 +55,6 @@ textFont =
         , Font.sansSerif
         ]
     ]
-
-
-debugSizeValuesRow : Viewport -> Float -> Element msg
-debugSizeValuesRow viewport y =
-    column [ Element.width fill ]
-        [ paragraph [ alignLeft, centerY ] [ Element.text ("Scene, width = " ++ String.fromFloat viewport.scene.width) ]
-        , paragraph [ alignLeft, centerY ] [ Element.text ("Scene, height = " ++ String.fromFloat viewport.scene.height) ]
-        , paragraph [ alignLeft, centerY ] [ Element.text ("Viewport, x = " ++ String.fromFloat viewport.viewport.x) ]
-        , paragraph [ alignLeft, centerY ] [ Element.text ("Viewport, y = " ++ String.fromFloat viewport.viewport.y) ]
-        , paragraph [ alignLeft, centerY ] [ Element.text ("Viewport, width = " ++ String.fromFloat viewport.viewport.width) ]
-        , paragraph [ alignLeft, centerY ] [ Element.text ("Viewport, height = " ++ String.fromFloat viewport.viewport.height) ]
-        , paragraph [ alignLeft, centerY ] [ Element.text ("y = " ++ fromFloat y) ]
-        ]
 
 
 introductionTextRow : ScreenWidth -> Element msg

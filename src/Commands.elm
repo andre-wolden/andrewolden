@@ -5,11 +5,11 @@ import Messages exposing (Msg(..))
 import Task
 
 
-gotViewport : Viewport -> Msg
-gotViewport viewport =
-    GotViewport viewport
-
-
 cmdGetViewport : Cmd Msg
 cmdGetViewport =
-    Task.perform gotViewport getViewport
+    Task.perform (\viewport -> GotViewport viewport) getViewport
+
+
+cmdInitialGetViewport : Cmd Msg
+cmdInitialGetViewport =
+    Task.perform (\viewport -> GotInitialViewport viewport) getViewport

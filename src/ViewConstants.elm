@@ -1,4 +1,4 @@
-module ViewConstants exposing (wContent, wContentMax)
+module ViewConstants exposing (..)
 
 
 wContentMax : Float
@@ -13,3 +13,23 @@ wContent wScene =
 
     else
         wContentMax
+
+
+cWMax : Float
+cWMax =
+    1024
+
+
+cHMax : Float
+cHMax =
+    1024
+
+
+cMBMin : Float
+cMBMin =
+    80
+
+
+cMBMinDelta : Float
+cMBMinDelta =
+    40

@@ -18,6 +18,9 @@ update message model =
         GotViewport viewport ->
             ( { model | viewport = Just viewport }, Cmd.none )
 
+        GotInitialViewport viewport ->
+            ( { model | viewport = Just viewport, initialH = Just viewport.viewport.height }, Cmd.none )
+
         Resized ->
             ( model, cmdGetViewport )
 

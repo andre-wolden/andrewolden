@@ -1,7 +1,9 @@
-module ViewUtils exposing (dotted, dottedGreen)
+module ViewUtils exposing (..)
 
-import Element exposing (rgb255)
+import Element exposing (Element, column, paragraph, rgb255)
 import Element.Border as Border
+import Messages exposing (Msg)
+import ViewTypes exposing (ViewData)
 
 
 dotted : List (Element.Attribute msg)
@@ -12,3 +14,13 @@ dotted =
 dottedGreen : List (Element.Attribute msg)
 dottedGreen =
     [ Border.width 2, Border.solid, Border.color (rgb255 0 255 0) ]
+
+
+debugSizeValuesRow : ViewData -> Element Msg
+debugSizeValuesRow viewdata =
+    column []
+        [ paragraph [] [ Element.text ("y = " ++ String.fromFloat viewdata.y) ]
+        , paragraph [] [ Element.text ("h = " ++ String.fromFloat viewdata.h) ]
+        , paragraph [] [ Element.text ("w = " ++ String.fromFloat viewdata.w) ]
+        , paragraph [] [ Element.text ("hMB = " ++ String.fromFloat viewdata.hMB) ]
+        ]

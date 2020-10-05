@@ -7,5 +7,6 @@ type Msg
     = NoOp
     | FocusSearchField
     | GotViewport Viewport
+    | GotInitialViewport Viewport
     | Resized
     | RecieveY String
