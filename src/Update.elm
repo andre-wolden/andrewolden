@@ -4,6 +4,7 @@ import Commands exposing (cmdGetViewport)
 import Messages exposing (Msg(..))
 import Model exposing (Model)
 import Utils exposing (focusSearchBox)
+import ViewportAndSceneUtils exposing (getFontSizeFormula)
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -19,7 +20,7 @@ update message model =
             ( { model | viewport = Just viewport }, Cmd.none )
 
         GotInitialViewport viewport ->
-            ( { model | viewport = Just viewport, initialH = Just viewport.viewport.height }, Cmd.none )
+            ( { model | viewport = Just viewport, initialH = Just viewport.viewport.height, fontSizeFunc = getFontSizeFormula }, Cmd.none )
 
         Resized ->
             ( model, cmdGetViewport )

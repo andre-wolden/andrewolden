@@ -1,4 +1,4 @@
-module ViewTypes exposing (CvEntry, ViewData)
+module ViewTypes exposing (..)
 
 import Element exposing (Element)
 import Messages exposing (Msg)
@@ -18,3 +18,7 @@ type alias ViewData =
     , y : Float
     , hMB : Float
     }
+
+
+type alias FontSizeFunc =
+    Float -> Float -> Float

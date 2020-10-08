@@ -7,8 +7,8 @@ import Element.Background exposing (color)
 import Element.Border as Border
 import Element.Font as Font
 import Messages exposing (Msg)
-import ViewConstants exposing (wContent)
-import ViewTypes exposing (ViewData)
+import ViewConstants exposing (picturePercentage, wContent)
+import ViewTypes exposing (FontSizeFunc, ViewData)
 import ViewUtils exposing (debugSizeValuesRow, dotted)
 
 
@@ -16,21 +16,20 @@ import ViewUtils exposing (debugSizeValuesRow, dotted)
 -- Element.explain Debug.todo,
 
 
-menubar : ViewData -> List (Attribute Msg)
-menubar viewData =
-    [ whiteBackgroundBox viewData
-    , title viewData
+menubar : ViewData -> FontSizeFunc -> List (Attribute Msg)
+menubar viewData fontSizeFunc =
+    [ whiteBackgroundBox viewData |> inFront
+    , title viewData fontSizeFunc |> inFront
     , debugSizeValuesRow viewData |> inFront
 
     --, bottomLine viewport y
-    --, picture viewport y
+    , picture viewData |> inFront
     ]
 
 
-whiteBackgroundBox : ViewData -> Attribute Msg
+whiteBackgroundBox : ViewData -> Element Msg
 whiteBackgroundBox viewData =
     el ([ width (viewData.w |> Math.floor |> px), whiteBackgroundColor, heightMenuBarAttribute viewData ] ++ dotted) none
-        |> inFront
 
 
 heightMenuBarAttribute : ViewData -> Attribute msg
@@ -84,10 +83,9 @@ maxInt max value =
         value
 
 
-title : ViewData -> Attribute Msg
-title viewData =
-    el [ centerX, paddingXY 0 (viewData.hMB * 0.5 |> Math.floor), Font.size (viewData.hMB |> Math.floor |> maxInt 45) ] (text "André Wolden")
-        |> inFront
+title : ViewData -> FontSizeFunc -> Element Msg
+title viewData fontSizeFunc =
+    el [ paddingXY 0 (viewData.hMB * 0.5 |> Math.floor), Font.size (fontSizeFunc viewData.hMB viewData.w |> Math.floor |> maxInt 100) ] ("André Wolden" ++ String.fromInt (Math.floor (fontSizeFunc viewData.hMB viewData.w)) |> text)
 
 
 titleFontSize : ViewData -> Int
@@ -117,41 +115,38 @@ totalPadding viewport y =
     64
 
 
-picture : Viewport -> Float -> Attribute Msg
-picture viewport y =
-    inFront <|
-        el [ paddingXY (Math.floor ((viewport.scene.width / 2) - pictureRadius (wContent viewport.scene.width))) 100 ] <|
-            image
-                [ clip
-                , Border.rounded (Math.floor (pictureRadius (wContent viewport.scene.width)))
-                , Element.height (px (Math.floor (pictureDiameter (wContent viewport.scene.width))))
-                , Element.width (px (Math.floor (pictureDiameter (wContent viewport.scene.width))))
-                ]
-                { description = "Picture of me.", src = "/images/4.jpg" }
+picture : ViewData -> Element Msg
+picture { w, h, y, hMB } =
+    let
+        diameter =
+            pictureDiameter picturePercentage w hMB
 
+        diameterInt =
+            Math.floor diameter
 
-pictureRow : Viewport -> Element msg
-pictureRow viewport =
-    row [ Element.width fill, centerY, spacing 30 ]
-        [ Element.image
+        radius =
+            diameter / 2
+
+        radiusInt =
+            Math.floor radius
+    in
+    el [ paddingXY 0 <| Math.floor <| hMB / 2 - radius ] <|
+        image
             [ clip
-            , centerX
-            , Border.rounded (Math.floor (pictureRadius (wContent viewport.scene.width)))
-            , Element.height (px (Math.floor (pictureDiameter (wContent viewport.scene.width))))
-            , Element.width (px (Math.floor (pictureDiameter (wContent viewport.scene.width))))
+            , Border.rounded radiusInt
+            , Element.height <| px diameterInt
+            , Element.width <| px diameterInt
             ]
-            { description = "Picture of me.", src = "/images/4.jpg" }
-        ]
+            { description = "Just a picture of me...", src = "/images/4.jpg" }
 
 
-pictureRadius : Float -> Float
-pictureRadius wContent =
-    0.2 * wContent + 75
+pictureDiameter : Float -> Float -> Float -> Float
+pictureDiameter percentage width height =
+    if width < height then
+        width * percentage / 100
 
-
-pictureDiameter : Float -> Float
-pictureDiameter wContent =
-    2 * pictureRadius wContent
+    else
+        height * percentage / 100
 
 
 whiteBackgroundColor : Attr decorative msg

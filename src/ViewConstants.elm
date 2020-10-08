@@ -33,3 +33,8 @@ cMBMin =
 cMBMinDelta : Float
 cMBMinDelta =
     40
+
+
+picturePercentage : Float
+picturePercentage =
+    80
