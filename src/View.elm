@@ -45,7 +45,7 @@ view model =
                     calculateViewData viewport y initialH
             in
             Element.layout (textFont ++ menubar viewData fontSizeF)
-                (column ([ paddingXY 0 (floor (hMax viewport.scene.width) + 72), Element.width (fill |> maximum (Math.floor wContentMax)), centerX ] ++ dotted)
+                (column [ paddingXY 0 (floor (hMax viewport.scene.width) + 72), Element.width (fill |> maximum (Math.floor wContentMax)), centerX ]
                     [ introductionTextRow (viewportToScreenWidth viewport)
                     , Element.image [ centerX ] { description = "Link to gitlab site", src = "/images/gitlab-color.jpg" }
                     , Element.image [ centerX, Element.width fill ] { description = "Link to github site", src = "/images/mark-github-512.png" }

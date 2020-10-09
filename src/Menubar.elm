@@ -1,15 +1,15 @@
 module Menubar exposing (..)
 
 import Basics as Math
-import Browser.Dom exposing (Viewport)
-import Element exposing (Attr, Attribute, Element, Length, centerX, centerY, clip, el, fill, height, image, inFront, none, paddingXY, px, rgb255, row, spacing, text, width)
+import Element exposing (Attr, Attribute, Element, Length, centerX, clip, el, height, image, inFront, maximum, moveRight, none, paddingXY, px, rgb255, text, width)
 import Element.Background exposing (color)
 import Element.Border as Border
 import Element.Font as Font
+import Menubar exposing (radius)
 import Messages exposing (Msg)
-import ViewConstants exposing (picturePercentage, wContent)
+import ViewConstants exposing (cMBMin, picturePercentage, wContent)
 import ViewTypes exposing (FontSizeFunc, ViewData)
-import ViewUtils exposing (debugSizeValuesRow, dotted)
+import ViewUtils exposing (bottomLine, debugSizeValuesRow, maximumFloat)
 
 
 
@@ -29,7 +29,7 @@ menubar viewData fontSizeFunc =
 
 whiteBackgroundBox : ViewData -> Element Msg
 whiteBackgroundBox viewData =
-    el ([ width (viewData.w |> Math.floor |> px), whiteBackgroundColor, heightMenuBarAttribute viewData ] ++ dotted) none
+    el ([ width (viewData.w |> Math.floor |> px), whiteBackgroundColor, heightMenuBarAttribute viewData, centerX ] ++ bottomLine) none
 
 
 heightMenuBarAttribute : ViewData -> Attribute msg
@@ -54,65 +54,10 @@ hMax wContent =
         max
 
 
-hMin : Float -> Float
-hMin wContent =
-    80
-
-
-heightMenuBar : Float -> Float -> Float
-heightMenuBar wContent y =
-    if y > (hMax wContent - hMin wContent) then
-        hMin wContent
-
-    else
-        hMax wContent - y
-
-
-bottomLine : Viewport -> Float -> Attribute Msg
-bottomLine viewport y =
-    el [] (text "bottom line")
-        |> inFront
-
-
-maxInt : Int -> Int -> Int
-maxInt max value =
-    if value > max then
-        max
-
-    else
-        value
-
-
 title : ViewData -> FontSizeFunc -> Element Msg
 title viewData fontSizeFunc =
-    el [ paddingXY 0 (viewData.hMB * 0.5 |> Math.floor), Font.size (fontSizeFunc viewData.hMB viewData.w |> Math.floor |> maxInt 100) ] ("André Wolden" ++ String.fromInt (Math.floor (fontSizeFunc viewData.hMB viewData.w)) |> text)
-
-
-titleFontSize : ViewData -> Int
-titleFontSize viewData =
-    ((70 - 12) / (hMax viewData.w - hMin viewData.w))
-        * viewData.hMB
-        |> Math.floor
-
-
-titlePaddingY : ViewData -> Int
-titlePaddingY viewData =
-    viewData.hMB * 2 / 3 |> Math.floor
-
-
-titlePaddingX : ViewData -> Int
-titlePaddingX viewData =
-    viewData.w / 2 |> Math.floor
-
-
-titleBoxHeight : Viewport -> Float -> Float
-titleBoxHeight viewport y =
-    32
-
-
-totalPadding : Viewport -> Float -> Float
-totalPadding viewport y =
-    64
+    el [ paddingXY 0 (viewData.hMB * 0.5 |> Math.floor), Font.size (fontSizeFunc viewData.hMB viewData.w |> Math.floor), centerX ]
+        ("André Wolden" ++ String.fromInt (Math.floor (fontSizeFunc viewData.hMB viewData.w)) |> text)
 
 
 picture : ViewData -> Element Msg
@@ -130,7 +75,7 @@ picture { w, h, y, hMB } =
         radiusInt =
             Math.floor radius
     in
-    el [ paddingXY 0 <| Math.floor <| hMB / 2 - radius ] <|
+    el [ paddingXY 0 <| Math.floor <| hMB / 2 - radius, centerX, moveRight (hMB |> maximumFloat ((w / 2) - radius * 1.2)) ] <|
         image
             [ clip
             , Border.rounded radiusInt
@@ -147,6 +92,21 @@ pictureDiameter percentage width height =
 
     else
         height * percentage / 100
+
+
+moveRightF : ViewData -> Float
+moveRightF hMB w =
+    let
+        diameter =
+            pictureDiameter picturePercentage w hMB
+
+        radius =
+            diameter / 2
+
+        max =
+            hMB |> maximumFloat ((w / 2) - radius * 1.2)
+    in
+    (hMB - cMBMin) / ()
 
 
 whiteBackgroundColor : Attr decorative msg
