@@ -5,9 +5,8 @@ import Element exposing (Attr, Attribute, Element, Length, centerX, clip, el, he
 import Element.Background exposing (color)
 import Element.Border as Border
 import Element.Font as Font
-import Menubar exposing (radius)
 import Messages exposing (Msg)
-import ViewConstants exposing (cMBMin, picturePercentage, wContent)
+import ViewConstants exposing (cHMax, cMBMin, picturePercentage, wContent)
 import ViewTypes exposing (FontSizeFunc, ViewData)
 import ViewUtils exposing (bottomLine, debugSizeValuesRow, maximumFloat)
 
@@ -61,8 +60,11 @@ title viewData fontSizeFunc =
 
 
 picture : ViewData -> Element Msg
-picture { w, h, y, hMB } =
+picture viewData =
     let
+        { w, h, y, hMB } =
+            viewData
+
         diameter =
             pictureDiameter picturePercentage w hMB
 
@@ -75,7 +77,7 @@ picture { w, h, y, hMB } =
         radiusInt =
             Math.floor radius
     in
-    el [ paddingXY 0 <| Math.floor <| hMB / 2 - radius, centerX, moveRight (hMB |> maximumFloat ((w / 2) - radius * 1.2)) ] <|
+    el [ paddingXY 0 <| Math.floor <| hMB / 2 - radius, centerX, moveRight (moveRightF viewData) ] <|
         image
             [ clip
             , Border.rounded radiusInt
@@ -95,7 +97,7 @@ pictureDiameter percentage width height =
 
 
 moveRightF : ViewData -> Float
-moveRightF hMB w =
+moveRightF { w, h, y, hMB } =
     let
         diameter =
             pictureDiameter picturePercentage w hMB
@@ -103,10 +105,23 @@ moveRightF hMB w =
         radius =
             diameter / 2
 
-        max =
-            hMB |> maximumFloat ((w / 2) - radius * 1.2)
+        maxW =
+            (w / 2) - radius * 1.2
+
+        hMBMax =
+            h
+
+        hMBMin =
+            cMBMin
+
+        mR : Float
+        mR =
+            maxW * (hMBMax ^ 4 - hMB ^ 4) * (hMBMax ^ 4 - hMBMin ^ 4)
+
+        a =
+            1 + Debug.log "moveRightF value: " mR
     in
-    (hMB - cMBMin) / ()
+    mR
 
 
 whiteBackgroundColor : Attr decorative msg
