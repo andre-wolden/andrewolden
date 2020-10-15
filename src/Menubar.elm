@@ -1,7 +1,7 @@
 module Menubar exposing (..)
 
 import Basics as Math
-import Element exposing (Attr, Attribute, Element, Length, centerX, clip, el, height, image, inFront, maximum, moveRight, none, paddingXY, px, rgb255, text, width)
+import Element exposing (Attr, Attribute, Element, Length, centerX, clip, el, height, image, inFront, moveDown, moveRight, moveUp, none, paddingXY, px, rgb255, text, width)
 import Element.Background exposing (color)
 import Element.Border as Border
 import Element.Font as Font
@@ -55,8 +55,13 @@ hMax wContent =
 
 title : ViewData -> FontSizeFunc -> Element Msg
 title viewData fontSizeFunc =
-    el [ paddingXY 0 (viewData.hMB * 0.5 |> Math.floor), Font.size (fontSizeFunc viewData.hMB viewData.w |> Math.floor), centerX ]
-        ("André Wolden" ++ String.fromInt (Math.floor (fontSizeFunc viewData.hMB viewData.w)) |> text)
+    el
+        [ paddingXY 0 (viewData.hMB * 0.5 |> Math.floor)
+        , Font.size (fontSizeFunc viewData.hMB viewData.w |> Math.floor)
+        , centerX
+        , moveDown (moveUpOrDownF viewData 0.6)
+        ]
+        ("André Wolden" |> text)
 
 
 picture : ViewData -> Element Msg
@@ -77,7 +82,7 @@ picture viewData =
         radiusInt =
             Math.floor radius
     in
-    el [ paddingXY 0 <| Math.floor <| hMB / 2 - radius, centerX, moveRight (moveRightF viewData) ] <|
+    el [ paddingXY 0 <| Math.floor <| hMB / 2 - radius, centerX, moveRight (moveRightF viewData), moveUp (moveUpOrDownF viewData 0.1) ] <|
         image
             [ clip
             , Border.rounded radiusInt
@@ -94,6 +99,18 @@ pictureDiameter percentage width height =
 
     else
         height * percentage / 100
+
+
+moveUpOrDownF : ViewData -> Float -> Float
+moveUpOrDownF viewData diameterPercentage =
+    let
+        { w, h, y, hMB, hMBMin } =
+            viewData
+
+        d =
+            pictureDiameter picturePercentage w hMB
+    in
+    d * diameterPercentage * (hMB - hMBMin) / (h - hMBMin)
 
 
 moveRightF : ViewData -> Float
@@ -116,10 +133,9 @@ moveRightF { w, h, y, hMB } =
 
         mR : Float
         mR =
-            maxW * (hMBMax ^ 4 - hMB ^ 4) * (hMBMax ^ 4 - hMBMin ^ 4)
+            maxW * (hMBMax ^ 4 - hMB ^ 4) / (hMBMax ^ 4 - hMBMin ^ 4)
 
-        a =
-            1 + Debug.log "moveRightF value: " mR
+        --a = 1 + Debug.log "moveRightF value: " mR
     in
     mR
 

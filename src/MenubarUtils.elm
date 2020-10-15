@@ -48,4 +48,4 @@ calculateViewData viewport y initialH =
             else
                 hMBMin
     in
-    { w = w, h = h, y = y, hMB = hMB }
+    { w = w, h = h, y = y, hMB = hMB, hMBMin = hMBMin }

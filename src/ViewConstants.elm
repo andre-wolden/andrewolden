@@ -37,4 +37,4 @@ cMBMinDelta =
 
 picturePercentage : Float
 picturePercentage =
-    80
+    60

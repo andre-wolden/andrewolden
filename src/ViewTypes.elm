@@ -17,6 +17,7 @@ type alias ViewData =
     , h : Float
     , y : Float
     , hMB : Float
+    , hMBMin : Float
     }
 
 
