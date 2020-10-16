@@ -1,7 +1,7 @@
 module Menubar exposing (..)
 
 import Basics as Math
-import Element exposing (Attr, Attribute, Element, Length, centerX, clip, el, height, image, inFront, moveDown, moveRight, moveUp, none, paddingXY, px, rgb255, text, width)
+import Element exposing (Attr, Attribute, Element, Length, centerX, centerY, clip, el, height, image, inFront, moveDown, moveRight, moveUp, none, paddingXY, px, rgb255, text, width)
 import Element.Background exposing (color)
 import Element.Border as Border
 import Element.Font as Font
@@ -67,7 +67,7 @@ title viewData fontSizeFunc =
 picture : ViewData -> Element Msg
 picture viewData =
     let
-        { w, h, y, hMB } =
+        { w, h, y, hMB, hMBMin } =
             viewData
 
         diameter =
@@ -82,7 +82,7 @@ picture viewData =
         radiusInt =
             Math.floor radius
     in
-    el [ paddingXY 0 <| Math.floor <| hMB / 2 - radius, centerX, moveRight (moveRightF viewData), moveUp (moveUpOrDownF viewData 0.1) ] <|
+    el [ centerX, centerY, moveRight (moveRightF viewData), moveUp (moveUpF viewData (h / 2)) ] <|
         image
             [ clip
             , Border.rounded radiusInt
@@ -131,13 +131,18 @@ moveRightF { w, h, y, hMB } =
         hMBMin =
             cMBMin
 
-        mR : Float
-        mR =
-            maxW * (hMBMax ^ 4 - hMB ^ 4) / (hMBMax ^ 4 - hMBMin ^ 4)
-
         --a = 1 + Debug.log "moveRightF value: " mR
     in
-    mR
+    maxW * (hMBMax ^ 4 - hMB ^ 4) / (hMBMax ^ 4 - hMBMin ^ 4)
+
+
+moveUpF : ViewData -> Float -> Float
+moveUpF { w, h, y, hMB, hMBMin } yStart =
+    if yStart - y < hMBMin / 2 then
+        yStart - (hMBMin / 2)
+
+    else
+        y
 
 
 whiteBackgroundColor : Attr decorative msg
