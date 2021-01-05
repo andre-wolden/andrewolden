@@ -47,6 +47,7 @@
     },
     "dependencies": {
         "elm-format": "^0.8.3",
+        "express": "^4.17.1",
         "purecss": "^2.0.3"
     },
     "prettier": {
