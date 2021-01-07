@@ -4,11 +4,28 @@ import Element exposing (Element)
 import Messages exposing (Msg)
 
 
+type alias Reference =
+    { title : String
+    , description : String
+    , link : String
+    }
+
+
+type alias ProjectDescription =
+    { title : String
+    , start : Maybe String
+    , end : Maybe String
+    , description : String
+    , technologies : Maybe (List String)
+    , references : Maybe (List Reference)
+    }
+
+
 type alias CvEntry =
     { year : String
     , title : String
     , subTitle : String
-    , body : Element Msg
+    , body : List ProjectDescription
     }
 
 

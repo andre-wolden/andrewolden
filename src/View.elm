@@ -3,13 +3,13 @@ module View exposing (..)
 import Basics as Math
 import Browser.Dom exposing (Viewport)
 import Cv exposing (cv)
-import CvEntries exposing (cvEntries)
+import Data.CvEntries exposing (cvEntries)
 import Element exposing (Element, centerX, column, el, fill, maximum, paddingXY, paragraph, row)
 import Element.Font as Font
 import Field exposing (Field)
 import Html exposing (..)
 import Matrix exposing (ColumnVector(..), Consistancy(..), Matrix(..), RowVector(..), Solution(..), solve)
-import Maybe exposing (map2, map3, map4)
+import Maybe exposing (map4)
 import Menubar exposing (hMax, menubar)
 import MenubarUtils exposing (calculateViewData)
 import Messages exposing (Msg(..))
@@ -19,7 +19,6 @@ import Types exposing (ScreenWidth)
 import Vector exposing (AbelianGroup, Vector(..), VectorSpace, addVectors, scalarMultiplication, subtractVectors)
 import ViewConstants exposing (wContentMax)
 import ViewTypes exposing (ViewData)
-import ViewUtils exposing (dotted)
 import ViewportAndSceneUtils exposing (viewportToScreenWidth)
 
 
