@@ -4,7 +4,7 @@ import Basics as Math
 import Browser.Dom exposing (Viewport)
 import Cv exposing (cv)
 import Data.CvEntries exposing (cvEntries)
-import Element exposing (Element, centerX, column, el, fill, maximum, paddingXY, paragraph, row)
+import Element exposing (Element, centerX, column, el, fill, maximum, paddingXY, paragraph, px, row)
 import Element.Font as Font
 import Field exposing (Field)
 import Html exposing (..)
@@ -15,11 +15,9 @@ import MenubarUtils exposing (calculateViewData)
 import Messages exposing (Msg(..))
 import Model exposing (Model)
 import String exposing (fromInt)
-import Types exposing (ScreenWidth)
 import Vector exposing (AbelianGroup, Vector(..), VectorSpace, addVectors, scalarMultiplication, subtractVectors)
-import ViewConstants exposing (wContentMax)
+import ViewConstants exposing (wContent, wContentMax)
 import ViewTypes exposing (ViewData)
-import ViewportAndSceneUtils exposing (viewportToScreenWidth)
 
 
 view : Model -> Html Msg
@@ -45,7 +43,7 @@ view model =
             in
             Element.layout (textFont ++ menubar viewData fontSizeF)
                 (column [ paddingXY 0 (floor (hMax viewport.scene.width) + 72), Element.width (fill |> maximum (Math.floor wContentMax)), centerX ]
-                    [ introductionTextRow (viewportToScreenWidth viewport)
+                    [ introductionTextRow (floor viewData.h) viewData.w
                     , Element.image [ centerX ] { description = "Link to gitlab site", src = "/images/gitlab-color.jpg" }
                     , Element.image [ centerX, Element.width fill ] { description = "Link to github site", src = "/images/mark-github-512.png" }
                     , cv cvEntries
@@ -122,10 +120,14 @@ textFont =
     ]
 
 
-introductionTextRow : ScreenWidth -> Element msg
-introductionTextRow screenWidth =
+
+-- , Element.explain Debug.todo
+
+
+introductionTextRow : Int -> Float -> Element msg
+introductionTextRow pxHeight screenWidth =
     row
-        [ Element.width fill ]
+        [ Element.width fill, Element.height (px pxHeight), Element.centerY, Element.paddingXY (floor <| 0.1 * wContent screenWidth) 0 ]
         [ paragraph [ centerX, Font.justify ] [ Element.text introtext ]
         ]
 
