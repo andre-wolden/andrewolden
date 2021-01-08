@@ -1,7 +1,29 @@
 module Menubar exposing (..)
 
 import Basics as Math
-import Element exposing (Attr, Attribute, Element, Length, centerX, centerY, clip, el, height, image, inFront, moveDown, moveRight, moveUp, none, paddingXY, px, rgb255, text, width)
+import Element
+    exposing
+        ( Attr
+        , Attribute
+        , Element
+        , Length
+        , centerX
+        , centerY
+        , clip
+        , el
+        , height
+        , image
+        , inFront
+        , moveDown
+        , moveRight
+        , moveUp
+        , none
+        , paddingXY
+        , px
+        , rgb255
+        , text
+        , width
+        )
 import Element.Background exposing (color)
 import Element.Border as Border
 import Element.Font as Font
@@ -19,8 +41,8 @@ menubar : ViewData -> FontSizeFunc -> List (Attribute Msg)
 menubar viewData fontSizeFunc =
     [ whiteBackgroundBox viewData |> inFront
     , title viewData fontSizeFunc |> inFront
-    , debugSizeValuesRow viewData |> inFront
 
+    --, debugSizeValuesRow viewData |> inFront
     --, bottomLine viewport y
     , picture viewData |> inFront
     ]
@@ -81,8 +103,11 @@ picture viewData =
 
         radiusInt =
             Math.floor radius
+
+        moveUpAmount =
+            moveUpF viewData (h / 2)
     in
-    el [ centerX, centerY, moveRight (moveRightF viewData), moveUp (moveUpF viewData (h / 2)) ] <|
+    el [ centerX, centerY, moveRight (moveRightF viewData), moveUp moveUpAmount ] <|
         image
             [ clip
             , Border.rounded radiusInt
@@ -93,12 +118,12 @@ picture viewData =
 
 
 pictureDiameter : Float -> Float -> Float -> Float
-pictureDiameter percentage width height =
-    if width < height then
-        width * percentage / 100
+pictureDiameter percentage mainColumnWidth heightMenuBar =
+    if mainColumnWidth < heightMenuBar then
+        mainColumnWidth * percentage / 100
 
     else
-        height * percentage / 100
+        heightMenuBar * percentage / 100
 
 
 moveUpOrDownF : ViewData -> Float -> Float
@@ -133,16 +158,20 @@ moveRightF { w, h, y, hMB } =
 
         --a = 1 + Debug.log "moveRightF value: " mR
     in
-    maxW * (hMBMax ^ 4 - hMB ^ 4) / (hMBMax ^ 4 - hMBMin ^ 4)
+    maxW * (hMBMax ^ 2 - hMB ^ 2) / (hMBMax ^ 2 - hMBMin ^ 2)
 
 
 moveUpF : ViewData -> Float -> Float
 moveUpF { w, h, y, hMB, hMBMin } yStart =
-    if yStart - y < hMBMin / 2 then
+    let
+        amount =
+            y * 1.3
+    in
+    if yStart - amount < hMBMin / 2 then
         yStart - (hMBMin / 2)
 
     else
-        y
+        amount
 
 
 whiteBackgroundColor : Attr decorative msg

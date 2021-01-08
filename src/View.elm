@@ -1,7 +1,9 @@
 module View exposing (..)
 
+import About exposing (about)
 import Basics as Math
 import Browser.Dom exposing (Viewport)
+import Contact exposing (contact)
 import Cv exposing (cv)
 import Data.CvEntries exposing (cvEntries)
 import Element exposing (Element, centerX, column, el, fill, maximum, paddingXY, paragraph, px, row)
@@ -44,9 +46,12 @@ view model =
             Element.layout (textFont ++ menubar viewData fontSizeF)
                 (column [ paddingXY 0 (floor (hMax viewport.scene.width) + 72), Element.width (fill |> maximum (Math.floor wContentMax)), centerX ]
                     [ introductionTextRow (floor viewData.h) viewData.w
-                    , Element.image [ centerX ] { description = "Link to gitlab site", src = "/images/gitlab-color.jpg" }
-                    , Element.image [ centerX, Element.width fill ] { description = "Link to github site", src = "/images/mark-github-512.png" }
+
+                    --, Element.image [ centerX ] { description = "Link to gitlab site", src = "/images/gitlab-color.jpg" }
+                    --, Element.image [ centerX, Element.width fill ] { description = "Link to github site", src = "/images/mark-github-512.png" }
                     , cv cvEntries
+                    , about
+                    , contact
                     , matrixTest
                     ]
                 )
