@@ -30,6 +30,14 @@ contactBottomText =
 
 
 
+-- Stuff to show off
+
+
+headerStuffToShowOff =
+    "Articles and Projects"
+
+
+
 -- About
 
 

@@ -1,6 +1,7 @@
 module Utils exposing (..)
 
 import Browser.Dom as Dom
+import Element exposing (Attribute, Element)
 import Http exposing (Error(..))
 import Messages exposing (Msg(..))
 import Task

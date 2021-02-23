@@ -1,7 +1,9 @@
 module ViewUtils exposing (..)
 
-import Element exposing (Element, column, paragraph, rgb255)
+import Debug exposing (todo)
+import Element exposing (Element, centerX, column, el, explain, paddingEach, paragraph, rgb255, row, text, width)
 import Element.Border as Border
+import Element.Font exposing (size)
 import Messages exposing (Msg)
 import ViewTypes exposing (ViewData)
 
@@ -38,3 +40,23 @@ maximumFloat max value =
 
     else
         value
+
+
+subheader : String -> Element Msg
+subheader string =
+    el [ size 24, centerX ] (text string)
+
+
+header3 : String -> Element Msg
+header3 string =
+    el [ size 20 ] (text string)
+
+
+paddedTextRow : List (Element msg) -> Element msg
+paddedTextRow list =
+    row [ paddingEach { top = 0, right = 0, bottom = 30, left = 0 }, explain todo ] list
+
+
+paddedHeaderRow : List (Element msg) -> Element msg
+paddedHeaderRow list =
+    row [ paddingEach { top = 100, right = 0, bottom = 50, left = 0 }, centerX ] list

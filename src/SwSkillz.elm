@@ -1,9 +1,10 @@
 module SwSkillz exposing (..)
 
-import Element exposing (column, el, text)
+import Element exposing (centerX, column)
+import ViewUtils exposing (paddedHeaderRow, subheader)
 
 
 swSkillz =
-    column []
-        [ el [] (text "Software skills")
+    column [ centerX ]
+        [ paddedHeaderRow [ subheader "Software skills" ]
         ]
