@@ -5,8 +5,7 @@ import Basics as Math
 import Browser.Dom exposing (Viewport)
 import Contact exposing (contact)
 import Cv exposing (cv)
-import Debug exposing (todo)
-import Element exposing (Element, centerX, column, el, explain, fill, maximum, paddingXY, paragraph, px, row)
+import Element exposing (Element, centerX, column, fill, maximum, paddingXY, paragraph, px, row)
 import Element.Font as Font
 import Html exposing (..)
 import Maybe exposing (map4)
@@ -17,6 +16,7 @@ import Model exposing (Model)
 import StuffToShowOff exposing (stuffToShowOff)
 import SwSkillz exposing (swSkillz)
 import ViewConstants exposing (wContent, wContentMax)
+import ViewTemplates exposing (viewTemplates)
 import ViewTypes exposing (ViewData)
 
 
@@ -46,7 +46,7 @@ view model =
                     calculateViewData viewport y initialH
             in
             Element.layout (textFont ++ menubar viewData fontSizeF)
-                (column [ paddingXY 0 (floor (hMax viewport.scene.width) + 72), Element.width (fill |> maximum (Math.floor wContentMax)), centerX, explain todo ]
+                (column [ paddingXY 0 (floor (hMax viewport.scene.width) + 72), Element.width (fill |> maximum (Math.floor wContentMax)), centerX ]
                     [ introductionTextRow (floor viewData.h) viewData.w
 
                     --, Element.image [ centerX ] { description = "Link to gitlab site", src = "/images/gitlab-color.jpg" }
@@ -56,6 +56,7 @@ view model =
                     , stuffToShowOff
                     , about
                     , contact
+                    , viewTemplates
                     ]
                 )
 

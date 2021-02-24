@@ -1,15 +1,15 @@
 module StuffToShowOff exposing (..)
 
 import Data.DivContent exposing (headerStuffToShowOff)
-import Element exposing (Element, column, el, link, padding, paddingEach, paragraph, row, text)
+import Element exposing (Element, column, link, paragraph, row, text)
 import Messages exposing (Msg)
-import ViewUtils exposing (header3, paddedHeaderRow, paddedTextRow, subheader)
+import ViewUtils exposing (centeredSectionHeader, header3, paddedHeaderRow, paddedTextRow)
 
 
 stuffToShowOff : Element Msg
 stuffToShowOff =
     column []
-        [ paddedHeaderRow [ subheader headerStuffToShowOff ]
+        [ paddedHeaderRow [ centeredSectionHeader headerStuffToShowOff ]
         , column []
             [ row [] [ header3 "www.andrewolden.com" ]
             , paddedTextRow [ paragraph [] [ text "Made with elm, in particluar to practice and test out the use of elm-ui." ] ]

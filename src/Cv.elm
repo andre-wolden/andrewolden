@@ -1,13 +1,12 @@
 module Cv exposing (..)
 
 import Data.CvEntries exposing (cvEntries)
-import Debug exposing (todo)
-import Element exposing (Element, alignTop, centerX, column, el, explain, fill, height, paddingEach, paragraph, px, rgb, row, text, width)
+import Element exposing (Element, alignTop, centerX, column, el, fill, height, paddingEach, paragraph, px, rgb, row, text, width)
 import Element.Background exposing (color)
 import Element.Border exposing (rounded)
 import Element.Font exposing (bold, size)
 import List exposing (map)
-import Maybe exposing (withDefault)
+import Maybe
 import Messages exposing (Msg)
 import ViewTypes exposing (CvEntry, ProjectDescription)
 
@@ -60,6 +59,6 @@ cvEntryView cvEntry =
             [ paragraph [ width fill ] [ text cvEntry.year ]
             , paragraph [ width fill, size 24, bold ] [ text cvEntry.title ]
             , paragraph [ width fill, paddingEach { top = 0, right = 0, bottom = 22, left = 0 } ] [ text cvEntry.subTitle ]
-            , cvEntry.body |> map cvEntryBodyView |> column [ width fill, explain todo ]
+            , cvEntry.body |> map cvEntryBodyView |> column [ width fill ]
             ]
         ]
