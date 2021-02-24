@@ -42,11 +42,6 @@ maximumFloat max value =
         value
 
 
-fullWidthSection : List (Element Msg) -> Element Msg
-fullWidthSection list =
-    column [ width fill, paddingEach { top = 0, right = 0, bottom = 120, left = 0 } ] list
-
-
 centeredSectionHeader : String -> Element Msg
 centeredSectionHeader string =
     el [ size 36, centerX, paddingEach { top = 0, right = 0, bottom = 60, left = 0 } ] (text string)

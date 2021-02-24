@@ -1,17 +1,17 @@
 module About exposing (..)
 
 import Data.DivContent exposing (aboutText, aboutTitle)
-import Element exposing (Element, el, html, newTabLink, padding, paragraph, row, spacing, text)
+import Element exposing (Element, column, el, fill, html, newTabLink, padding, paragraph, row, spacing, text, width)
 import Element.Font exposing (underline)
 import Html exposing (i)
 import Html.Attributes exposing (class)
 import Messages exposing (Msg)
-import ViewUtils exposing (centeredSectionHeader, fullWidthSection)
+import ViewUtils exposing (centeredSectionHeader)
 
 
 about : Element Msg
 about =
-    fullWidthSection
+    column [ width fill ]
         [ centeredSectionHeader aboutTitle
         , paragraph [ spacing 6, padding 24 ] [ text aboutText ]
         , row [ padding 24, spacing 16 ]

@@ -1,13 +1,13 @@
 module ViewTemplates exposing (..)
 
-import Element exposing (Element, padding, paragraph, spacing, text, textColumn)
+import Element exposing (Element, column, fill, padding, paragraph, spacing, text, textColumn, width)
 import Messages exposing (Msg)
-import ViewUtils exposing (centeredSectionHeader, fullWidthSection, header1, header2, header3)
+import ViewUtils exposing (centeredSectionHeader, header1, header2, header3)
 
 
 viewTemplates : Element Msg
 viewTemplates =
-    fullWidthSection
+    column [ width fill ]
         [ centeredSectionHeader "Title (Test of View Components)"
         , header1 "Header 1"
         , paragraph [] [ text "This is a paragraph that can have a lot of text..." ]
