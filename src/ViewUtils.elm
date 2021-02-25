@@ -1,7 +1,7 @@
 module ViewUtils exposing (..)
 
 import Debug exposing (todo)
-import Element exposing (Attribute, Element, centerX, column, el, explain, fill, paddingEach, paragraph, rgb255, row, text, width)
+import Element exposing (Attribute, Element, centerX, column, el, explain, fill, paddingEach, paragraph, rgb255, row, text, textColumn, width)
 import Element.Border as Border
 import Element.Font exposing (size)
 import Messages exposing (Msg)
@@ -44,22 +44,22 @@ maximumFloat max value =
 
 centeredSectionHeader : String -> Element Msg
 centeredSectionHeader string =
-    el [ size 36, centerX, paddingEach { top = 0, right = 0, bottom = 60, left = 0 } ] (text string)
+    paragraph [ size 36, centerX, paddingEach { top = 0, right = 0, bottom = 60, left = 0 } ] [ text string ]
 
 
 header1 : String -> Element Msg
 header1 string =
-    el [ size 28, paddingEach { top = 0, right = 0, bottom = 20, left = 0 } ] (text string)
+    paragraph [ size 28, paddingEach { top = 0, right = 0, bottom = 20, left = 0 } ] [ text string ]
 
 
 header2 : String -> Element Msg
 header2 string =
-    el [ size 24, paddingEach { top = 0, right = 0, bottom = 20, left = 0 } ] (text string)
+    paragraph [ size 24, paddingEach { top = 0, right = 0, bottom = 20, left = 0 } ] [ text string ]
 
 
 header3 : String -> Element Msg
 header3 string =
-    el [ size 20, paddingEach { top = 0, right = 0, bottom = 20, left = 0 } ] (text string)
+    paragraph [ size 20, paddingEach { top = 0, right = 0, bottom = 20, left = 0 } ] [ text string ]
 
 
 paddedTextRow : List (Element msg) -> Element msg
@@ -69,4 +69,4 @@ paddedTextRow list =
 
 paddedHeaderRow : List (Element msg) -> Element msg
 paddedHeaderRow list =
-    row [ paddingEach { top = 100, right = 0, bottom = 50, left = 0 }, centerX ] list
+    textColumn [ paddingEach { top = 100, right = 0, bottom = 50, left = 0 }, centerX ] list
