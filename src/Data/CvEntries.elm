@@ -39,7 +39,7 @@ cvEntries =
                         , { title = "Omsorgspenger for arbeidstaker", description = "repository", link = "https://github.com/navikt/omsorgspengerutbetaling-arbeidstaker-soknad" }
                         ]
               }
-            , { title = "NAV - Digisos"
+            , { title = "NAV - Digisos (Social Services)"
               , start = Just "2018-05"
               , end = Just "2019-12"
               , description = "Application form"
