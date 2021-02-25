@@ -1,29 +1,8 @@
 module Menubar exposing (..)
 
 import Basics as Math
-import Element
-    exposing
-        ( Attr
-        , Attribute
-        , Element
-        , Length
-        , centerX
-        , centerY
-        , clip
-        , el
-        , height
-        , image
-        , inFront
-        , moveDown
-        , moveRight
-        , moveUp
-        , none
-        , paddingXY
-        , px
-        , rgb255
-        , text
-        , width
-        )
+import Debug exposing (todo)
+import Element exposing (Attr, Attribute, Element, Length, centerX, centerY, clip, el, explain, height, image, inFront, moveDown, moveRight, moveUp, none, paddingXY, px, rgb255, text, width)
 import Element.Background exposing (color)
 import Element.Border as Border
 import Element.Font as Font
@@ -177,3 +156,8 @@ moveUpF { w, h, y, hMB, hMBMin } yStart =
 whiteBackgroundColor : Attr decorative msg
 whiteBackgroundColor =
     color (rgb255 255 255 255)
+
+
+coolBackgroundColor : Attr decorative msg
+coolBackgroundColor =
+    color (rgb255 233 196 106)

@@ -3,7 +3,7 @@ module ViewUtils exposing (..)
 import Debug exposing (todo)
 import Element exposing (Attribute, Element, centerX, column, el, explain, fill, paddingEach, paragraph, rgb255, row, text, textColumn, width)
 import Element.Border as Border
-import Element.Font exposing (size)
+import Element.Font exposing (center, size)
 import Messages exposing (Msg)
 import ViewTypes exposing (ViewData)
 
@@ -44,7 +44,12 @@ maximumFloat max value =
 
 centeredSectionHeader : String -> Element Msg
 centeredSectionHeader string =
-    paragraph [ size 36, centerX, paddingEach { top = 0, right = 0, bottom = 60, left = 0 } ] [ text string ]
+    paragraph
+        [ size 36
+        , center
+        , paddingEach { top = 0, right = 0, bottom = 60, left = 0 }
+        ]
+        [ text string ]
 
 
 header1 : String -> Element Msg

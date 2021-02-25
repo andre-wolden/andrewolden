@@ -6,7 +6,7 @@ import ViewUtils exposing (centeredSectionHeader)
 
 swSkillz =
     column [ width fill ]
-        [ centeredSectionHeader "Software Competencies"
+        [ centeredSectionHeader "Competency"
         , paragraph [ padding 24 ] [ text "Frontend" ]
         , paragraph [ padding 24 ] [ text "React, Redux, Typescript, fp-ts, Elm" ]
         , paragraph [ padding 24 ] [ text "Backend" ]

@@ -48,8 +48,7 @@ view model =
             Element.layout (textFont ++ menubar viewData fontSizeF)
                 (column [ paddingXY 0 (floor (hMax viewport.scene.width) + 72), Element.width (fill |> maximum (Math.floor wContentMax)), centerX ]
                     [ introductionTextRow (floor viewData.h) viewData.w
-
-                    --, cv
+                    , cv
                     , swSkillz
                     , stuffToShowOff
                     , about
