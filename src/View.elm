@@ -16,7 +16,6 @@ import Model exposing (Model)
 import StuffToShowOff exposing (stuffToShowOff)
 import SwSkillz exposing (swSkillz)
 import ViewConstants exposing (wContent, wContentMax)
-import ViewTemplates exposing (viewTemplates)
 import ViewTypes exposing (ViewData)
 
 
@@ -48,15 +47,11 @@ view model =
             Element.layout (textFont ++ menubar viewData fontSizeF)
                 (column [ paddingXY 0 (floor (hMax viewport.scene.width) + 72), Element.width (fill |> maximum (Math.floor wContentMax)), centerX ]
                     [ introductionTextRow (floor viewData.h) viewData.w
-
-                    --, Element.image [ centerX ] { description = "Link to gitlab site", src = "/images/gitlab-color.jpg" }
-                    --, Element.image [ centerX, Element.width fill ] { description = "Link to github site", src = "/images/mark-github-512.png" }
                     , cv
                     , swSkillz
                     , stuffToShowOff
                     , about
                     , contact
-                    , viewTemplates
                     ]
                 )
 
