@@ -1,11 +1,11 @@
-module ViewUtils exposing (..)
+module ViewUtils.ViewUtils exposing (..)
 
-import Debug exposing (todo)
-import Element exposing (Attribute, Element, centerX, column, el, explain, fill, paddingEach, paragraph, rgb255, row, text, textColumn, width)
+import Element exposing (Attribute, Element, centerX, column, paddingEach, paragraph, rgb255, row, text, textColumn)
 import Element.Border as Border
 import Element.Font exposing (center, size)
 import Messages exposing (Msg)
 import ViewTypes exposing (ViewData)
+import ViewUtils.FontUtils exposing (fontSizeLarge)
 
 
 dotted : List (Element.Attribute msg)
@@ -62,9 +62,9 @@ header2 string =
     paragraph [ size 24, paddingEach { top = 0, right = 0, bottom = 20, left = 0 } ] [ text string ]
 
 
-header3 : String -> Element Msg
-header3 string =
-    paragraph [ size 20, paddingEach { top = 0, right = 0, bottom = 20, left = 0 } ] [ text string ]
+header3 : String -> Float -> Element Msg
+header3 string screenWidth =
+    paragraph [ fontSizeLarge screenWidth, paddingEach { top = 0, right = 0, bottom = 20, left = 0 } ] [ text string ]
 
 
 paddedTextRow : List (Element msg) -> Element msg

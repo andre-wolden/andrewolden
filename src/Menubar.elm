@@ -9,7 +9,7 @@ import Element.Font as Font
 import Messages exposing (Msg)
 import ViewConstants exposing (cHMax, cMBMin, picturePercentage, wContent)
 import ViewTypes exposing (FontSizeFunc, ViewData)
-import ViewUtils exposing (bottomLine, debugSizeValuesRow, maximumFloat)
+import ViewUtils.ViewUtils exposing (bottomLine)
 
 
 

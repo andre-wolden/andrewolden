@@ -6,7 +6,7 @@ import Element.Font exposing (underline)
 import Html exposing (i)
 import Html.Attributes exposing (class)
 import Messages exposing (Msg)
-import ViewUtils exposing (centeredSectionHeader)
+import ViewUtils.ViewUtils exposing (centeredSectionHeader)
 
 
 about : Element Msg

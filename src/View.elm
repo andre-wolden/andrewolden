@@ -4,9 +4,8 @@ import About exposing (about)
 import Basics as Math
 import Browser.Dom exposing (Viewport)
 import Contact exposing (contact)
-import Cv exposing (cv)
-import Debug exposing (todo)
-import Element exposing (Element, centerX, column, explain, fill, maximum, paddingXY, paragraph, px, row)
+import Cv.Cv exposing (cv)
+import Element exposing (Element, centerX, column, fill, maximum, paddingXY, paragraph, px, row)
 import Element.Font as Font
 import Html exposing (..)
 import Maybe exposing (map4)
@@ -48,9 +47,9 @@ view model =
             Element.layout (textFont ++ menubar viewData fontSizeF)
                 (column [ paddingXY 0 (floor (hMax viewport.scene.width) + 72), Element.width (fill |> maximum (Math.floor wContentMax)), centerX ]
                     [ introductionTextRow (floor viewData.h) viewData.w
-                    , cv
+                    , cv viewData.w
                     , swSkillz
-                    , stuffToShowOff
+                    , stuffToShowOff viewData.w
                     , about
                     , contact
                     ]
