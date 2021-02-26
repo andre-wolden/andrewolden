@@ -75,3 +75,8 @@ paddedTextRow list =
 paddedHeaderRow : List (Element msg) -> Element msg
 paddedHeaderRow list =
     textColumn [ paddingEach { top = 100, right = 0, bottom = 50, left = 0 }, centerX ] list
+
+
+edges : { top : Int, right : Int, bottom : Int, left : Int }
+edges =
+    { top = 0, right = 0, bottom = 0, left = 0 }

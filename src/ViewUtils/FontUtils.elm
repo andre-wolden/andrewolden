@@ -19,25 +19,25 @@ fontSizeSmall width =
         size 14
 
     else
-        size 18
+        size 16
 
 
 fontSizeMedium : Float -> Attribute msg
 fontSizeMedium width =
     if width > 500 then
-        size 18
+        size 16
 
     else
-        size 26
+        size 18
 
 
 fontSizeLarge : Float -> Attribute msg
 fontSizeLarge width =
     if width > 500 then
-        size 26
+        size 18
 
     else
-        size 32
+        size 22
 
 
 fontSizeXL : Float -> Attribute msg

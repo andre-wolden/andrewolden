@@ -17,6 +17,7 @@ import StuffToShowOff exposing (stuffToShowOff)
 import SwSkillz exposing (swSkillz)
 import ViewConstants exposing (wContent, wContentMax)
 import ViewTypes exposing (ViewData)
+import ViewUtils.Palette exposing (greyScaleDark3, greyScaleDark4, greyScaleMiddle)
 
 
 
@@ -58,7 +59,7 @@ view model =
 
 textFont : List (Element.Attribute msg)
 textFont =
-    [ Font.color (Element.rgb 0 0 0)
+    [ Font.color greyScaleDark4
     , Font.size 16
     , Font.family
         [ Font.typeface "Courier New"

@@ -3,10 +3,11 @@ module Cv.Cv exposing (..)
 import Cv.CvUtils exposing (circle, workDateHeader)
 import Debug exposing (todo)
 import Element exposing (Element, alignTop, column, el, explain, fill, newTabLink, padding, paddingEach, paragraph, row, spacing, text, textColumn, width)
-import Element.Font exposing (bold)
+import Element.Font exposing (bold, color)
 import Messages exposing (Msg)
 import ViewUtils.FontUtils exposing (fontSizeLarge, fontSizeMedium, fontSizeSmall)
-import ViewUtils.ViewUtils exposing (centeredSectionHeader)
+import ViewUtils.Palette exposing (greyScaleDark1, greyScaleLight1)
+import ViewUtils.ViewUtils exposing (centeredSectionHeader, edges)
 
 
 cv : Float -> Element Msg
@@ -15,24 +16,31 @@ cv screenWidth =
         [ centeredSectionHeader "CV"
 
         -- Bekk
-        , row [ width fill, explain todo ]
-            [ el [ alignTop, paddingEach { top = 5, right = 10, bottom = 0, left = 10 } ] circle
+        , row [ width fill ]
+            [ el [ alignTop, paddingEach { top = 3, right = 10, bottom = 0, left = 10 } ] circle
             , textColumn [ width fill ]
-                [ paragraph [ fontSizeSmall screenWidth, bold ] [ text "January 2018 - now" ]
+                [ paragraph [ fontSizeSmall screenWidth, bold, paddingEach { edges | top = 4, bottom = 26 } ] [ text "January 2018 - now" ]
+                , paragraph [ fontSizeSmall screenWidth, color greyScaleDark1 ] [ text "Company" ]
                 , paragraph
                     [ fontSizeLarge screenWidth
                     , bold
+                    , paddingEach { edges | bottom = 26 }
                     ]
                     [ text "Bekk Consulting" ]
-                , textColumn [ width fill, spacing 20 ]
-                    [ textColumn [ width fill, spacing 16 ]
+                , textColumn [ width fill ]
+                    [ paragraph [ fontSizeSmall screenWidth, color greyScaleDark1 ] [ text "Projects" ]
+                    , textColumn [ width fill, paddingEach { edges | bottom = 30 } ]
                         [ -- NAV sif
-                          paragraph [ fontSizeMedium screenWidth ] [ text "NAV - Arbeids- og velferdsetaten" ]
-                        , paragraph [] [ text "January 2020 - now" ]
-                        , paragraph [] [ text "Team Sykdom i familien (illness within the family)" ]
-                        , paragraph [] [ text "Different application forms in some way related to attendance allowance. Several react based application forms, and Kotlin based backends. Data is validated before it is put on a Kafka topic." ]
-                        , paragraph [] [ text "Technologies" ]
-                        , paragraph [] [ text "React, Typescript, Formik, Gatsby, Sanity, Kotlin, Kafka, Docker, Nais (nais.io, built on Kubernetes)" ]
+                          paragraph [ fontSizeLarge screenWidth, bold, paddingEach { edges | bottom = 20 } ] [ text "NAV - Arbeids- og velferdsetaten" ]
+                        , paragraph [ fontSizeSmall screenWidth, color greyScaleDark1 ] [ text "Interval" ]
+                        , paragraph [ fontSizeMedium screenWidth, paddingEach { edges | bottom = 15 } ] [ text "January 2020 - now" ]
+                        , paragraph [ fontSizeSmall screenWidth, color greyScaleDark1 ] [ text "Team" ]
+                        , paragraph [ fontSizeMedium screenWidth, paddingEach { edges | bottom = 15 } ] [ text "Sykdom i familien" ]
+                        , paragraph [ fontSizeSmall screenWidth, color greyScaleDark1 ] [ text "Short introduction" ]
+                        , paragraph [ fontSizeMedium screenWidth, paddingEach { edges | bottom = 15 } ] [ text "Different application forms in some way related to attendance allowance. Several react based application forms, and Kotlin based backends. Data is validated before it is put on a Kafka topic." ]
+                        , paragraph [ fontSizeSmall screenWidth, color greyScaleDark1 ] [ text "Technologies" ]
+                        , paragraph [ fontSizeMedium screenWidth, paddingEach { edges | bottom = 15 } ] [ text "React, Typescript, Formik, Gatsby, Sanity, Kotlin, Kafka, Docker, Nais (nais.io, built on Kubernetes)" ]
+                        , paragraph [ fontSizeSmall screenWidth, color greyScaleDark1 ] [ text "Some open source contributions" ]
                         , newTabLink []
                             { url = "https://github.com/navikt/sykdom-i-familien"
                             , label = text "sykdom-i-familien"
