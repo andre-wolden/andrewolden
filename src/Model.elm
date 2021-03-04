@@ -16,4 +16,10 @@ type alias Model =
 
 init : () -> ( Model, Cmd Msg )
 init flags =
-    ( { viewport = Nothing, maybeY = Just 0, initialH = Nothing, fontSizeFunc = Nothing }, cmdInitialGetViewport )
+    ( { viewport = Nothing
+      , maybeY = Just 0
+      , initialH = Nothing
+      , fontSizeFunc = Nothing
+      }
+    , cmdInitialGetViewport
+    )
