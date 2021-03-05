@@ -1,6 +1,9 @@
 module Update exposing (..)
 
+import Animator
+import AnimatorExample exposing (animator)
 import Commands exposing (cmdGetViewport)
+import Expand.Expand exposing (expandAnimator)
 import Messages exposing (Msg(..))
 import Model exposing (Model)
 import Utils exposing (focusSearchBox)
@@ -27,5 +30,25 @@ update message model =
 
         RecieveY y ->
             ( { model | maybeY = String.toFloat y }
+            , Cmd.none
+            )
+
+        SetExpands expands ->
+            ( { model | expands = expands }, Cmd.none )
+
+        Tick newTime ->
+            ( model
+                |> Animator.update newTime animator
+              -- (5) - Updating our model using our animator and the current time.
+            , Cmd.none
+            )
+
+        Check newChecked ->
+            ( { model
+                | checked =
+                    -- (6) - Here we're adding a new state to our timeline.
+                    model.checked
+                        |> Animator.go Animator.slowly newChecked
+              }
             , Cmd.none
             )

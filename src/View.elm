@@ -1,12 +1,14 @@
 module View exposing (..)
 
 import About exposing (about)
+import AnimatorExample exposing (animatorExample)
 import Basics as Math
 import Browser.Dom exposing (Viewport)
 import Contact exposing (contact)
 import Cv.Cv exposing (cv)
 import Element exposing (Element, centerX, column, fill, maximum, paddingXY, paragraph, px, row)
 import Element.Font as Font
+import Expand.Expand exposing (expandDemo)
 import Html exposing (..)
 import Maybe exposing (map4)
 import Menubar exposing (hMax, menubar)
@@ -45,16 +47,20 @@ view model =
                 viewData =
                     calculateViewData viewport y initialH
             in
-            Element.layout (textFont ++ menubar viewData fontSizeF)
-                (column [ paddingXY 0 (floor (hMax viewport.scene.width) + 72), Element.width (fill |> maximum (Math.floor wContentMax)), centerX ]
-                    [ introductionTextRow (floor viewData.h) viewData.w
-                    , cv viewData.w
-                    , swSkillz
-                    , stuffToShowOff viewData.w
-                    , about
-                    , contact
-                    ]
-                )
+            div []
+                [ Element.layout (textFont ++ menubar viewData fontSizeF)
+                    (column [ paddingXY 0 (floor (hMax viewport.scene.width) + 72), Element.width (fill |> maximum (Math.floor wContentMax)), centerX ]
+                        [ introductionTextRow (floor viewData.h) viewData.w
+                        , cv viewData.w
+                        , swSkillz
+                        , stuffToShowOff viewData.w
+                        , about
+                        , contact
+                        , expandDemo model viewData
+                        ]
+                    )
+                , animatorExample model
+                ]
 
 
 textFont : List (Element.Attribute msg)

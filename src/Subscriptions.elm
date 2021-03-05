@@ -1,6 +1,9 @@
 module Subscriptions exposing (subscriptions)
 
+import Animator
+import AnimatorExample exposing (animator)
 import Browser.Events as E
+import Expand.Expand exposing (expandAnimator)
 import Messages exposing (Msg(..))
 import Model exposing (Model)
 import Platform.Sub exposing (batch)
@@ -12,6 +15,7 @@ subscriptions model =
     batch
         [ resizeSub
         , messageReceiver RecieveY
+        , Animator.toSubscription Tick model animator
         ]
 
 
