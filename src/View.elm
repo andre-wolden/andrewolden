@@ -4,14 +4,14 @@ import About exposing (about)
 import AnimatorExample exposing (animatorExample)
 import Basics as Math
 import Browser.Dom exposing (Viewport)
+import Components.Header.Menubar exposing (hMax, menubarHeader)
 import Contact exposing (contact)
 import Cv.Cv exposing (cv)
-import Element exposing (Element, centerX, column, fill, maximum, paddingXY, paragraph, px, row)
+import Element exposing (Element, centerX, clip, column, fill, maximum, paddingXY, paragraph, px, row)
 import Element.Font as Font
 import Expand.Expand exposing (expandDemo)
 import Html exposing (..)
 import Maybe exposing (map4)
-import Menubar exposing (hMax, menubar)
 import MenubarUtils exposing (calculateViewData)
 import Messages exposing (Msg(..))
 import Model exposing (Model)
@@ -48,8 +48,13 @@ view model =
                     calculateViewData viewport y initialH
             in
             div []
-                [ Element.layout (textFont ++ menubar viewData fontSizeF)
-                    (column [ paddingXY 0 (floor (hMax viewport.scene.width) + 72), Element.width (fill |> maximum (Math.floor wContentMax)), centerX ]
+                [ Element.layout (textFont ++ menubarHeader viewData fontSizeF)
+                    (column
+                        [ clip
+                        , paddingXY 0 (floor (hMax viewport.scene.width) + 72)
+                        , Element.width (fill |> maximum (Math.floor wContentMax))
+                        , centerX
+                        ]
                         [ introductionTextRow (floor viewData.h) viewData.w
                         , cv viewData.w
                         , swSkillz
@@ -59,7 +64,8 @@ view model =
                         , expandDemo model viewData
                         ]
                     )
-                , animatorExample model
+
+                --, animatorExample model
                 ]
 
 

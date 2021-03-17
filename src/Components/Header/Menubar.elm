@@ -1,14 +1,12 @@
-module Menubar exposing (..)
+module Components.Header.Menubar exposing (..)
 
 import Basics as Math
-import Debug exposing (todo)
-import Element exposing (Attr, Attribute, Element, Length, centerX, centerY, clip, el, explain, height, image, inFront, moveDown, moveLeft, moveRight, moveUp, none, paddingXY, px, rgb255, text, width)
+import Element exposing (Attr, Attribute, Element, Length, centerX, centerY, clip, el, height, image, inFront, moveDown, moveLeft, moveRight, moveUp, none, paddingXY, px, rgb255, text, width)
 import Element.Background exposing (color)
 import Element.Border as Border
 import Element.Font as Font
 import Messages exposing (Msg)
-import String exposing (fromFloat)
-import ViewConstants exposing (cHMax, cMBMin, picturePercentage, wContent)
+import ViewConstants exposing (picturePercentage, wContent)
 import ViewTypes exposing (FontSizeFunc, ViewData)
 import ViewUtils.ViewUtils exposing (bottomLine)
 
@@ -17,13 +15,10 @@ import ViewUtils.ViewUtils exposing (bottomLine)
 -- Element.explain Debug.todo,
 
 
-menubar : ViewData -> FontSizeFunc -> List (Attribute Msg)
-menubar viewData fontSizeFunc =
+menubarHeader : ViewData -> FontSizeFunc -> List (Attribute Msg)
+menubarHeader viewData fontSizeFunc =
     [ whiteBackgroundBox viewData |> inFront
     , title viewData fontSizeFunc |> inFront
-
-    --, debugSizeValuesRow viewData |> inFront
-    --, bottomLine viewport y
     , picture viewData |> inFront
     ]
 
@@ -95,7 +90,12 @@ picture viewData =
         moveRightAmount =
             moveHorizontalF viewData 1
     in
-    el [ centerX, centerY, moveRight moveRightAmount, moveUp moveUpAmount ] <|
+    el
+        [ centerX
+        , moveRight moveRightAmount
+        , moveDown ((h / 2) - radius - moveUpAmount)
+        ]
+    <|
         image
             [ clip
             , Border.rounded radiusInt
