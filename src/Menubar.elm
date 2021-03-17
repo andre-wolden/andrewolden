@@ -2,11 +2,12 @@ module Menubar exposing (..)
 
 import Basics as Math
 import Debug exposing (todo)
-import Element exposing (Attr, Attribute, Element, Length, centerX, centerY, clip, el, explain, height, image, inFront, moveDown, moveRight, moveUp, none, paddingXY, px, rgb255, text, width)
+import Element exposing (Attr, Attribute, Element, Length, centerX, centerY, clip, el, explain, height, image, inFront, moveDown, moveLeft, moveRight, moveUp, none, paddingXY, px, rgb255, text, width)
 import Element.Background exposing (color)
 import Element.Border as Border
 import Element.Font as Font
 import Messages exposing (Msg)
+import String exposing (fromFloat)
 import ViewConstants exposing (cHMax, cMBMin, picturePercentage, wContent)
 import ViewTypes exposing (FontSizeFunc, ViewData)
 import ViewUtils.ViewUtils exposing (bottomLine)
@@ -56,11 +57,16 @@ hMax wContent =
 
 title : ViewData -> FontSizeFunc -> Element Msg
 title viewData fontSizeFunc =
+    let
+        moveLeftAmount =
+            moveHorizontalF viewData 0.6
+    in
     el
         [ paddingXY 0 (viewData.hMB * 0.5 |> Math.floor)
         , Font.size (fontSizeFunc viewData.hMB viewData.w |> Math.floor)
         , centerX
         , moveDown (moveUpOrDownF viewData 0.6)
+        , moveLeft moveLeftAmount
         ]
         ("André Wolden" |> text)
 
@@ -85,8 +91,11 @@ picture viewData =
 
         moveUpAmount =
             moveUpF viewData (h / 2)
+
+        moveRightAmount =
+            moveHorizontalF viewData 1
     in
-    el [ centerX, centerY, moveRight (moveRightF viewData), moveUp moveUpAmount ] <|
+    el [ centerX, centerY, moveRight moveRightAmount, moveUp moveUpAmount ] <|
         image
             [ clip
             , Border.rounded radiusInt
@@ -117,40 +126,35 @@ moveUpOrDownF viewData diameterPercentage =
     d * diameterPercentage * (hMB - hMBMin) / (h - hMBMin)
 
 
-moveRightF : ViewData -> Float
-moveRightF { w, h, y, hMB } =
+moveHorizontalF : ViewData -> Float -> Float
+moveHorizontalF { w, h, y, hMB, hMBMin } pOffHorizontal =
     let
-        diameter =
-            pictureDiameter picturePercentage w hMB
-
-        radius =
-            diameter / 2
-
-        maxW =
-            (w / 2) - radius * 1.2
-
-        hMBMax =
-            h
-
-        hMBMin =
-            cMBMin
-
-        --a = 1 + Debug.log "moveRightF value: " mR
+        a =
+            0.5 * pOff * (w - hMBMin) / (h - hMBMin) ^ 4
     in
-    maxW * (hMBMax ^ 2 - hMB ^ 2) / (hMBMax ^ 2 - hMBMin ^ 2)
+    if y > (h - hMBMin) then
+        a * (h - hMBMin) ^ 4 |> (*) pOffHorizontal
+
+    else
+        a * y ^ 4 |> (*) pOffHorizontal
+
+
+pOff : Float
+pOff =
+    1
 
 
 moveUpF : ViewData -> Float -> Float
 moveUpF { w, h, y, hMB, hMBMin } yStart =
     let
-        amount =
-            y * 1.3
+        a =
+            0.5 * pOff
     in
-    if yStart - amount < hMBMin / 2 then
-        yStart - (hMBMin / 2)
+    if y > h - hMBMin then
+        a * (h - hMBMin)
 
     else
-        amount
+        a * y
 
 
 whiteBackgroundColor : Attr decorative msg
