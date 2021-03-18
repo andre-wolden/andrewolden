@@ -1,6 +1,7 @@
 module AnimatorExample exposing (..)
 
-import Animator
+import Animator exposing (Timeline, at)
+import Animator.Css
 import Animator.Inline
 import Browser
 import Color
@@ -106,7 +107,7 @@ viewHugeCheckbox checked =
                 ]
             , span
                 [ Attr.style "margin-left" "32px"
-                , Attr.style "font-size" "190px"
+                , Attr.style "font-size" "90px"
                 ]
                 [ text "Click me" ]
             ]
@@ -125,4 +126,31 @@ viewHugeCheckbox checked =
                 ]
                 [ text "👍" ]
             ]
+        ]
+
+
+animatorExampleCss : Model -> Html Msg
+animatorExampleCss model =
+    div [ Attr.style "padding" "60px" ]
+        [ Animator.Css.div model.checked
+            [ Animator.Css.backgroundColor <|
+                \checked ->
+                    if checked then
+                        Color.rgb255 255 96 96
+
+                    else
+                        Color.green
+            , Animator.Css.height <|
+                \checked ->
+                    if checked then
+                        at 300
+
+                    else
+                        at 30
+            ]
+            [ Attr.style "height" "30px"
+            , Attr.style "width" "30px"
+            ]
+            [ Html.text "x" ]
+        , button [ Events.onClick (Check (not (Animator.current model.checked))) ] [ text "toggle" ]
         ]

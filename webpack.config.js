@@ -13,7 +13,8 @@ const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 var MODE =
     process.env.npm_lifecycle_event === "prod" ? "production" : "development";
-var withDebug = !process.env["npm_config_nodebug"] && MODE === "development";
+// var withDebug = !process.env["npm_config_nodebug"] && MODE === "development";
+var withDebug = false;
 // this may help for Yarn users
 // var withDebug = !npmParams.includes("--nodebug");
 console.log(

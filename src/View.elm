@@ -1,8 +1,10 @@
 module View exposing (..)
 
 import About exposing (about)
+import AnimatorExample exposing (animatorExample, animatorExampleCss)
 import Basics as Math
 import Browser.Dom exposing (Viewport)
+import Components.Collapse exposing (collapseExample)
 import Components.Header.Menubar exposing (hMax, menubarHeader)
 import Components.Introduction exposing (introductionSection)
 import Contact exposing (contact)
@@ -56,16 +58,19 @@ view model =
                         , centerX
                         ]
                         [ introductionSection viewData
+                        , collapseExample model
                         , cv viewData.w
                         , swSkillz
                         , stuffToShowOff viewData.w
                         , about
                         , contact
-                        , expandDemo model viewData
+
+                        --, expandDemo model viewData
                         ]
                     )
 
                 --, animatorExample model
+                , animatorExampleCss model
                 ]
 
 
