@@ -1,7 +1,8 @@
 module About exposing (..)
 
 import Data.DivContent exposing (aboutText, aboutTitle)
-import Element exposing (Element, column, el, fill, html, newTabLink, padding, paragraph, row, spacing, text, width)
+import Debug exposing (todo)
+import Element exposing (Element, centerX, column, el, explain, fill, html, newTabLink, padding, paragraph, row, spacing, text, width)
 import Element.Font exposing (underline)
 import Html exposing (i)
 import Html.Attributes exposing (class)

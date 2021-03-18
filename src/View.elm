@@ -1,13 +1,13 @@
 module View exposing (..)
 
 import About exposing (about)
-import AnimatorExample exposing (animatorExample)
 import Basics as Math
 import Browser.Dom exposing (Viewport)
 import Components.Header.Menubar exposing (hMax, menubarHeader)
+import Components.Introduction exposing (introductionSection)
 import Contact exposing (contact)
 import Cv.Cv exposing (cv)
-import Element exposing (Element, centerX, clip, column, fill, maximum, paddingXY, paragraph, px, row)
+import Element exposing (Element, centerX, clip, column, fill, maximum, paddingXY)
 import Element.Font as Font
 import Expand.Expand exposing (expandDemo)
 import Html exposing (..)
@@ -17,9 +17,9 @@ import Messages exposing (Msg(..))
 import Model exposing (Model)
 import StuffToShowOff exposing (stuffToShowOff)
 import SwSkillz exposing (swSkillz)
-import ViewConstants exposing (wContent, wContentMax)
+import ViewConstants exposing (wContentMax)
 import ViewTypes exposing (ViewData)
-import ViewUtils.Palette exposing (greyScaleDark3, greyScaleDark4, greyScaleMiddle)
+import ViewUtils.Palette exposing (greyScaleDark4)
 
 
 
@@ -55,7 +55,7 @@ view model =
                         , Element.width (fill |> maximum (Math.floor wContentMax))
                         , centerX
                         ]
-                        [ introductionTextRow (floor viewData.h) viewData.w
+                        [ introductionSection viewData
                         , cv viewData.w
                         , swSkillz
                         , stuffToShowOff viewData.w
@@ -78,15 +78,3 @@ textFont =
         , Font.sansSerif
         ]
     ]
-
-
-introductionTextRow : Int -> Float -> Element msg
-introductionTextRow pxScreenHeight screenWidth =
-    row
-        [ Element.width fill, Element.height (px pxScreenHeight), Element.centerY, Element.paddingXY (floor <| 0.1 * wContent screenWidth) 0 ]
-        [ paragraph [ centerX, Font.justify ] [ Element.text introtext ]
-        ]
-
-
-introtext =
-    "I work as a software developer. In my spare time I basically do two things. I spend time with my family, and I practice some nerdy activity. Which usually means practice coding, math or korean. Here's my CV, an introduction to myself, and some other things that I would like to share."

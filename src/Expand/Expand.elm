@@ -31,7 +31,7 @@ expandDemo model viewdata =
         expands =
             model.expands
     in
-    column [ width fill, padding 80, explain todo ]
+    column [ width fill, clipX, padding 80, explain todo ]
         [ el [ padding 16 ] (text "EXPAND EXAMPLE")
         , expand
             { isOpen = model.expands.exampleExpand
