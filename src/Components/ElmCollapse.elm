@@ -31,7 +31,7 @@ elmCollapse isOpen maybeElementHeight collapseId content =
                                 at 30
 
                             Just h ->
-                                at <| toFloat h
+                                at <| toFloat h + 12
 
                     else
                         at 45

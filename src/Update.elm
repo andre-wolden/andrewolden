@@ -49,7 +49,7 @@ update message model =
                 | checked =
                     -- (6) - Here we're adding a new state to our timeline.
                     model.checked
-                        |> Animator.go Animator.slowly newChecked
+                        |> Animator.go Animator.quickly newChecked
               }
             , Cmd.none
             )
@@ -61,7 +61,7 @@ update message model =
             case result of
                 Ok element ->
                     ( { model
-                        | checked = model.checked |> Animator.go Animator.slowly (not (Animator.current model.checked))
+                        | checked = model.checked |> Animator.go Animator.quickly (not (Animator.current model.checked))
                         , elmCollapseResult = element :: model.elmCollapseResult
                         , height = Just <| round element.element.height
                       }
