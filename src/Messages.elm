@@ -1,6 +1,6 @@
 module Messages exposing (..)
 
-import Browser.Dom exposing (Viewport)
+import Browser.Dom exposing (Element, Error, Viewport)
 import Time
 import Types exposing (Expands)
 
@@ -15,3 +15,7 @@ type Msg
     | SetExpands Expands
     | Tick Time.Posix
     | Check Bool
+    | ToggleCollapse Int
+    | ElmCollapseElement (Result Error Element)
+    | FindElmCollapses
+    | GetElementHeight String

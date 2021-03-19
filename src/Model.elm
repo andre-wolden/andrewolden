@@ -1,9 +1,11 @@
 module Model exposing (..)
 
 import Animator
-import Browser.Dom exposing (Viewport)
-import Commands exposing (cmdInitialGetViewport)
+import Browser.Dom exposing (Element, Error, Viewport)
+import Commands exposing (cmdGetAllElmCollapseNodes, cmdInitialGetViewport)
+import Maybe exposing (Maybe)
 import Messages exposing (Msg)
+import Platform.Cmd exposing (batch)
 import Types exposing (Expands)
 import ViewTypes exposing (FontSizeFunc)
 
@@ -15,6 +17,9 @@ type alias Model =
     , fontSizeFunc : Maybe FontSizeFunc
     , expands : Expands
     , checked : Animator.Timeline Bool
+    , height : Maybe Int
+    , elmCollapseResult : List Element
+    , errors : List Error
     }
 
 
@@ -26,8 +31,13 @@ init flags =
       , fontSizeFunc = Nothing
       , expands = initialExpands
       , checked = Animator.init False
+      , height = Nothing
+      , elmCollapseResult = []
+      , errors = []
       }
-    , cmdInitialGetViewport
+    , batch
+        [ cmdInitialGetViewport
+        ]
     )
 
 

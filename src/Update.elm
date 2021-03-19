@@ -2,10 +2,11 @@ module Update exposing (..)
 
 import Animator
 import AnimatorExample exposing (animator)
-import Commands exposing (cmdGetViewport)
+import Commands exposing (cmdGetAllElmCollapseNodes, cmdGetElmCollapseElement, cmdGetViewport)
 import Expand.Expand exposing (expandAnimator)
 import Messages exposing (Msg(..))
 import Model exposing (Model)
+import Result exposing (toMaybe)
 import Utils exposing (focusSearchBox)
 import ViewportAndSceneUtils exposing (getFontSizeFormula)
 
@@ -52,3 +53,26 @@ update message model =
               }
             , Cmd.none
             )
+
+        ToggleCollapse uuid ->
+            ( model, Cmd.none )
+
+        ElmCollapseElement result ->
+            case result of
+                Ok element ->
+                    ( { model
+                        | checked = model.checked |> Animator.go Animator.slowly (not (Animator.current model.checked))
+                        , elmCollapseResult = element :: model.elmCollapseResult
+                        , height = Just <| round element.element.height
+                      }
+                    , Cmd.none
+                    )
+
+                Err error ->
+                    ( { model | errors = error :: model.errors }, Cmd.none )
+
+        FindElmCollapses ->
+            ( model, cmdGetAllElmCollapseNodes )
+
+        GetElementHeight collapseId ->
+            ( model, cmdGetElmCollapseElement collapseId )
