@@ -1,9 +1,9 @@
 module Commands exposing (..)
 
-import Browser.Dom exposing (Viewport, getElement, getViewport)
-import List exposing (map)
+import Browser.Dom exposing (Element, Error, Viewport, getElement, getViewport)
+import Components.ElmCollapse.ElmCollapseTypes exposing (ElmCollapse)
 import Messages exposing (Msg(..))
-import Platform.Cmd exposing (batch)
+import Platform.Cmd
 import Task
 
 
@@ -17,20 +17,33 @@ cmdInitialGetViewport =
     Task.perform (\viewport -> GotInitialViewport viewport) getViewport
 
 
-elmCollapseUids : List String
-elmCollapseUids =
-    [ "elm-collapse-1", "elm-collapse-2" ]
+
+--ToggleElmCollapse { elmCollapse | maybeElementHeight = Just }
 
 
-cmdGetAllElmCollapseNodes : Cmd Msg
-cmdGetAllElmCollapseNodes =
-    elmCollapseUids
-        |> map getElement
-        |> map (Task.attempt (\result -> ElmCollapseElement result))
-        |> batch
+cmdGetHeightElmCollapse1 : ElmCollapse -> Cmd Msg
+cmdGetHeightElmCollapse1 elmCollapse =
+    getElement elmCollapse.collapseId
+        |> Task.attempt
+            (\result ->
+                case result of
+                    Err _ ->
+                        ToggleElmCollapse1 Nothing
+
+                    Ok e ->
+                        ToggleElmCollapse1 (Just e.element.height)
+            )
 
 
-cmdGetElmCollapseElement : String -> Cmd Msg
-cmdGetElmCollapseElement uuid =
-    getElement uuid
-        |> Task.attempt (\result -> ElmCollapseElement result)
+cmdGetHeightElmCollapse2 : ElmCollapse -> Cmd Msg
+cmdGetHeightElmCollapse2 elmCollapse =
+    getElement elmCollapse.collapseId
+        |> Task.attempt
+            (\result ->
+                case result of
+                    Err _ ->
+                        ToggleElmCollapse2 Nothing
+
+                    Ok e ->
+                        ToggleElmCollapse2 (Just e.element.height)
+            )

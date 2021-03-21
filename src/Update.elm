@@ -1,12 +1,10 @@
 module Update exposing (..)
 
 import Animator
-import AnimatorExample exposing (animator)
-import Commands exposing (cmdGetAllElmCollapseNodes, cmdGetElmCollapseElement, cmdGetViewport)
-import Expand.Expand exposing (expandAnimator)
+import Commands exposing (cmdGetHeightElmCollapse1, cmdGetHeightElmCollapse2, cmdGetViewport)
+import Components.ElmCollapse.ElmCollapse exposing (animator1, animator2)
 import Messages exposing (Msg(..))
 import Model exposing (Model)
-import Result exposing (toMaybe)
 import Utils exposing (focusSearchBox)
 import ViewportAndSceneUtils exposing (getFontSizeFormula)
 
@@ -34,45 +32,50 @@ update message model =
             , Cmd.none
             )
 
-        SetExpands expands ->
-            ( { model | expands = expands }, Cmd.none )
-
-        Tick newTime ->
+        Tick1 newTime ->
             ( model
-                |> Animator.update newTime animator
-              -- (5) - Updating our model using our animator and the current time.
+                |> Animator.update newTime animator1
+              -- (5)  Updating our model using our animator and the current time.
             , Cmd.none
             )
 
-        Check newChecked ->
-            ( { model
-                | checked =
-                    -- (6) - Here we're adding a new state to our timeline.
-                    model.checked
-                        |> Animator.go Animator.quickly newChecked
-              }
+        GetHeightOfElmCollapse1 ->
+            ( model, cmdGetHeightElmCollapse1 model.elmCollapse1 )
+
+        ToggleElmCollapse1 maybeHeightFloat ->
+            let
+                elmCollapse1 =
+                    model.elmCollapse1
+
+                updatedElmCollapse1 =
+                    { elmCollapse1
+                        | isOpen =
+                            Animator.go Animator.quickly (not (Animator.current elmCollapse1.isOpen)) elmCollapse1.isOpen
+                        , maybeElementHeight = maybeHeightFloat
+                    }
+            in
+            ( { model | elmCollapse1 = updatedElmCollapse1 }, Cmd.none )
+
+        Tick2 newTime ->
+            ( model
+                |> Animator.update newTime animator2
+              -- (5)  Updating our model using our animator and the current time.
             , Cmd.none
             )
 
-        ToggleCollapse uuid ->
-            ( model, Cmd.none )
+        GetHeightOfElmCollapse2 ->
+            ( model, cmdGetHeightElmCollapse2 model.elmCollapse2 )
 
-        ElmCollapseElement result ->
-            case result of
-                Ok element ->
-                    ( { model
-                        | checked = model.checked |> Animator.go Animator.quickly (not (Animator.current model.checked))
-                        , elmCollapseResult = element :: model.elmCollapseResult
-                        , height = Just <| round element.element.height
-                      }
-                    , Cmd.none
-                    )
+        ToggleElmCollapse2 maybeHeightFloat ->
+            let
+                elmCollapse2 =
+                    model.elmCollapse2
 
-                Err error ->
-                    ( { model | errors = error :: model.errors }, Cmd.none )
-
-        FindElmCollapses ->
-            ( model, cmdGetAllElmCollapseNodes )
-
-        GetElementHeight collapseId ->
-            ( model, cmdGetElmCollapseElement collapseId )
+                updatedElmCollapse2 =
+                    { elmCollapse2
+                        | isOpen =
+                            Animator.go Animator.quickly (not (Animator.current elmCollapse2.isOpen)) elmCollapse2.isOpen
+                        , maybeElementHeight = maybeHeightFloat
+                    }
+            in
+            ( { model | elmCollapse2 = updatedElmCollapse2 }, Cmd.none )

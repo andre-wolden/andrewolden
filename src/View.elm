@@ -1,16 +1,15 @@
 module View exposing (..)
 
 import About exposing (about)
-import AnimatorExample exposing (animatorExampleCss)
 import Basics as Math
 import Browser.Dom exposing (Viewport)
-import Components.ElmCollapse exposing (elmCollapseExample)
 import Components.Header.Menubar exposing (hMax, menubarHeader)
 import Components.Introduction exposing (introductionSection)
 import Contact exposing (contact)
 import Cv.Cv exposing (cv)
 import Element exposing (Element, centerX, clip, column, fill, maximum, paddingXY)
 import Element.Font as Font
+import Examples.ElmCollapseExample exposing (elmCollapseExample)
 import Html exposing (..)
 import Maybe exposing (map4)
 import MenubarUtils exposing (calculateViewData)
@@ -63,13 +62,8 @@ view model =
                         , stuffToShowOff viewData.w
                         , about
                         , contact
-
-                        --, expandDemo model viewData
                         ]
                     )
-
-                --, animatorExample model
-                , animatorExampleCss model
                 ]
 
 
