@@ -15,7 +15,6 @@ type alias Model =
     , maybeY : Maybe Float
     , initialH : Maybe Float
     , fontSizeFunc : Maybe FontSizeFunc
-    , checked : Animator.Timeline Bool
     , elmCollapse1 : ElmCollapse
     , elmCollapse2 : ElmCollapse
     }
@@ -27,7 +26,6 @@ init flags =
       , maybeY = Just 0
       , initialH = Nothing
       , fontSizeFunc = Nothing
-      , checked = Animator.init False
       , elmCollapse1 = initialElmCollapse1
       , elmCollapse2 = initialElmCollapse2
       }

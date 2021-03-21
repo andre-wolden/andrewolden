@@ -2,8 +2,7 @@ module Components.ElmCollapse.ElmCollapse exposing (..)
 
 import Animator exposing (Timeline, at, current)
 import Components.ElmCollapse.ElmCollapseTypes exposing (ElmCollapse)
-import Debug exposing (todo)
-import Element exposing (Element, clip, column, explain, fill, height, htmlAttribute, padding, paragraph, px, text, width, wrappedRow)
+import Element exposing (Element, alignTop, clip, column, fill, height, htmlAttribute, padding, paragraph, px, width, wrappedRow)
 import Element.Input exposing (button)
 import Html.Attributes exposing (id)
 import Messages exposing (Msg(..))
@@ -89,9 +88,16 @@ elmCollapse elmCollapseInfo content =
         [ wrappedRow
             [ height <| px (round theHeight)
             , clip
-            , explain todo
+
+            --, explain todo
             ]
-            [ paragraph [ padding 10, htmlAttribute <| id collapseId ] [ content ] ]
+            [ paragraph
+                [ padding 10
+                , htmlAttribute <| id collapseId
+                , alignTop
+                ]
+                [ content ]
+            ]
         , button []
             { onPress = elmCollapseInfo.onPress maybeElementHeight
             , label = elmCollapseInfo.label (current isOpen)
