@@ -4,7 +4,7 @@ import About exposing (about)
 import Basics as Math
 import Browser.Dom exposing (Viewport)
 import Components.CollapseAnimator.Example as CollapseAnimator
-import Components.CollapseKeyframer.Example as Keyframer
+import Components.CollapseTransition.Example as Transition
 import Components.Header.Menubar exposing (hMax, menubarHeader)
 import Components.Introduction exposing (introductionSection)
 import Contact exposing (contact)
@@ -13,7 +13,6 @@ import Data.DivContent exposing (aboutText)
 import Element exposing (Element, centerX, clip, column, fill, maximum, paddingXY)
 import Element.Font as Font
 import Html exposing (..)
-import Html.Attributes
 import Maybe exposing (map4)
 import MenubarUtils exposing (calculateViewData)
 import Messages exposing (Msg(..))
@@ -67,7 +66,7 @@ view model =
                         ]
                     )
                 , CollapseAnimator.example model
-                , Keyframer.example model
+                , Transition.example model
                 , Html.div
                     []
                     [ Html.div [] [ Html.text aboutText ] ]

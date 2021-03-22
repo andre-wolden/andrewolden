@@ -2,7 +2,7 @@
 
 require("./styles.scss");
 require("./Components/CollapseAnimator/collapse-animator.scss");
-require("./Components/CollapseKeyframer/collapse-keyframer.scss");
+require("./Components/CollapseTransition/collapse-transition.scss");
 
 const {Elm} = require('./Main');
 var app = Elm.Main.init({flags: 6});

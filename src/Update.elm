@@ -1,8 +1,9 @@
 module Update exposing (..)
 
 import Animator
-import Commands exposing (cmdGetHeightElmCollapse1, cmdGetHeightElmCollapse2, cmdGetViewport)
+import Commands exposing (cmdGetHeightElmCollapse1, cmdGetHeightElmCollapse2, cmdGetHeightOfElement, cmdGetViewport)
 import Components.CollapseAnimator.Collapse exposing (animator1, animator2)
+import Components.CollapseTransition.Collapse exposing (CollapseTransition)
 import Messages exposing (Msg(..))
 import Model exposing (Model)
 import Utils exposing (focusSearchBox)
@@ -80,5 +81,50 @@ update message model =
             in
             ( { model | elmCollapse2 = updatedElmCollapse2 }, Cmd.none )
 
-        ToggleKeyframer ->
-            ( { model | keyframerIsOpen = not model.keyframerIsOpen }, Cmd.none )
+        ToggleCollapseTransition elementId ->
+            let
+                updatedCollapseTransitions =
+                    model.collapseTransitions
+                        |> List.map (toggleForMatchingElementId elementId)
+            in
+            ( { model | collapseTransitions = updatedCollapseTransitions }, Cmd.none )
+
+        TryToGetElementHeightAndThenMaybeToggle elementId ->
+            ( model, cmdGetHeightOfElement elementId )
+
+        GotMaybeElementHeight ( maybeHeightFloat, elementId ) ->
+            case maybeHeightFloat of
+                Nothing ->
+                    ( model, Cmd.none )
+
+                Just height ->
+                    let
+                        updatedCollapseTransitions =
+                            model.collapseTransitions
+                                |> List.map (setHeightAndToggle elementId height)
+                    in
+                    ( { model | collapseTransitions = updatedCollapseTransitions }, Cmd.none )
+
+
+setHeightAndToggle : String -> Float -> CollapseTransition -> CollapseTransition
+setHeightAndToggle elementId height ct =
+    setHeightOnMatchingElementId elementId height ct
+        |> toggleForMatchingElementId elementId
+
+
+toggleForMatchingElementId : String -> CollapseTransition -> CollapseTransition
+toggleForMatchingElementId elementId ct =
+    if ct.elementId == elementId then
+        { ct | isOpen = not ct.isOpen }
+
+    else
+        ct
+
+
+setHeightOnMatchingElementId : String -> Float -> CollapseTransition -> CollapseTransition
+setHeightOnMatchingElementId elementId height ct =
+    if ct.elementId == elementId then
+        { ct | maybeHeight = Just height }
+
+    else
+        ct

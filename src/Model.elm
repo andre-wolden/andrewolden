@@ -4,6 +4,7 @@ import Animator
 import Browser.Dom exposing (Element, Error, Viewport)
 import Commands exposing (cmdInitialGetViewport)
 import Components.CollapseAnimator.Types exposing (ElmCollapse, initialElmCollapse1, initialElmCollapse2)
+import Components.CollapseTransition.Collapse exposing (CollapseTransition, initialCollapseTransitions)
 import Maybe exposing (Maybe)
 import Messages exposing (Msg)
 import Platform.Cmd exposing (batch)
@@ -18,6 +19,7 @@ type alias Model =
     , elmCollapse1 : ElmCollapse
     , elmCollapse2 : ElmCollapse
     , keyframerIsOpen : Bool
+    , collapseTransitions : List CollapseTransition
     }
 
 
@@ -30,6 +32,7 @@ init flags =
       , elmCollapse1 = initialElmCollapse1
       , elmCollapse2 = initialElmCollapse2
       , keyframerIsOpen = False
+      , collapseTransitions = initialCollapseTransitions
       }
     , batch
         [ cmdInitialGetViewport

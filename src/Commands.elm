@@ -47,3 +47,17 @@ cmdGetHeightElmCollapse2 elmCollapse =
                     Ok e ->
                         ToggleElmCollapse2 (Just e.element.height)
             )
+
+
+cmdGetHeightOfElement : String -> Cmd Msg
+cmdGetHeightOfElement elementId =
+    getElement elementId
+        |> Task.attempt
+            (\result ->
+                case result of
+                    Err _ ->
+                        GotMaybeElementHeight ( Nothing, elementId )
+
+                    Ok element ->
+                        GotMaybeElementHeight ( Just element.element.height, elementId )
+            )
