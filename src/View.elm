@@ -3,14 +3,17 @@ module View exposing (..)
 import About exposing (about)
 import Basics as Math
 import Browser.Dom exposing (Viewport)
+import Components.CollapseAnimator.Example as CollapseAnimator
+import Components.CollapseKeyframer.Example as Keyframer
 import Components.Header.Menubar exposing (hMax, menubarHeader)
 import Components.Introduction exposing (introductionSection)
 import Contact exposing (contact)
 import Cv.Cv exposing (cv)
+import Data.DivContent exposing (aboutText)
 import Element exposing (Element, centerX, clip, column, fill, maximum, paddingXY)
 import Element.Font as Font
-import Examples.ElmCollapseExample exposing (elmCollapseExample)
 import Html exposing (..)
+import Html.Attributes
 import Maybe exposing (map4)
 import MenubarUtils exposing (calculateViewData)
 import Messages exposing (Msg(..))
@@ -56,7 +59,6 @@ view model =
                         , centerX
                         ]
                         [ introductionSection viewData
-                        , elmCollapseExample model
                         , cv viewData.w
                         , swSkillz
                         , stuffToShowOff viewData.w
@@ -64,6 +66,11 @@ view model =
                         , contact
                         ]
                     )
+                , CollapseAnimator.example model
+                , Keyframer.example
+                , Html.div
+                    []
+                    [ Html.div [] [ Html.text aboutText ] ]
                 ]
 
 

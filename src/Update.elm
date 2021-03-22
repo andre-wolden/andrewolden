@@ -2,7 +2,7 @@ module Update exposing (..)
 
 import Animator
 import Commands exposing (cmdGetHeightElmCollapse1, cmdGetHeightElmCollapse2, cmdGetViewport)
-import Components.ElmCollapse.ElmCollapse exposing (animator1, animator2)
+import Components.CollapseAnimator.Collapse exposing (animator1, animator2)
 import Messages exposing (Msg(..))
 import Model exposing (Model)
 import Utils exposing (focusSearchBox)

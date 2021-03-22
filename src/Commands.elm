@@ -1,7 +1,7 @@
 module Commands exposing (..)
 
 import Browser.Dom exposing (Element, Error, Viewport, getElement, getViewport)
-import Components.ElmCollapse.ElmCollapseTypes exposing (ElmCollapse)
+import Components.CollapseAnimator.Types exposing (ElmCollapse)
 import Messages exposing (Msg(..))
 import Platform.Cmd
 import Task

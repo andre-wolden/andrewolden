@@ -1,7 +1,8 @@
-module Components.ElmCollapse.ElmCollapseTypes exposing (..)
+module Components.CollapseAnimator.Types exposing (..)
 
 import Animator exposing (Timeline, current, init)
 import Element exposing (Element, text)
+import Html exposing (Html)
 import Messages exposing (Msg(..))
 
 
@@ -9,8 +10,8 @@ type alias ElmCollapse =
     { isOpen : Timeline Bool
     , maybeElementHeight : Maybe Float
     , collapseId : String
-    , onPress : Maybe Float -> Maybe Msg
-    , label : Bool -> Element Msg
+    , onPress : Maybe Float -> Msg
+    , label : Bool -> Html Msg
     }
 
 
@@ -23,13 +24,13 @@ initialElmCollapse1 =
         \maybeElementHeight ->
             case maybeElementHeight of
                 Nothing ->
-                    Just GetHeightOfElmCollapse1
+                    GetHeightOfElmCollapse1
 
                 Just height ->
-                    Just (ToggleElmCollapse1 (Just height))
+                    ToggleElmCollapse1 (Just height)
     , label =
         \isOpen ->
-            text <|
+            Html.text <|
                 if isOpen then
                     "vis mindre"
 
@@ -47,14 +48,13 @@ initialElmCollapse2 =
         \maybeElementHeight ->
             case maybeElementHeight of
                 Nothing ->
-                    Just GetHeightOfElmCollapse2
+                    GetHeightOfElmCollapse2
 
                 Just height ->
-                    Just <|
-                        ToggleElmCollapse2 (Just height)
+                    ToggleElmCollapse2 (Just height)
     , label =
         \isOpen ->
-            text <|
+            Html.text <|
                 if isOpen then
                     "vis mindre"
 

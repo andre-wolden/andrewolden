@@ -2,7 +2,7 @@ module Subscriptions exposing (subscriptions)
 
 import Animator
 import Browser.Events as E
-import Components.ElmCollapse.ElmCollapse exposing (animator1, animator2)
+import Components.CollapseAnimator.Collapse exposing (animator1, animator2)
 import Messages exposing (Msg(..))
 import Model exposing (Model)
 import Platform.Sub exposing (batch)

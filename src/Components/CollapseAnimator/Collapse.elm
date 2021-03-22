@@ -1,10 +1,11 @@
-module Components.ElmCollapse.ElmCollapse exposing (..)
+module Components.CollapseAnimator.Collapse exposing (..)
 
-import Animator exposing (Timeline, at, current)
-import Components.ElmCollapse.ElmCollapseTypes exposing (ElmCollapse)
-import Element exposing (Element, alignTop, clip, column, fill, height, htmlAttribute, padding, paragraph, px, width, wrappedRow)
-import Element.Input exposing (button)
+import Animator exposing (Timeline, at)
+import Animator.Css exposing (Attribute)
+import Components.CollapseAnimator.Types exposing (ElmCollapse)
+import Html exposing (Html)
 import Html.Attributes exposing (id)
+import Html.Events exposing (onClick)
 import Messages exposing (Msg(..))
 import Model exposing (Model)
 
@@ -12,7 +13,7 @@ import Model exposing (Model)
 animator1 : Animator.Animator Model
 animator1 =
     Animator.animator
-        |> Animator.watching
+        |> Animator.Css.watching
             -- we tell the animator how
             -- to get the checked timeline using .checked
             (\model ->
@@ -24,13 +25,13 @@ animator1 =
             )
             -- and we tell the animator how
             -- to update that timeline as well
-            (\newChecked model ->
+            (\updatedIsOpen model ->
                 let
                     a =
                         model.elmCollapse1
 
                     b =
-                        { a | isOpen = newChecked }
+                        { a | isOpen = updatedIsOpen }
                 in
                 { model | elmCollapse1 = b }
             )
@@ -39,7 +40,7 @@ animator1 =
 animator2 : Animator.Animator Model
 animator2 =
     Animator.animator
-        |> Animator.watching
+        |> Animator.Css.watching
             -- we tell the animator how
             -- to get the checked timeline using .checked
             (\model ->
@@ -51,28 +52,28 @@ animator2 =
             )
             -- and we tell the animator how
             -- to update that timeline as well
-            (\newChecked model ->
+            (\updatedIsOpen model ->
                 let
                     a =
                         model.elmCollapse2
 
                     b =
-                        { a | isOpen = newChecked }
+                        { a | isOpen = updatedIsOpen }
                 in
                 { model | elmCollapse2 = b }
             )
 
 
-elmCollapse : ElmCollapse -> Element Msg -> Element Msg
-elmCollapse elmCollapseInfo content =
+collapse : ElmCollapse -> Html Msg -> Html Msg
+collapse elmCollapseInfo content =
     let
         { isOpen, maybeElementHeight, collapseId } =
             elmCollapseInfo
 
-        theHeight : Float
+        theHeight : Attribute Bool
         theHeight =
-            Animator.linear isOpen <|
-                \checked ->
+            Animator.Css.height
+                (\checked ->
                     if checked then
                         case maybeElementHeight of
                             Nothing ->
@@ -83,23 +84,18 @@ elmCollapse elmCollapseInfo content =
 
                     else
                         at 45
+                )
     in
-    column [ width fill, padding 40 ]
-        [ wrappedRow
-            [ height <| px (round theHeight)
-            , clip
-
-            --, explain todo
-            ]
-            [ paragraph
-                [ padding 10
-                , htmlAttribute <| id collapseId
-                , alignTop
+    Html.div [ Html.Attributes.class "collapse-animator-wrapper" ]
+        [ Animator.Css.div isOpen
+            [ theHeight ]
+            []
+            [ Html.div
+                [ id collapseId
                 ]
-                [ content ]
+                [ Html.div [ Html.Attributes.class "wrapper" ] [ content ] ]
             ]
-        , button []
-            { onPress = elmCollapseInfo.onPress maybeElementHeight
-            , label = elmCollapseInfo.label (current isOpen)
-            }
+        , Html.div []
+            [ Html.button [ onClick (elmCollapseInfo.onPress maybeElementHeight) ] [ Html.text "vis mer" ]
+            ]
         ]

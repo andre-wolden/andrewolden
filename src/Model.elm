@@ -3,7 +3,7 @@ module Model exposing (..)
 import Animator
 import Browser.Dom exposing (Element, Error, Viewport)
 import Commands exposing (cmdInitialGetViewport)
-import Components.ElmCollapse.ElmCollapseTypes exposing (ElmCollapse, initialElmCollapse1, initialElmCollapse2)
+import Components.CollapseAnimator.Types exposing (ElmCollapse, initialElmCollapse1, initialElmCollapse2)
 import Maybe exposing (Maybe)
 import Messages exposing (Msg)
 import Platform.Cmd exposing (batch)

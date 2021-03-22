@@ -1,6 +1,8 @@
 'use strict';
 
 require("./styles.scss");
+require("./Components/CollapseAnimator/collapse-animator.scss");
+require("./Components/CollapseKeyframer/collapse-keyframer.scss");
 
 const {Elm} = require('./Main');
 var app = Elm.Main.init({flags: 6});
