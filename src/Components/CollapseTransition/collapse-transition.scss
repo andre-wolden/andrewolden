@@ -1,37 +1,15 @@
 .collapse-transition-wrapper {
-  //border: 2px dotted green;
-
   max-width: 300px;
-
   .closed {
     overflow: hidden;
-    background: blue;
-    //animation-name: closeit;
-    //animation-duration: 0.3s;
     max-height: 30px;
   }
   .open {
     overflow: hidden;
-    background: red;
-    //animation-name: openit;
-    //animation-duration: 0.3s;
     max-height: 300px;
-
   }
 }
 
-@keyframes openit {
-  from {
-    background: blue;
-    max-height: 30px;
-  }
-}
-@keyframes closeit {
-  to {
-    background: red;
-    max-height: 30px;
-  }
-}
 
 .collapse-transition-example-wrapper {
   border: 2px dotted black;
