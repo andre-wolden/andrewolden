@@ -67,7 +67,7 @@ view model =
                         ]
                     )
                 , CollapseAnimator.example model
-                , Keyframer.example
+                , Keyframer.example model
                 , Html.div
                     []
                     [ Html.div [] [ Html.text aboutText ] ]

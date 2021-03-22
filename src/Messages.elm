@@ -17,3 +17,4 @@ type Msg
     | Tick2 Time.Posix
     | GetHeightOfElmCollapse2
     | ToggleElmCollapse2 (Maybe Float)
+    | ToggleKeyframer

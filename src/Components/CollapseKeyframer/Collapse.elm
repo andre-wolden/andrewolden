@@ -1,10 +1,29 @@
 module Components.CollapseKeyframer.Collapse exposing (..)
 
+import Data.DivContent exposing (aboutText)
 import Html exposing (Html)
 import Html.Attributes
-import Messages exposing (Msg)
+import Html.Events
+import Messages exposing (Msg(..))
 
 
-collapse : Html Msg
-collapse =
-    Html.div [ Html.Attributes.class "collapse-keyframer-wrapper" ] [ Html.text "her kommer CollapseKeyframer" ]
+collapse : Bool -> Html Msg
+collapse isOpen =
+    let
+        theClass : String
+        theClass =
+            if isOpen then
+                "open"
+
+            else
+                "closed"
+    in
+    Html.div
+        [ Html.Attributes.class "collapse-keyframer-wrapper"
+        ]
+        [ Html.div
+            [ Html.Attributes.class theClass
+            ]
+            [ Html.text aboutText ]
+        , Html.button [ Html.Events.onClick ToggleKeyframer ] [ Html.text "TOGGLE" ]
+        ]

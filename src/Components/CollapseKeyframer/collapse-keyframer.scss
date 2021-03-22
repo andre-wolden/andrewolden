@@ -1,9 +1,36 @@
 .collapse-keyframer-wrapper {
-  wrapper {
-    border: 1px dotted red;
-  }
-  border: 2px dotted green;
+  //border: 2px dotted green;
 
+  .closed {
+    max-height: 0;
+    transition: max-height 0.15s ease-out;
+    overflow: hidden;
+    background: #d5d5d5;
+  }
+  .open {
+    max-height: 500px;
+    transition: max-height 0.25s ease-in;
+  }
+
+}
+
+@keyframes expand {
+  from {
+    height: 100px;
+  }
+
+  to {
+    height: 300px;
+  }
+}
+@keyframes collapse {
+  from {
+    height: 300px;
+  }
+
+  to {
+    height:100px;
+  }
 }
 
 .collapse-keyframer-example-wrapper {

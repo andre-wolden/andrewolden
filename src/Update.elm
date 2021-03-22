@@ -79,3 +79,6 @@ update message model =
                     }
             in
             ( { model | elmCollapse2 = updatedElmCollapse2 }, Cmd.none )
+
+        ToggleKeyframer ->
+            ( { model | keyframerIsOpen = not model.keyframerIsOpen }, Cmd.none )

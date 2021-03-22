@@ -17,6 +17,7 @@ type alias Model =
     , fontSizeFunc : Maybe FontSizeFunc
     , elmCollapse1 : ElmCollapse
     , elmCollapse2 : ElmCollapse
+    , keyframerIsOpen : Bool
     }
 
 
@@ -28,6 +29,7 @@ init flags =
       , fontSizeFunc = Nothing
       , elmCollapse1 = initialElmCollapse1
       , elmCollapse2 = initialElmCollapse2
+      , keyframerIsOpen = False
       }
     , batch
         [ cmdInitialGetViewport
