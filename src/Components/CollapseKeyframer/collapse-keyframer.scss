@@ -2,34 +2,41 @@
   //border: 2px dotted green;
 
   .closed {
-    max-height: 0;
-    transition: max-height 0.15s ease-out;
     overflow: hidden;
-    background: #d5d5d5;
+    background: blue;
+    max-height: 30px;
+    animation-name: collapse;
+    animation-duration: 0.3s;
   }
   .open {
-    max-height: 500px;
-    transition: max-height 0.25s ease-in;
-  }
+    overflow: hidden;
+    background: red;
+    max-height: 300px;
+    animation-name: expand;
+    animation-duration: 0.3s;  }
 
 }
 
 @keyframes expand {
   from {
-    height: 100px;
+    background: blue;
+    max-height: 30px;
   }
 
   to {
-    height: 300px;
+    background: red;
+    max-height: 300px;
   }
 }
 @keyframes collapse {
   from {
-    height: 300px;
+    max-height: 300px;
+    background: red;
   }
 
   to {
-    height:100px;
+    max-height: 30px;
+    background: blue;
   }
 }
 
