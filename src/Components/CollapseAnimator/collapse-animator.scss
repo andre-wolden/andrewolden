@@ -1,8 +1,9 @@
 .collapse-animator-wrapper {
-  wrapper {
-    border: 1px dotted red;
-  }
   border: 2px dotted red;
+
+  overflow: hidden;
+  .content-div-asdf {
+  }
 
 }
 
