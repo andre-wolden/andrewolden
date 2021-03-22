@@ -10,19 +10,19 @@ import Messages exposing (Msg(..))
 collapse : Bool -> Html Msg
 collapse isOpen =
     let
-        theClass : String
-        theClass =
+        ( className, inlineStyle ) =
             if isOpen then
-                "open"
+                ( "open", "max-height 0.2s" )
 
             else
-                "closed"
+                ( "closed", "max-height 0.2s" )
     in
     Html.div
         [ Html.Attributes.class "collapse-keyframer-wrapper"
         ]
         [ Html.div
-            [ Html.Attributes.class theClass
+            [ Html.Attributes.class className
+            , Html.Attributes.style "transition" inlineStyle
             ]
             [ Html.text aboutText ]
         , Html.button [ Html.Events.onClick ToggleKeyframer ] [ Html.text "TOGGLE" ]
