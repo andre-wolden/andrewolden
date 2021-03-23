@@ -1,13 +1,5 @@
 .collapse-transition-wrapper {
-  max-width: 300px;
-  .closed {
-    overflow: hidden;
-    max-height: 30px;
-  }
-  .open {
-    overflow: hidden;
-    max-height: 300px;
-  }
+  overflow: hidden;
 }
 
 

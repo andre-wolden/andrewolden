@@ -40,3 +40,16 @@ body {
 .dotted {
   border: 1px dotted red;
 }
+
+.example-component {
+  border: 1px solid red;
+  background-color: green;
+  height: 300px;
+  width: 75px;
+  display: flex;
+
+  span {
+    border: 4px dotted black;
+    align-self: flex-end;
+  }
+}

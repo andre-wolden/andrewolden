@@ -1,10 +1,11 @@
 module Components.CollapseTransition.Collapse exposing (..)
 
-import Data.DivContent exposing (aboutText)
 import Html exposing (Html)
 import Html.Attributes
 import Html.Events
 import Messages exposing (Msg(..))
+import String exposing (fromFloat)
+import ViewUtils.ViewExamples exposing (exactSizeBox)
 
 
 type alias CollapseTransition =
@@ -46,30 +47,45 @@ getCT elementId list =
         |> List.head
 
 
-collapse : Maybe CollapseTransition -> Html Msg
-collapse maybeCT =
+collapse : Maybe CollapseTransition -> Html Msg -> Html Msg
+collapse maybeCT content =
     case maybeCT of
         Nothing ->
             Html.div [] [ Html.text "Oops, something wrong here..." ]
 
         Just { elementId, maybeHeight, isOpen } ->
             let
-                ( className, transitionValue, maxHeightValue ) =
-                    if isOpen then
-                        ( "open", "max-height 0.2s", "300px" )
+                ( transitionValue, maxHeightValue ) =
+                    case maybeHeight of
+                        Nothing ->
+                            ( "max-height 0.2s", "0px" )
 
-                    else
-                        ( "closed", "max-height 0.2s", "30px" )
+                        Just height ->
+                            let
+                                -- px/s
+                                speed =
+                                    2000
+
+                                time =
+                                    fromFloat (height / speed)
+
+                                transitionAttrValue =
+                                    "max-height " ++ time ++ "s"
+                            in
+                            if isOpen then
+                                ( transitionAttrValue, fromFloat height ++ "px" )
+
+                            else
+                                ( transitionAttrValue, "0px" )
             in
             Html.div
                 [ Html.Attributes.class "collapse-transition-wrapper"
                 ]
                 [ Html.div
-                    [ Html.Attributes.class className
-                    , Html.Attributes.style "transition" transitionValue
+                    [ Html.Attributes.style "transition" transitionValue
                     , Html.Attributes.style "max-height" maxHeightValue
                     ]
-                    [ Html.div [ Html.Attributes.id elementId ] [ Html.text aboutText ] ]
+                    [ Html.div [ Html.Attributes.id elementId ] [ content ] ]
                 , Html.button
                     [ Html.Events.onClick (toggle elementId maybeHeight)
                     ]
