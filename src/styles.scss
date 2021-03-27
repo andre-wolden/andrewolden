@@ -41,6 +41,67 @@ body {
   border: 1px dotted red;
 }
 
+.block {
+  width: 99%;
+  padding-bottom: 100px;
+}
+
+.titleXXL {
+  font-size: 36px;
+  text-align: center;
+}
+
+$font-normal-color: #212529;
+
+.cv-content-wrapper {
+  display: flex;
+  .left {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  .workplace-title {
+    font-weight: bold;
+    color:$font-normal-color;
+    font-size: 18px;
+  }
+  .description-block {
+    padding-top: 30px;
+  }
+  .description {
+    font-weight: bold;
+    color: #6C757D;
+    font-size: 12px;
+  }
+  .large-text {
+    color: $font-normal-color;
+    font-size: 14px;
+  }
+
+
+  .marginTopS {
+    margin-top: 20px;
+  }
+  .marginTopM {
+    margin-top: 30px;
+  }
+  .marginTopL {
+    margin-top: 40px;
+  }
+  .marginBottomXS {
+    margin-bottom: 10px;
+  }
+  .marginBottomS {
+    margin-bottom: 20px;
+  }
+  .marginBottomM {
+    margin-bottom: 30px;
+  }
+  .marginBottomL {
+    margin-bottom: 40px;
+  }
+}
+
+
 .example-component {
   border: 1px solid red;
   background-color: green;

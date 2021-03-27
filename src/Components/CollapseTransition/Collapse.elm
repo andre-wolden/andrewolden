@@ -1,7 +1,7 @@
 module Components.CollapseTransition.Collapse exposing (..)
 
 import Html exposing (Html)
-import Html.Attributes
+import Html.Attributes exposing (hidden)
 import Html.Events
 import Messages exposing (Msg(..))
 import String exposing (fromFloat)
@@ -84,10 +84,18 @@ collapse maybeCT content =
                 [ Html.div
                     [ Html.Attributes.style "transition" transitionValue
                     , Html.Attributes.style "max-height" maxHeightValue
+                    , Html.Attributes.class "content"
                     ]
                     [ Html.div [ Html.Attributes.id elementId ] [ content ] ]
                 , Html.button
                     [ Html.Events.onClick (toggle elementId maybeHeight)
+                    , Html.Attributes.class "button"
                     ]
-                    [ Html.text "TOGGLE" ]
+                    [ Html.text <|
+                        if isOpen then
+                            "show less"
+
+                        else
+                            "show more"
+                    ]
                 ]

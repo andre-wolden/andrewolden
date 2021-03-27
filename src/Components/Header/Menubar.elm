@@ -1,7 +1,8 @@
 module Components.Header.Menubar exposing (..)
 
 import Basics as Math
-import Element exposing (Attr, Attribute, Element, Length, centerX, centerY, clip, el, height, image, inFront, moveDown, moveLeft, moveRight, moveUp, none, paddingXY, px, rgb255, text, width)
+import Debug exposing (todo)
+import Element exposing (Attr, Attribute, Element, Length, centerX, centerY, clip, el, explain, height, image, inFront, moveDown, moveLeft, moveRight, moveUp, none, paddingXY, px, rgb255, text, width)
 import Element.Background exposing (color)
 import Element.Border as Border
 import Element.Font as Font
@@ -25,7 +26,7 @@ menubarHeader viewData fontSizeFunc =
 
 whiteBackgroundBox : ViewData -> Element Msg
 whiteBackgroundBox viewData =
-    el ([ width (viewData.w |> Math.floor |> px), whiteBackgroundColor, heightMenuBarAttribute viewData, centerX ] ++ bottomLine) none
+    el ([ explain todo, width (viewData.w |> Math.floor |> px), whiteBackgroundColor, heightMenuBarAttribute viewData, centerX ] ++ bottomLine) none
 
 
 heightMenuBarAttribute : ViewData -> Attribute msg

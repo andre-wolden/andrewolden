@@ -9,10 +9,13 @@ import Components.Header.Menubar exposing (hMax, menubarHeader)
 import Components.Introduction exposing (introductionSection)
 import Contact exposing (contact)
 import Cv.Cv exposing (cv)
+import Cv2 as Cv
 import Data.DivContent exposing (aboutText)
-import Element exposing (Element, centerX, clip, column, fill, maximum, paddingXY)
+import Debug exposing (todo)
+import Element exposing (Element, centerX, clip, column, explain, fill, html, maximum, paddingEach, paddingXY)
 import Element.Font as Font
 import Html exposing (..)
+import Html.Attributes
 import Maybe exposing (map4)
 import MenubarUtils exposing (calculateViewData)
 import Messages exposing (Msg(..))
@@ -53,11 +56,12 @@ view model =
                 [ Element.layout (textFont ++ menubarHeader viewData fontSizeF)
                     (column
                         [ clip
-                        , paddingXY 0 (floor (hMax viewport.scene.width) + 72)
+                        , paddingEach { top = floor (hMax viewport.scene.width) + 300, right = 0, bottom = 0, left = 0 }
                         , Element.width (fill |> maximum (Math.floor wContentMax))
                         , centerX
                         ]
-                        [ introductionSection viewData
+                        [ html <| div [ Html.Attributes.class "dotted block" ] [ Cv.cv model ]
+                        , introductionSection viewData
                         , cv viewData.w
                         , swSkillz
                         , stuffToShowOff viewData.w
@@ -65,11 +69,12 @@ view model =
                         , contact
                         ]
                     )
-                , CollapseAnimator.example model
-                , Transition.example model
-                , Html.div
-                    []
-                    [ Html.div [] [ Html.text aboutText ] ]
+
+                --, CollapseAnimator.example model
+                --, Transition.example model
+                --, Html.div
+                --    []
+                --    [ Html.div [] [ Html.text aboutText ] ]
                 ]
 
 

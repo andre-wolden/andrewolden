@@ -1,5 +1,19 @@
 .collapse-transition-wrapper {
   overflow: hidden;
+  width: fit-content;
+
+  .content {
+    display: block;
+    border: 1px dotted blue;
+  }
+
+  .button {
+    border: none;
+    background-color: inherit;
+  }
+  .button:hover {
+    border-bottom: 1px solid black;
+  }
 }
 
 
