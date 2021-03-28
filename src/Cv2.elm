@@ -1,7 +1,7 @@
 module Cv2 exposing (..)
 
-import Components.CollapseTransition.Collapse exposing (collapse, elementId3, getCT)
-import Html exposing (Html, div, text)
+import Components.CollapseTransition.Collapse exposing (collapse, collapseId3)
+import Html exposing (Html, a, div, text)
 import Html.Attributes exposing (class)
 import Messages exposing (Msg)
 import Model exposing (Model)
@@ -88,7 +88,17 @@ cv model =
                         [ div [] [ text "NAV - Arbeids- og velferdsetaten" ]
                         , infoText "January 2020 - now"
                         , infoText "Team Sykdom i familien"
-                        , collapse (getCT elementId3 model.collapseTransitions) (info "SHORT INTRODUCTION" "Different application forms in some way related to attendance allowance. Several react based application forms, and Kotlin based backends. Application form data is validated before it is put on a Kafka topic ready to be evaluated.")
+                        , collapse
+                            ( collapseId3, model.collapseTransitions )
+                            (div []
+                                [ info "SHORT INTRODUCTION" "Different application forms in some way related to attendance allowance. Several react based application forms, and Kotlin based backends. Application form data is validated before it is put on a Kafka topic ready to be evaluated."
+                                , info "TECHNOLOGIES" "React, Typescript, Formik, Gatsby, Sanity, Kotlin, Kafka, Docker, Nais (nais.io, built on Kubernetes)"
+                                , descriptionHeader "OPEN SOURCE REPOSITORIES"
+                                , div [] [ a [] [ text "sykdom-i-familien" ] ]
+                                , div [] [ a [] [ text "omsorgsdager-kalkulator" ] ]
+                                , div [] [ a [] [ text "arbeidstaker" ] ]
+                                ]
+                            )
                         ]
                     ]
                 ]

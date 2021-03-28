@@ -1,11 +1,10 @@
 module Components.CollapseTransition.Collapse exposing (..)
 
 import Html exposing (Html)
-import Html.Attributes exposing (hidden)
+import Html.Attributes
 import Html.Events
 import Messages exposing (Msg(..))
 import String exposing (fromFloat)
-import ViewUtils.ViewExamples exposing (exactSizeBox)
 
 
 type alias CollapseTransition =
@@ -15,23 +14,23 @@ type alias CollapseTransition =
     }
 
 
-elementId1 =
-    "collapse-transition-example-1"
+collapseId1 =
+    "collapse-transition-1"
 
 
-elementId2 =
-    "collapse-transition-example-2"
+collapseId2 =
+    "collapse-transition-2"
 
 
-elementId3 =
-    "collapse-transition-example-3"
+collapseId3 =
+    "collapse-transition-3"
 
 
 initialCollapseTransitions : List CollapseTransition
 initialCollapseTransitions =
-    [ { elementId = elementId1, maybeHeight = Nothing, isOpen = False }
-    , { elementId = elementId2, maybeHeight = Nothing, isOpen = False }
-    , { elementId = elementId3, maybeHeight = Nothing, isOpen = False }
+    [ { elementId = collapseId1, maybeHeight = Nothing, isOpen = False }
+    , { elementId = collapseId2, maybeHeight = Nothing, isOpen = False }
+    , { elementId = collapseId3, maybeHeight = Nothing, isOpen = False }
     ]
 
 
@@ -52,8 +51,12 @@ getCT elementId list =
         |> List.head
 
 
-collapse : Maybe CollapseTransition -> Html Msg -> Html Msg
-collapse maybeCT content =
+collapse : ( String, List CollapseTransition ) -> Html Msg -> Html Msg
+collapse ( collapseId, listOfCts ) content =
+    let
+        maybeCT =
+            getCT collapseId listOfCts
+    in
     case maybeCT of
         Nothing ->
             Html.div [] [ Html.text "Oops, something wrong here..." ]
