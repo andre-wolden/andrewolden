@@ -1,5 +1,6 @@
 module Cv2 exposing (..)
 
+import Components.CollapseTransition.Collapse exposing (collapse, elementId3, getCT)
 import Html exposing (Html, div, text)
 import Html.Attributes exposing (class)
 import Messages exposing (Msg)
@@ -54,15 +55,19 @@ info : String -> String -> Html Msg
 info description content =
     div [ class "description-block" ]
         [ descriptionHeader description
-        , div [ class "large-text" ] [ text content ]
+        , div [ class "large-text p" ] [ text content ]
         ]
+
+
+infoText : String -> Html Msg
+infoText content =
+    div [ class "large-text" ] [ text content ]
 
 
 cv : Model -> Html Msg
 cv model =
     div
-        [ class "dotted"
-        ]
+        []
         [ div [ class "titleXXL" ]
             [ text "CV"
             ]
@@ -72,14 +77,19 @@ cv model =
             [ div [ class "left" ]
                 [ largeCircle
                 ]
-            , div [ class "dotted" ]
+            , div []
                 [ div [ class "workplace-title" ] [ text "January 2018 - now" ]
                 , info "COMPANY" "Bekk Consulting"
                 , info "POSITION" "Senior software developer"
                 , div [ class "marginTopM marginBottomXS" ] [ descriptionHeader "PROJECTS" ]
                 , div [ class "cv-content-wrapper" ]
                     [ div [] [ smallCircle ]
-                    , div [] [ text "akjsnd" ]
+                    , div []
+                        [ div [] [ text "NAV - Arbeids- og velferdsetaten" ]
+                        , infoText "January 2020 - now"
+                        , infoText "Team Sykdom i familien"
+                        , collapse (getCT elementId3 model.collapseTransitions) (info "SHORT INTRODUCTION" "Different application forms in some way related to attendance allowance. Several react based application forms, and Kotlin based backends. Application form data is validated before it is put on a Kafka topic ready to be evaluated.")
+                        ]
                     ]
                 ]
             ]

@@ -12,7 +12,7 @@ import Cv.Cv exposing (cv)
 import Cv2 as Cv
 import Data.DivContent exposing (aboutText)
 import Debug exposing (todo)
-import Element exposing (Element, centerX, clip, column, explain, fill, html, maximum, paddingEach, paddingXY)
+import Element exposing (Element, centerX, clip, column, el, explain, fill, html, maximum, paddingEach, paddingXY)
 import Element.Font as Font
 import Html exposing (..)
 import Html.Attributes
@@ -20,6 +20,7 @@ import Maybe exposing (map4)
 import MenubarUtils exposing (calculateViewData)
 import Messages exposing (Msg(..))
 import Model exposing (Model)
+import String exposing (fromInt)
 import StuffToShowOff exposing (stuffToShowOff)
 import SwSkillz exposing (swSkillz)
 import ViewConstants exposing (wContentMax)
@@ -53,29 +54,37 @@ view model =
                     calculateViewData viewport y initialH
             in
             div []
-                [ Element.layout (textFont ++ menubarHeader viewData fontSizeF)
-                    (column
-                        [ clip
-                        , paddingEach { top = floor (hMax viewport.scene.width) + 300, right = 0, bottom = 0, left = 0 }
-                        , Element.width (fill |> maximum (Math.floor wContentMax))
-                        , centerX
-                        ]
-                        [ html <| div [ Html.Attributes.class "dotted block" ] [ Cv.cv model ]
-                        , introductionSection viewData
-                        , cv viewData.w
-                        , swSkillz
-                        , stuffToShowOff viewData.w
-                        , about
-                        , contact
-                        ]
-                    )
+                [ Element.layout (textFont ++ menubarHeader viewData fontSizeF) (el [] (Element.text ""))
 
+                --(column
+                --    [ clip
+                --    , paddingEach { top = floor (hMax viewport.scene.width) + 300, right = 0, bottom = 0, left = 0 }
+                --    , Element.width (fill |> maximum (Math.floor wContentMax))
+                --    , centerX
+                --    ]
+                --    [ html <| div [ Html.Attributes.class "dotted block" ] [ Cv.cv model ]
+                --    , introductionSection viewData
+                --    , cv viewData.w
+                --    , swSkillz
+                --    , stuffToShowOff viewData.w
+                --    , about
+                --    , contact
+                --    ]
+                --)
                 --, CollapseAnimator.example model
                 --, Transition.example model
                 --, Html.div
                 --    []
                 --    [ Html.div [] [ Html.text aboutText ] ]
+                , div [ Html.Attributes.class "container", Html.Attributes.style "margin-top" (inFrontMarginTop viewport.scene.width) ]
+                    [ div [ Html.Attributes.class "dotted block" ] [ Cv.cv model ]
+                    ]
                 ]
+
+
+inFrontMarginTop : Float -> String
+inFrontMarginTop width =
+    fromInt (floor (hMax width) + 300) ++ "px"
 
 
 textFont : List (Element.Attribute msg)

@@ -55,6 +55,8 @@ $font-normal-color: #212529;
 
 .cv-content-wrapper {
   display: flex;
+
+
   .left {
     padding-left: 12px;
     padding-right: 12px;
@@ -75,6 +77,13 @@ $font-normal-color: #212529;
   .large-text {
     color: $font-normal-color;
     font-size: 14px;
+  }
+
+  .p {
+    border: 1px dotted red;
+    max-width: 300px;
+    text-align: justify;
+    text-justify: inter-word;
   }
 
 
@@ -113,4 +122,10 @@ $font-normal-color: #212529;
     border: 4px dotted black;
     align-self: flex-end;
   }
+}
+
+.asdf-asdf {
+  border: 3px solid green;
+  padding: 100px;
+  max-width: 100px;
 }

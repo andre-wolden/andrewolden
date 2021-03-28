@@ -23,10 +23,15 @@ elementId2 =
     "collapse-transition-example-2"
 
 
+elementId3 =
+    "collapse-transition-example-3"
+
+
 initialCollapseTransitions : List CollapseTransition
 initialCollapseTransitions =
     [ { elementId = elementId1, maybeHeight = Nothing, isOpen = False }
     , { elementId = elementId2, maybeHeight = Nothing, isOpen = False }
+    , { elementId = elementId3, maybeHeight = Nothing, isOpen = False }
     ]
 
 
@@ -64,7 +69,7 @@ collapse maybeCT content =
                             let
                                 -- px/s
                                 speed =
-                                    2000
+                                    500
 
                                 time =
                                     fromFloat (height / speed)
