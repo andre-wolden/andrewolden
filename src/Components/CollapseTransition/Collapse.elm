@@ -1,6 +1,6 @@
 module Components.CollapseTransition.Collapse exposing (..)
 
-import Html exposing (Html)
+import Html exposing (Attribute, Html)
 import Html.Attributes
 import Html.Events
 import Messages exposing (Msg(..))
@@ -51,8 +51,8 @@ getCT elementId list =
         |> List.head
 
 
-collapse : ( String, List CollapseTransition ) -> Html Msg -> Html Msg
-collapse ( collapseId, listOfCts ) content =
+collapse : ( String, List CollapseTransition ) -> List (Attribute Msg) -> List (Html Msg) -> Html Msg
+collapse ( collapseId, listOfCts ) attributes content =
     let
         maybeCT =
             getCT collapseId listOfCts
@@ -87,23 +87,27 @@ collapse ( collapseId, listOfCts ) content =
                                 ( transitionAttrValue, "0px" )
             in
             Html.div
-                [ Html.Attributes.class "collapse-transition-wrapper"
-                ]
+                ([ Html.Attributes.class "collapse-transition-wrapper"
+                 ]
+                    ++ attributes
+                )
                 [ Html.div
                     [ Html.Attributes.style "transition" transitionValue
                     , Html.Attributes.style "max-height" maxHeightValue
                     , Html.Attributes.class "content"
                     ]
-                    [ Html.div [ Html.Attributes.id elementId ] [ content ] ]
-                , Html.button
-                    [ Html.Events.onClick (toggle elementId maybeHeight)
-                    , Html.Attributes.class "button"
-                    ]
-                    [ Html.text <|
-                        if isOpen then
-                            "show less"
+                    [ Html.div [ Html.Attributes.id elementId ] content ]
+                , Html.div [ Html.Attributes.class "button-wrapper" ]
+                    [ Html.button
+                        [ Html.Events.onClick (toggle elementId maybeHeight)
+                        , Html.Attributes.class "button"
+                        ]
+                        [ Html.text <|
+                            if isOpen then
+                                "show less"
 
-                        else
-                            "show more"
+                            else
+                                "show more"
+                        ]
                     ]
                 ]

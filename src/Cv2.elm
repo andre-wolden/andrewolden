@@ -1,7 +1,7 @@
 module Cv2 exposing (..)
 
 import Components.CollapseTransition.Collapse exposing (collapse, collapseId3)
-import Html exposing (Html, a, div, text)
+import Html exposing (Attribute, Html, a, div, text)
 import Html.Attributes exposing (class)
 import Messages exposing (Msg)
 import Model exposing (Model)
@@ -46,15 +46,15 @@ smallCircle =
     circle 7 largeCircleColor
 
 
-descriptionHeader : String -> Html Msg
-descriptionHeader content =
-    div [ class "description" ] [ text content ]
+descriptionHeader : List (Attribute Msg) -> String -> Html Msg
+descriptionHeader attributes content =
+    div ([ class "description" ] ++ attributes) [ text content ]
 
 
-info : String -> String -> Html Msg
-info description content =
-    div [ class "description-block" ]
-        [ descriptionHeader description
+info : String -> String -> String -> Html Msg
+info className description content =
+    div [ class className ]
+        [ descriptionHeader [] description
         , div [ class "large-text p" ] [ text content ]
         ]
 
@@ -79,9 +79,9 @@ cv model =
                 ]
             , div []
                 [ div [ class "workplace-title" ] [ text "January 2018 - now" ]
-                , info "COMPANY" "Bekk Consulting"
-                , info "POSITION" "Senior software developer"
-                , div [ class "marginTopM marginBottomXS" ] [ descriptionHeader "PROJECTS" ]
+                , info "marginTopM" "COMPANY" "Bekk Consulting"
+                , info "marginTopM" "POSITION" "Senior software developer"
+                , div [ class "marginTopM marginBottomXS" ] [ descriptionHeader [] "PROJECTS" ]
                 , div [ class "cv-content-wrapper" ]
                     [ div [] [ smallCircle ]
                     , div []
@@ -90,15 +90,14 @@ cv model =
                         , infoText "Team Sykdom i familien"
                         , collapse
                             ( collapseId3, model.collapseTransitions )
-                            (div []
-                                [ info "SHORT INTRODUCTION" "Different application forms in some way related to attendance allowance. Several react based application forms, and Kotlin based backends. Application form data is validated before it is put on a Kafka topic ready to be evaluated."
-                                , info "TECHNOLOGIES" "React, Typescript, Formik, Gatsby, Sanity, Kotlin, Kafka, Docker, Nais (nais.io, built on Kubernetes)"
-                                , descriptionHeader "OPEN SOURCE REPOSITORIES"
-                                , div [] [ a [] [ text "sykdom-i-familien" ] ]
-                                , div [] [ a [] [ text "omsorgsdager-kalkulator" ] ]
-                                , div [] [ a [] [ text "arbeidstaker" ] ]
-                                ]
-                            )
+                            [ class "marginTopM" ]
+                            [ info "" "SHORT INTRODUCTION" "Different application forms in some way related to attendance allowance. Several react based application forms, and Kotlin based backends. Application form data is validated before it is put on a Kafka topic ready to be evaluated."
+                            , info "marginTopM" "TECHNOLOGIES" "React, Typescript, Formik, Gatsby, Sanity, Kotlin, Kafka, Docker, Nais (nais.io, built on Kubernetes)"
+                            , descriptionHeader [ class "marginTopM" ] "OPEN SOURCE REPOSITORIES"
+                            , div [] [ a [] [ text "sykdom-i-familien" ] ]
+                            , div [] [ a [] [ text "omsorgsdager-kalkulator" ] ]
+                            , div [] [ a [] [ text "arbeidstaker" ] ]
+                            ]
                         ]
                     ]
                 ]
