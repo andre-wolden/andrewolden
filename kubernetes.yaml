@@ -1,0 +1,60 @@
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: andrewolden
+  labels:
+    app: andrewolden
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: andrewolden
+  template:
+    metadata:
+      labels:
+        app: andrewolden
+    spec:
+      containers:
+        - name: andrewolden
+          image: woldena/andrewolden:0.1
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: andrewolden
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+  selector:
+    app: andrewolden
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: andrewolden
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.ingress.kubernetes.io/redirect-entry-point: https
+spec:
+  rules:
+    - host: www.funkoa.com
+      http:
+        paths:
+          - path: /andrewolden
+            backend:
+              serviceName: andrewolden
+              servicePort: http
+    - host: funkoa.com
+      http:
+        paths:
+          - path: /andrewolden
+            backend:
+              serviceName: andrewolden
+              servicePort: http
+  tls:
+    - secretName: funkoa-tls-cert
