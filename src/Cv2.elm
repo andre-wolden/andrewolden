@@ -2,7 +2,7 @@ module Cv2 exposing (..)
 
 import Components.CollapseTransition.Collapse exposing (collapse, collapseId3)
 import Html exposing (Attribute, Html, a, div, text)
-import Html.Attributes exposing (class)
+import Html.Attributes exposing (class, href)
 import Messages exposing (Msg)
 import Model exposing (Model)
 import String exposing (fromInt)
@@ -94,9 +94,9 @@ cv model =
                             [ info "" "SHORT INTRODUCTION" "Different application forms in some way related to attendance allowance. Several react based application forms, and Kotlin based backends. Application form data is validated before it is put on a Kafka topic ready to be evaluated."
                             , info "marginTopM" "TECHNOLOGIES" "React, Typescript, Formik, Gatsby, Sanity, Kotlin, Kafka, Docker, Nais (nais.io, built on Kubernetes)"
                             , descriptionHeader [ class "marginTopM" ] "OPEN SOURCE REPOSITORIES"
-                            , div [] [ a [] [ text "sykdom-i-familien" ] ]
-                            , div [] [ a [] [ text "omsorgsdager-kalkulator" ] ]
-                            , div [] [ a [] [ text "arbeidstaker" ] ]
+                            , div [] [ a [ href "https://github.com/navikt/sykdom-i-familien" ] [ text "sykdom-i-familien" ] ]
+                            , div [] [ a [ href "https://github.com/navikt/omsorgsdager-kalkulator" ] [ text "omsorgsdager-kalkulator" ] ]
+                            , div [] [ a [ href "https://github.com/navikt/omsorgspengerutbetaling-arbeidstaker-soknad" ] [ text "arbeidstaker" ] ]
                             ]
                         ]
                     ]
