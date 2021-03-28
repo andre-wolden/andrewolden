@@ -26,7 +26,7 @@ menubarHeader viewData fontSizeFunc =
 
 whiteBackgroundBox : ViewData -> Element Msg
 whiteBackgroundBox viewData =
-    el ([ explain todo, width (viewData.w |> Math.floor |> px), whiteBackgroundColor, heightMenuBarAttribute viewData, centerX ] ++ bottomLine) none
+    el ([ width (viewData.w |> Math.floor |> px), whiteBackgroundColor, heightMenuBarAttribute viewData, centerX ] ++ bottomLine) none
 
 
 heightMenuBarAttribute : ViewData -> Attribute msg

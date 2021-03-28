@@ -48,7 +48,7 @@ smallCircle =
 
 descriptionHeader : List (Attribute Msg) -> String -> Html Msg
 descriptionHeader attributes content =
-    div ([ class "description" ] ++ attributes) [ text content ]
+    div ([ class "description marginBottomXXS" ] ++ attributes) [ text content ]
 
 
 info : String -> String -> String -> Html Msg
@@ -72,25 +72,25 @@ cv model =
             [ text "CV"
             ]
         , div
-            [ class "cv-content-wrapper"
+            [ class "cv-content-wrapper marginTopL"
             ]
             [ div [ class "left" ]
                 [ largeCircle
                 ]
-            , div []
+            , div [ class "right" ]
                 [ div [ class "workplace-title" ] [ text "January 2018 - now" ]
                 , info "marginTopM" "COMPANY" "Bekk Consulting"
                 , info "marginTopM" "POSITION" "Senior software developer"
-                , div [ class "marginTopM marginBottomXS" ] [ descriptionHeader [] "PROJECTS" ]
-                , div [ class "cv-content-wrapper" ]
-                    [ div [] [ smallCircle ]
+                , div [ class "marginTopM marginBottomS" ] [ descriptionHeader [] "PROJECTS" ]
+                , div [ class "cv-projects-wrapper" ]
+                    [ div [ class "left" ] [ smallCircle ]
                     , div []
                         [ div [] [ text "NAV - Arbeids- og velferdsetaten" ]
                         , infoText "January 2020 - now"
                         , infoText "Team Sykdom i familien"
                         , collapse
                             ( collapseId3, model.collapseTransitions )
-                            [ class "marginTopM" ]
+                            [ class "marginTopS" ]
                             [ info "" "SHORT INTRODUCTION" "Different application forms in some way related to attendance allowance. Several react based application forms, and Kotlin based backends. Application form data is validated before it is put on a Kafka topic ready to be evaluated."
                             , info "marginTopM" "TECHNOLOGIES" "React, Typescript, Formik, Gatsby, Sanity, Kotlin, Kafka, Docker, Nais (nais.io, built on Kubernetes)"
                             , descriptionHeader [ class "marginTopM" ] "OPEN SOURCE REPOSITORIES"

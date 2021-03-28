@@ -77,7 +77,7 @@ view model =
                 --    []
                 --    [ Html.div [] [ Html.text aboutText ] ]
                 , div [ Html.Attributes.class "container", Html.Attributes.style "margin-top" (inFrontMarginTop viewport.scene.width) ]
-                    [ div [ Html.Attributes.class "dotted block" ] [ Cv.cv model ]
+                    [ div [ Html.Attributes.class "block" ] [ Cv.cv model ]
                     ]
                 ]
 

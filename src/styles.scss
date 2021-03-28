@@ -53,13 +53,50 @@ body {
 
 $font-normal-color: #212529;
 
+.marginTopXXS {
+  margin-top: 3px;
+}
+.marginTopXS {
+  margin-top: 10px;
+}
+.marginTopS {
+  margin-top: 20px;
+}
+.marginTopM {
+  margin-top: 30px;
+}
+.marginTopL {
+  margin-top: 40px;
+}
+.marginBottomXXS {
+  margin-bottom: 3px;
+}
+.marginBottomXS {
+  margin-bottom: 10px;
+}
+.marginBottomS {
+  margin-bottom: 20px;
+}
+.marginBottomM {
+  margin-bottom: 30px;
+}
+.marginBottomL {
+  margin-bottom: 40px;
+}
+
 .cv-content-wrapper {
   display: flex;
 
+  .cv-projects-wrapper {
+    display: flex;
+  }
 
   .left {
     padding-left: 12px;
     padding-right: 12px;
+  }
+  .right {
+
   }
   .workplace-title {
     font-weight: bold;
@@ -80,39 +117,17 @@ $font-normal-color: #212529;
   }
 
   .p {
-    border: 1px dotted red;
     max-width: 300px;
     text-align: justify;
     text-justify: inter-word;
   }
 
 
-  .marginTopS {
-    margin-top: 20px;
-  }
-  .marginTopM {
-    margin-top: 30px;
-  }
-  .marginTopL {
-    margin-top: 40px;
-  }
-  .marginBottomXS {
-    margin-bottom: 10px;
-  }
-  .marginBottomS {
-    margin-bottom: 20px;
-  }
-  .marginBottomM {
-    margin-bottom: 30px;
-  }
-  .marginBottomL {
-    margin-bottom: 40px;
-  }
+
 }
 
 
 .example-component {
-  border: 1px solid red;
   background-color: green;
   height: 300px;
   width: 75px;
