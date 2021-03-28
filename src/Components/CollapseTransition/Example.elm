@@ -1,10 +1,10 @@
 module Components.CollapseTransition.Example exposing (..)
 
-import Components.CollapseTransition.Collapse as Transition exposing (collapseId1)
+import Components.CollapseTransition.Collapse as Transition
 import Html exposing (Html)
 import Html.Attributes
 import Messages exposing (Msg)
-import Model exposing (Model)
+import Model exposing (Model, collapseId1)
 import ViewUtils.ViewExamples exposing (exactSizeBox)
 
 

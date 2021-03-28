@@ -1,10 +1,9 @@
 module Model exposing (..)
 
-import Animator
 import Browser.Dom exposing (Element, Error, Viewport)
 import Commands exposing (cmdInitialGetViewport)
 import Components.CollapseAnimator.Types exposing (ElmCollapse, initialElmCollapse1, initialElmCollapse2)
-import Components.CollapseTransition.Collapse exposing (CollapseTransition, initialCollapseTransitions)
+import Components.CollapseTransition.Collapse exposing (CollapseTransition)
 import Maybe exposing (Maybe)
 import Messages exposing (Msg)
 import Platform.Cmd exposing (batch)
@@ -38,3 +37,23 @@ init flags =
         [ cmdInitialGetViewport
         ]
     )
+
+
+collapseId1 =
+    "collapse-transition-1"
+
+
+collapseId2 =
+    "collapse-transition-2"
+
+
+collapseId3 =
+    "collapse-transition-3"
+
+
+initialCollapseTransitions : List CollapseTransition
+initialCollapseTransitions =
+    [ { elementId = collapseId1, maybeHeight = Nothing, isOpen = False }
+    , { elementId = collapseId2, maybeHeight = Nothing, isOpen = False }
+    , { elementId = collapseId3, maybeHeight = Nothing, isOpen = False }
+    ]

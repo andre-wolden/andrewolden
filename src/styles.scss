@@ -83,11 +83,32 @@ $font-normal-color: #212529;
 .marginBottomL {
   margin-bottom: 40px;
 }
+.marginBottomXL {
+  margin-bottom: 50px;
+}
+.paddingBottomXXS {
+  padding-bottom: 3px;
+}
+.paddingBottomXS {
+  padding-bottom: 10px;
+}
+.paddingBottomS {
+  padding-bottom: 20px;
+}
+.paddingBottomM {
+  padding-bottom: 30px;
+}
+.paddingBottomL {
+  padding-bottom: 40px;
+}
+.paddingBottomXL {
+  padding-bottom: 50px;
+}
 
 .cv-content-wrapper {
   display: flex;
 
-  .cv-projects-wrapper {
+  .cv-project-wrapper {
     display: flex;
   }
 

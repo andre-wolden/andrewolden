@@ -14,26 +14,6 @@ type alias CollapseTransition =
     }
 
 
-collapseId1 =
-    "collapse-transition-1"
-
-
-collapseId2 =
-    "collapse-transition-2"
-
-
-collapseId3 =
-    "collapse-transition-3"
-
-
-initialCollapseTransitions : List CollapseTransition
-initialCollapseTransitions =
-    [ { elementId = collapseId1, maybeHeight = Nothing, isOpen = False }
-    , { elementId = collapseId2, maybeHeight = Nothing, isOpen = False }
-    , { elementId = collapseId3, maybeHeight = Nothing, isOpen = False }
-    ]
-
-
 toggle : String -> Maybe Float -> Msg
 toggle elementId maybeHeightFloat =
     case maybeHeightFloat of
