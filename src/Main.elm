@@ -11,7 +11,7 @@ import View exposing (view)
 
 main : Program () Model Msg
 main =
-    Browser.document
+    Browser.application
         { init = init
         , update = update
         , view =
@@ -20,4 +20,6 @@ main =
                 , body = [ view m ]
                 }
         , subscriptions = subscriptions
+        , onUrlRequest = LinkClicked
+        , onUrlChange = UrlChanged
         }

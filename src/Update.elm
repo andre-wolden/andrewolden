@@ -1,11 +1,14 @@
 module Update exposing (..)
 
 import Animator
+import Browser exposing (UrlRequest(..))
+import Browser.Navigation as Nav
 import Commands exposing (cmdGetHeightElmCollapse1, cmdGetHeightElmCollapse2, cmdGetHeightOfElement, cmdGetViewport)
 import Components.CollapseAnimator.Collapse exposing (animator1, animator2)
 import Components.CollapseTransition.Collapse exposing (CollapseTransition)
 import Messages exposing (Msg(..))
 import Model exposing (Model)
+import Url
 import Utils exposing (focusSearchBox)
 import ViewportAndSceneUtils exposing (getFontSizeFormula)
 
@@ -104,6 +107,19 @@ update message model =
                                 |> List.map (setHeightAndToggle elementId height)
                     in
                     ( { model | collapseTransitions = updatedCollapseTransitions }, Cmd.none )
+
+        LinkClicked urlRequest ->
+            case urlRequest of
+                Internal url ->
+                    ( model, Nav.pushUrl model.key (Url.toString url) )
+
+                External href ->
+                    ( model, Nav.load href )
+
+        UrlChanged url ->
+            ( { model | url = url }
+            , Cmd.none
+            )
 
 
 setHeightAndToggle : String -> Float -> CollapseTransition -> CollapseTransition

@@ -16,11 +16,11 @@ import ViewUtils.ViewUtils exposing (bottomLine)
 -- Element.explain Debug.todo,
 
 
-menubarHeader : ViewData -> FontSizeFunc -> List (Attribute Msg)
-menubarHeader viewData fontSizeFunc =
+menubarHeader : ViewData -> FontSizeFunc -> String -> List (Attribute Msg)
+menubarHeader viewData fontSizeFunc publicPath =
     [ whiteBackgroundBox viewData |> inFront
     , title viewData fontSizeFunc |> inFront
-    , picture viewData |> inFront
+    , picture viewData publicPath |> inFront
     ]
 
 
@@ -67,8 +67,8 @@ title viewData fontSizeFunc =
         ("André Wolden" |> text)
 
 
-picture : ViewData -> Element Msg
-picture viewData =
+picture : ViewData -> String -> Element Msg
+picture viewData publicPath =
     let
         { w, h, y, hMB, hMBMin } =
             viewData
@@ -90,6 +90,16 @@ picture viewData =
 
         moveRightAmount =
             moveHorizontalF viewData 1
+
+        src =
+            "/images/4.jpg"
+
+        imagePath =
+            if publicPath == "/" then
+                src
+
+            else
+                publicPath ++ src
     in
     el
         [ centerX
@@ -103,7 +113,7 @@ picture viewData =
             , Element.height <| px diameterInt
             , Element.width <| px diameterInt
             ]
-            { description = "Just a picture of me...", src = "/images/4.jpg" }
+            { description = "Just a picture of me...", src = imagePath }
 
 
 pictureDiameter : Float -> Float -> Float -> Float

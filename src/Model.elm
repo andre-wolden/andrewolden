@@ -1,12 +1,14 @@
 module Model exposing (..)
 
 import Browser.Dom exposing (Element, Error, Viewport)
+import Browser.Navigation as Nav
 import Commands exposing (cmdInitialGetViewport)
 import Components.CollapseAnimator.Types exposing (ElmCollapse, initialElmCollapse1, initialElmCollapse2)
 import Components.CollapseTransition.Collapse exposing (CollapseTransition)
 import Maybe exposing (Maybe)
 import Messages exposing (Msg)
 import Platform.Cmd exposing (batch)
+import Url
 import ViewTypes exposing (FontSizeFunc)
 
 
@@ -19,11 +21,13 @@ type alias Model =
     , elmCollapse2 : ElmCollapse
     , keyframerIsOpen : Bool
     , collapseTransitions : List CollapseTransition
+    , key : Nav.Key
+    , url : Url.Url
     }
 
 
-init : () -> ( Model, Cmd Msg )
-init flags =
+init : () -> Url.Url -> Nav.Key -> ( Model, Cmd Msg )
+init flags url key =
     ( { viewport = Nothing
       , maybeY = Just 0
       , initialH = Nothing
@@ -32,6 +36,8 @@ init flags =
       , elmCollapse2 = initialElmCollapse2
       , keyframerIsOpen = False
       , collapseTransitions = initialCollapseTransitions
+      , url = url
+      , key = key
       }
     , batch
         [ cmdInitialGetViewport
