@@ -13,7 +13,7 @@
   publish = "dist/"
 
   # Default build command.
-  command = "yarn run prod-netlify"
+  command = "yarn run prod"
 
 [[plugins]]
   # Installs the Lighthouse Build Plugin for all deploy contexts

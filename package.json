@@ -11,7 +11,7 @@
         "build": "webpack",
         "prod": "webpack -p",
         "prod-funkoa": "webpack --mode=production",
-        "prod-netlify": "webpack --mode=productions",
+        "prod-netlify": "webpack --mode=production",
         "analyse": "elm-analyse -s -p 3001 -o"
     },
     "repository": {
