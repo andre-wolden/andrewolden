@@ -1,8 +1,8 @@
 {
-    "author": "Simon Hampton",
-    "name": "elm-webpack-starter",
-    "version": "3.10.4",
-    "description": "Elm 0.19 starter with Webpack 4 hot-reloading",
+    "author": "André Wolden",
+    "name": "andrewolden",
+    "version": "0.9.0",
+    "description": "André Wolden",
     "main": "index.js",
     "scripts": {
         "test": "elm-test",
@@ -10,11 +10,13 @@
         "dev": "webpack-dev-server --hot --colors --port 3013 --host 192.168.10.147",
         "build": "webpack",
         "prod": "webpack -p",
+        "prod-funkoa": "webpack --mode=production",
+        "prod-netlify": "webpack --mode=productions",
         "analyse": "elm-analyse -s -p 3001 -o"
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/simonh1000/elm-webpack-starter.git"
+        "url": "git+https://github.com/woldena/andrewolden.git"
     },
     "license": "MIT",
     "devDependencies": {
