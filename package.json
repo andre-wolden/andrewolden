@@ -7,7 +7,7 @@
     "scripts": {
         "test": "elm-test",
         "start": "npm run dev",
-        "dev": "webpack-dev-server --hot --colors --port 3013 --host 192.168.10.147",
+        "dev": "PUBLIC_PATH='/' webpack-dev-server --hot --colors --port 3013 --host 192.168.10.147",
         "build": "webpack",
         "prod": "webpack -p",
         "prod-funkoa": "webpack --mode=production",
