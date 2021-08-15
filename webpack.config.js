@@ -80,9 +80,9 @@ var common = {
                 loader: "file-loader"
             },
             {
+                loader: "file-loader",
                 test: /\.(jpe?g|png|gif|svg)$/i,
                 exclude: [/elm-stuff/, /node_modules/],
-                loader: "file-loader",
             }
         ]
     }
