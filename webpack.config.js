@@ -14,6 +14,8 @@ const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 var MODE =
     process.env.npm_lifecycle_event === "prod" ? "production" : "development";
 
+const getPublicPath = () => process.env.PUBLIC_PATH || "/";
+
 var withDebug = !process.env["npm_config_nodebug"] && MODE === "development";
 // var withDebug = false;
 
@@ -29,7 +31,7 @@ var common = {
     entry: "./src/index.js",
     output: {
         path: path.join(__dirname, "dist"),
-        publicPath: "/",
+        publicPath: getPublicPath(),
         // FIXME webpack -p automatically adds hash when building for production
         filename: MODE === "production" ? "[name]-[hash].js" : "index.js"
     },
@@ -43,7 +45,7 @@ var common = {
     ],
     resolve: {
         modules: [path.join(__dirname, "src"), "node_modules"],
-        extensions: [".js", ".elm", ".scss", ".png"]
+        extensions: [".js", ".elm", ".scss", ".png", ".jpg"]
     },
     module: {
         rules: [
@@ -82,7 +84,7 @@ var common = {
             {
                 test: /\.(jpe?g|png|gif|svg)$/i,
                 exclude: [/elm-stuff/, /node_modules/],
-                loader: "file-loader"
+                loader: "file-loader",
             }
         ]
     }
@@ -117,7 +119,7 @@ if (MODE === "development") {
         devServer: {
             inline: true,
             stats: "errors-only",
-            contentBase: path.join(__dirname, "src/assets"),
+            contentBase: path.join(__dirname, "dist"),
             historyApiFallback: true,
             // feel free to delete this section if you don't need anything like this
             before(app) {

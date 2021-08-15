@@ -7,9 +7,9 @@
     "scripts": {
         "test": "elm-test",
         "start": "npm run dev",
-        "dev": "PUBLIC_PATH='/' webpack-dev-server --hot --colors --port 3013 --host 192.168.10.147",
+        "dev": "PUBLIC_PATH='/public_path' webpack-dev-server --hot --colors --port 3013 --host 192.168.10.147",
         "build": "webpack",
-        "prod": "webpack -p",
+        "prod": "PUBLIC_PATH='asdf' webpack -p",
         "prod-funkoa": "webpack --mode=production",
         "prod-netlify": "webpack --mode=production",
         "analyse": "elm-analyse -s -p 3001 -o"
