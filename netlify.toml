@@ -12,8 +12,11 @@
   # directory located at the absolute path "root/project/build-output"
   publish = "dist/"
 
+  environment = { PUBLIC_PATH = "asdf" }
+
   # Default build command.
   command = "yarn run prod"
+
 
 [[plugins]]
   # Installs the Lighthouse Build Plugin for all deploy contexts
