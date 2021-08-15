@@ -92,7 +92,7 @@ picture viewData publicPath =
             moveHorizontalF viewData 1
 
         src =
-            "/images/4.jpg"
+            "images/4.jpg"
 
         imagePath =
             if publicPath == "/" then

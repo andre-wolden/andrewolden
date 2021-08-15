@@ -14,8 +14,6 @@ const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 var MODE =
     process.env.npm_lifecycle_event === "prod" ? "production" : "development";
 
-const getPublicPath = () => process.env.PUBLIC_PATH || "/";
-
 var withDebug = !process.env["npm_config_nodebug"] && MODE === "development";
 // var withDebug = false;
 
@@ -31,7 +29,7 @@ var common = {
     entry: "./src/index.js",
     output: {
         path: path.join(__dirname, "dist"),
-        publicPath: getPublicPath(),
+        publicPath: ".",
         // FIXME webpack -p automatically adds hash when building for production
         filename: MODE === "production" ? "[name]-[hash].js" : "index.js"
     },
