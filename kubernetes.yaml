@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: andrewolden
-          image: andrewolden:0.5
+          image: woldena/andrewolden:0.5
           ports:
             - containerPort: 80
 ---
