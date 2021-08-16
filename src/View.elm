@@ -54,7 +54,7 @@ view model =
                     calculateViewData viewport y initialH
             in
             div []
-                [ Element.layout (textFont ++ menubarHeader viewData fontSizeF model.url.path) (el [] (Element.text ""))
+                [ Element.layout (textFont ++ menubarHeader viewData fontSizeF model.basePath) (el [] (Element.text ""))
 
                 --(column
                 --    [ clip

@@ -17,6 +17,8 @@ var MODE =
 var withDebug = !process.env["npm_config_nodebug"] && MODE === "development";
 // var withDebug = false;
 
+const getBasePath = () => process.env.BASE_PATH || '/';
+
 // this may help for Yarn users
 // var withDebug = !npmParams.includes("--nodebug");
 console.log(
@@ -29,7 +31,7 @@ var common = {
     entry: "./src/index.js",
     output: {
         path: path.join(__dirname, "dist"),
-        publicPath: ".",
+        publicPath: getBasePath(),
         // FIXME webpack -p automatically adds hash when building for production
         filename: MODE === "production" ? "[name]-[hash].js" : "index.js"
     },
@@ -117,7 +119,7 @@ if (MODE === "development") {
         devServer: {
             inline: true,
             stats: "errors-only",
-            contentBase: path.join(__dirname, "dist"),
+            contentBase: path.join(__dirname, "src/assets"),
             historyApiFallback: true,
             // feel free to delete this section if you don't need anything like this
             before(app) {

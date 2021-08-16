@@ -5,7 +5,11 @@ require("./Components/CollapseAnimator/collapse-animator.scss");
 require("./Components/CollapseTransition/collapse-transition.scss");
 
 const {Elm} = require('./Main');
-var app = Elm.Main.init({flags: 6});
+var app = Elm.Main.init({
+    flags: {
+        aFlagValue: 'for/example/a/base/path'
+    }
+});
 
 
 

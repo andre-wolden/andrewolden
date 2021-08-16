@@ -1,6 +1,7 @@
 module Components.Header.Menubar exposing (..)
 
 import Basics as Math
+import Components.Burger exposing (burger)
 import Debug exposing (todo)
 import Element exposing (Attr, Attribute, Element, Length, centerX, centerY, clip, el, explain, height, image, inFront, moveDown, moveLeft, moveRight, moveUp, none, paddingXY, px, rgb255, text, width)
 import Element.Background exposing (color)
@@ -17,10 +18,12 @@ import ViewUtils.ViewUtils exposing (bottomLine)
 
 
 menubarHeader : ViewData -> FontSizeFunc -> String -> List (Attribute Msg)
-menubarHeader viewData fontSizeFunc publicPath =
+menubarHeader viewData fontSizeFunc basePath =
     [ whiteBackgroundBox viewData |> inFront
     , title viewData fontSizeFunc |> inFront
-    , picture viewData publicPath |> inFront
+    , picture viewData basePath |> inFront
+
+    --, burger |> inFront
     ]
 
 
@@ -68,7 +71,7 @@ title viewData fontSizeFunc =
 
 
 picture : ViewData -> String -> Element Msg
-picture viewData publicPath =
+picture viewData basePath =
     let
         { w, h, y, hMB, hMBMin } =
             viewData
@@ -92,14 +95,7 @@ picture viewData publicPath =
             moveHorizontalF viewData 1
 
         src =
-            "images/4.jpg"
-
-        imagePath =
-            if publicPath == "/" then
-                src
-
-            else
-                publicPath ++ src
+            basePath ++ "images/4.jpg"
     in
     el
         [ centerX
@@ -113,7 +109,7 @@ picture viewData publicPath =
             , Element.height <| px diameterInt
             , Element.width <| px diameterInt
             ]
-            { description = "Just a picture of me...", src = imagePath }
+            { description = "Just a picture of me. Not important.", src = src }
 
 
 pictureDiameter : Float -> Float -> Float -> Float

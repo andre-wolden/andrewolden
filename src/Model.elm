@@ -9,6 +9,7 @@ import Maybe exposing (Maybe)
 import Messages exposing (Msg)
 import Platform.Cmd exposing (batch)
 import Url
+import Utils exposing (getBasePath)
 import ViewTypes exposing (FontSizeFunc)
 
 
@@ -23,10 +24,17 @@ type alias Model =
     , collapseTransitions : List CollapseTransition
     , key : Nav.Key
     , url : Url.Url
+    , flags : Flags
+    , basePath : String
     }
 
 
-init : () -> Url.Url -> Nav.Key -> ( Model, Cmd Msg )
+type alias Flags =
+    { aFlagValue : String
+    }
+
+
+init : Flags -> Url.Url -> Nav.Key -> ( Model, Cmd Msg )
 init flags url key =
     ( { viewport = Nothing
       , maybeY = Just 0
@@ -38,6 +46,8 @@ init flags url key =
       , collapseTransitions = initialCollapseTransitions
       , url = url
       , key = key
+      , flags = flags
+      , basePath = getBasePath url.host
       }
     , batch
         [ cmdInitialGetViewport
