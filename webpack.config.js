@@ -12,9 +12,9 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 var MODE =
-    process.env.npm_lifecycle_event === "prod" ? "production" : "development";
+    process.env.MODE || "development";
 
-var withDebug = !process.env["npm_config_nodebug"] && MODE === "development";
+var withDebug = true;
 // var withDebug = false;
 
 const getBasePath = () => process.env.BASE_PATH || '/';
