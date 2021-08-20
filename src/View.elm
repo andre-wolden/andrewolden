@@ -1,29 +1,21 @@
 module View exposing (..)
 
-import About exposing (about)
-import Basics as Math
+import Basics
 import Browser.Dom exposing (Viewport)
-import Components.CollapseAnimator.Example as CollapseAnimator
-import Components.CollapseTransition.Example as Transition
+import Components.Burger exposing (burger)
 import Components.Header.Menubar exposing (hMax, menubarHeader)
-import Components.Introduction exposing (introductionSection)
-import Contact exposing (contact)
-import Cv.Cv exposing (cv)
 import Cv2 as Cv
-import Data.DivContent exposing (aboutText)
-import Debug exposing (todo)
-import Element exposing (Element, centerX, clip, column, el, explain, fill, html, maximum, paddingEach, paddingXY)
+import Element exposing (Element, el)
 import Element.Font as Font
-import Html exposing (..)
+import Html exposing (Html, div, text)
 import Html.Attributes
-import Maybe exposing (map4)
+import Maybe exposing (andThen, map, map4)
 import MenubarUtils exposing (calculateViewData)
 import Messages exposing (Msg(..))
 import Model exposing (Model)
 import String exposing (fromInt)
 import StuffToShowOff exposing (stuffToShowOff)
-import SwSkillz exposing (swSkillz)
-import ViewConstants exposing (wContentMax)
+import Types exposing (Route(..))
 import ViewTypes exposing (ViewData)
 import ViewUtils.Palette exposing (greyScaleDark4)
 
@@ -34,16 +26,38 @@ import ViewUtils.Palette exposing (greyScaleDark4)
 
 view : Model -> Html Msg
 view model =
-    let
-        a : Maybe { viewport : Viewport, y : Float, initialH : Float, fontSizeF : Float -> Float -> Float }
-        a =
-            map4 (\viewport y initialH fontSizeF -> { viewport = viewport, y = y, initialH = initialH, fontSizeF = fontSizeF })
-                model.viewport
-                model.maybeY
-                model.initialH
-                model.fontSizeFunc
-    in
-    case a of
+    case model.route.route of
+        Just route ->
+            case route of
+                Resume ->
+                    div [] [ text "resume" ]
+
+                PersonalProjects ->
+                    div [] [ text "personal projects" ]
+
+        Nothing ->
+            div [] [ text "home" ]
+
+
+type alias ViewConfig =
+    { viewport : Viewport
+    , y : Float
+    , initialH : Float
+    , fontSizeF : Float -> Float -> Float
+    }
+
+
+maybeViewConfigOf : Model -> Maybe ViewConfig
+maybeViewConfigOf { viewport, maybeY, initialH, fontSizeFunc } =
+    map (\tmp -> { viewport = tmp }) viewport
+        |> andThen (\tmp -> map (\y -> { viewport = tmp.viewport, y = y }) maybeY)
+        |> andThen (\tmp -> map (\ih -> { viewport = tmp.viewport, y = tmp.y, initialH = ih }) initialH)
+        |> andThen (\tmp -> map (\fsf -> { viewport = tmp.viewport, y = tmp.y, initialH = tmp.initialH, fontSizeF = fsf }) fontSizeFunc)
+
+
+viewIntro : Model -> Html Msg
+viewIntro model =
+    case maybeViewConfigOf model of
         Nothing ->
             Element.layout [] Element.none
 
@@ -77,7 +91,8 @@ view model =
                 --    []
                 --    [ Html.div [] [ Html.text aboutText ] ]
                 , div [ Html.Attributes.class "container", Html.Attributes.style "margin-top" (inFrontMarginTop viewport.scene.width) ]
-                    [ div [ Html.Attributes.class "block" ] [ Cv.cv model ]
+                    [ burger
+                    , div [ Html.Attributes.class "block" ] [ Cv.cv model ]
                     ]
                 ]
 

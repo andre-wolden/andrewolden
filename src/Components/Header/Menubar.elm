@@ -1,9 +1,7 @@
 module Components.Header.Menubar exposing (..)
 
 import Basics as Math
-import Components.Burger exposing (burger)
-import Debug exposing (todo)
-import Element exposing (Attr, Attribute, Element, Length, centerX, centerY, clip, el, explain, height, image, inFront, moveDown, moveLeft, moveRight, moveUp, none, paddingXY, px, rgb255, text, width)
+import Element exposing (Attr, Attribute, Element, Length, centerX, clip, el, height, image, inFront, moveDown, moveLeft, moveRight, none, paddingXY, px, rgb255, text, width)
 import Element.Background exposing (color)
 import Element.Border as Border
 import Element.Font as Font
@@ -22,8 +20,6 @@ menubarHeader viewData fontSizeFunc basePath =
     [ whiteBackgroundBox viewData |> inFront
     , title viewData fontSizeFunc |> inFront
     , picture viewData basePath |> inFront
-
-    --, burger |> inFront
     ]
 
 

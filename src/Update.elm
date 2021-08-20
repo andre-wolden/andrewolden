@@ -8,8 +8,9 @@ import Components.CollapseAnimator.Collapse exposing (animator1, animator2)
 import Components.CollapseTransition.Collapse exposing (CollapseTransition)
 import Messages exposing (Msg(..))
 import Model exposing (Model)
-import Url
-import Utils exposing (focusSearchBox)
+import Url exposing (toString)
+import Url.Parser exposing (parse)
+import Utils exposing (focusSearchBox, routeParser)
 import ViewportAndSceneUtils exposing (getFontSizeFormula)
 
 
@@ -111,13 +112,13 @@ update message model =
         LinkClicked urlRequest ->
             case urlRequest of
                 Internal url ->
-                    ( model, Nav.pushUrl model.key (Url.toString url) )
+                    ( { model | testString = url.path }, Nav.pushUrl model.key (Url.toString url) )
 
                 External href ->
-                    ( model, Nav.load href )
+                    ( { model | testString = "href external thingy" }, Nav.load href )
 
         UrlChanged url ->
-            ( { model | url = url }
+            ( { model | route = { url = url, route = parse routeParser url } }
             , Cmd.none
             )
 

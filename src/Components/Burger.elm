@@ -1,10 +1,14 @@
 module Components.Burger exposing (burger)
 
-import Element exposing (Element, el, text)
-import Element.Font as Font
+import Html exposing (Html, a, div, li, text, ul)
+import Html.Attributes exposing (href)
 import Messages exposing (Msg(..))
 
 
-burger : Element Msg
+burger : Html Msg
 burger =
-    el [ Font.size 100 ] ("BURGER" |> text)
+    ul []
+        [ li [] [ a [ href "/intro" ] [ text "intro" ] ]
+        , li [] [ a [ href "/resume" ] [ text "resume" ] ]
+        , li [] [ a [ href "/personal-projects" ] [ text "personal projects" ] ]
+        ]
