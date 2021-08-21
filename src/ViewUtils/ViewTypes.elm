@@ -1,7 +1,4 @@
-module ViewTypes exposing (..)
-
-import Element exposing (Element)
-import Messages exposing (Msg)
+module ViewUtils.ViewTypes exposing (..)
 
 
 type alias Reference =

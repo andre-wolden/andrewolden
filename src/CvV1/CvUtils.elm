@@ -1,4 +1,4 @@
-module Cv.CvUtils exposing (..)
+module CvV1.CvUtils exposing (..)
 
 import Element exposing (Element, el, height, padding, paddingEach, paragraph, px, rgb, row, spacing, text, width)
 import Element.Background exposing (color)

@@ -1,4 +1,4 @@
-module StuffToShowOff exposing (..)
+module Views.StuffToShowOff exposing (..)
 
 import Data.DivContent exposing (headerStuffToShowOff)
 import Element exposing (Element, clip, column, fill, link, paragraph, row, text, textColumn, width)

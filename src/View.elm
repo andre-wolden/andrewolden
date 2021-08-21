@@ -3,21 +3,20 @@ module View exposing (..)
 import Basics
 import Browser.Dom exposing (Viewport)
 import Components.Burger exposing (burger)
-import Components.Header.Menubar exposing (hMax, menubarHeader)
-import Cv2 as Cv
+import Components.Menubar.Menubar exposing (hMax, menubarHeader)
+import Components.Menubar.MenubarUtils exposing (calculateViewData)
+import CvV2.Cv exposing (cv)
 import Element exposing (Element, el)
 import Element.Font as Font
 import Html exposing (Html, div, text)
 import Html.Attributes
-import Maybe exposing (andThen, map, map4)
-import MenubarUtils exposing (calculateViewData)
+import Maybe exposing (andThen, map)
 import Messages exposing (Msg(..))
 import Model exposing (Model)
 import String exposing (fromInt)
-import StuffToShowOff exposing (stuffToShowOff)
 import Types exposing (Route(..))
-import ViewTypes exposing (ViewData)
 import ViewUtils.Palette exposing (greyScaleDark4)
+import ViewUtils.ViewTypes exposing (ViewData)
 
 
 
@@ -92,7 +91,7 @@ resumePage model =
                 --    [ Html.div [] [ Html.text aboutText ] ]
                 , div [ Html.Attributes.class "container", Html.Attributes.style "margin-top" (inFrontMarginTop viewport.scene.width) ]
                     [ burger
-                    , div [ Html.Attributes.class "block" ] [ Cv.cv model ]
+                    , div [ Html.Attributes.class "block" ] [ cv model ]
                     ]
                 ]
 

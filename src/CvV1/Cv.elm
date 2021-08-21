@@ -1,6 +1,6 @@
-module Cv.Cv exposing (..)
+module CvV1.Cv exposing (..)
 
-import Cv.CvUtils exposing (circle, workDateHeader)
+import CvV1.CvUtils exposing (circle, workDateHeader)
 import Element exposing (Element, alignTop, el, fill, mouseOver, newTabLink, paddingEach, paragraph, rgb255, rgba255, row, spacingXY, text, textColumn, width, wrappedRow)
 import Element.Border as Border
 import Element.Font exposing (bold, color)

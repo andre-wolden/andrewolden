@@ -1,4 +1,4 @@
-module Components.Header.Menubar exposing (..)
+module Components.Menubar.Menubar exposing (..)
 
 import Basics as Math
 import Element exposing (Attr, Attribute, Element, Length, centerX, clip, el, height, image, inFront, moveDown, moveLeft, moveRight, none, paddingXY, px, rgb255, text, width)
@@ -6,8 +6,8 @@ import Element.Background exposing (color)
 import Element.Border as Border
 import Element.Font as Font
 import Messages exposing (Msg)
-import ViewConstants exposing (picturePercentage, wContent)
-import ViewTypes exposing (FontSizeFunc, ViewData)
+import ViewUtils.ViewConstants exposing (picturePercentage, wContent)
+import ViewUtils.ViewTypes exposing (FontSizeFunc, ViewData)
 import ViewUtils.ViewUtils exposing (bottomLine)
 
 

@@ -1,8 +1,8 @@
-module MenubarUtils exposing (..)
+module Components.Menubar.MenubarUtils exposing (..)
 
 import Browser.Dom exposing (Viewport)
-import ViewConstants exposing (cHMax, cMBMin, cMBMinDelta, cWMax)
-import ViewTypes exposing (ViewData)
+import ViewUtils.ViewConstants exposing (cHMax, cMBMin, cMBMinDelta, cWMax)
+import ViewUtils.ViewTypes exposing (ViewData)
 
 
 calculateViewData : Viewport -> Float -> Float -> ViewData

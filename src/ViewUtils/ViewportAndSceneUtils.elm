@@ -1,4 +1,4 @@
-module ViewportAndSceneUtils exposing (..)
+module ViewUtils.ViewportAndSceneUtils exposing (..)
 
 import Basics exposing (..)
 import Browser.Dom exposing (Viewport)
@@ -7,8 +7,8 @@ import Matrix exposing (ColumnVector(..), Consistancy(..), Matrix(..), RowVector
 import Maybe exposing (andThen, map)
 import Types exposing (ScreenWidth(..))
 import Vector exposing (AbelianGroup, Vector(..), VectorSpace, addVectors, getAt, scalarMultiplication, subtractVectors)
-import ViewConstants exposing (cHMax, cMBMin, cWMax)
-import ViewTypes exposing (FontSizeFunc)
+import ViewUtils.ViewConstants exposing (cHMax, cMBMin, cWMax)
+import ViewUtils.ViewTypes exposing (FontSizeFunc)
 
 
 getWidth : Viewport -> Int

@@ -1,4 +1,4 @@
-module MatrixTest exposing (..)
+module Components.MatrixTest.MatrixTest exposing (..)
 
 import Element exposing (Element, el)
 import Field exposing (Field)

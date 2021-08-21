@@ -1,4 +1,4 @@
-module Contact exposing (..)
+module Views.Contact exposing (..)
 
 import Data.DivContent exposing (contactBottomText, contactTitle, emailAddress)
 import Element exposing (Element, column, fill, paragraph, text, width)

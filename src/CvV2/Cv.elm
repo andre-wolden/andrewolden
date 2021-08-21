@@ -1,4 +1,4 @@
-module Cv2 exposing (..)
+module CvV2.Cv exposing (..)
 
 import Components.CollapseTransition.Collapse exposing (collapse)
 import Html exposing (Attribute, Html, div, text)

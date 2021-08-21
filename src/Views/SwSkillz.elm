@@ -1,4 +1,4 @@
-module SwSkillz exposing (..)
+module Views.SwSkillz exposing (..)
 
 import Element exposing (column, fill, padding, paragraph, text, width)
 import ViewUtils.ViewUtils exposing (centeredSectionHeader)

@@ -1,4 +1,4 @@
-module TitleRow exposing (..)
+module ViewUtils.TitleRow exposing (..)
 
 import Browser.Dom exposing (Viewport)
 import Element exposing (Element, centerX, centerY, el, fill, px, row)

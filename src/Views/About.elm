@@ -1,4 +1,4 @@
-module About exposing (..)
+module Views.About exposing (..)
 
 import Data.DivContent exposing (aboutText, aboutTitle)
 import Debug exposing (todo)
