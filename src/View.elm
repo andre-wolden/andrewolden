@@ -30,7 +30,7 @@ view model =
         Just route ->
             case route of
                 Resume ->
-                    div [] [ text "resume" ]
+                    resumePage model
 
                 PersonalProjects ->
                     div [] [ text "personal projects" ]
@@ -55,8 +55,8 @@ maybeViewConfigOf { viewport, maybeY, initialH, fontSizeFunc } =
         |> andThen (\tmp -> map (\fsf -> { viewport = tmp.viewport, y = tmp.y, initialH = tmp.initialH, fontSizeF = fsf }) fontSizeFunc)
 
 
-viewIntro : Model -> Html Msg
-viewIntro model =
+resumePage : Model -> Html Msg
+resumePage model =
     case maybeViewConfigOf model of
         Nothing ->
             Element.layout [] Element.none

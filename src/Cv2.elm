@@ -71,12 +71,17 @@ workPlaces attributes workplaces =
         |> div []
 
 
+newTabLink : String -> String -> Html Msg
+newTabLink link txt =
+    a [ href link, target "_blank", rel "noreferrer noopener" ] [ text txt ]
+
+
 cv : Model -> Html Msg
 cv model =
     div
         []
         [ div [ class "titleXXL" ]
-            [ text "CV"
+            [ text "Resume"
             ]
         , workPlaces []
             [ div []
@@ -115,7 +120,7 @@ cv model =
                                 [ info [] "SHORT INTRODUCTION" [ text "Application form for financial assistance. React frontend and Java backend. Users can log in with Idporten. Each submitted application is validated and transmitted to the correct municipality based on the user’s current andress." ]
                                 , info [ class "marginTopM" ] "TECHNOLOGIES" [ text "React, Typescript, Redux, Java, Docker, nais.io, Kubernetes" ]
                                 , descriptionHeader [ class "marginTopM" ] "OPEN SOURCE REPOSITORIES"
-                                , div [] [ a [ href "https://github.com/navikt/sosialhjelp-soknad" ] [ text "sosialhjelp-soknad" ] ]
+                                , div [] [ newTabLink "https://github.com/navikt/sosialhjelp-soknad" "sosialhjelp-soknad" ]
                                 , div [] [ a [ href "https://github.com/navikt/sosialhjelp-innsyn" ] [ text "sosialhjelp-innsyn" ] ]
                                 , div [ class "paddingBottomL" ] [ a [ href "https://github.com/navikt/sosialhjelp-woldena-tm" ] [ text "sosialhjelp-woldena-tm" ] ]
                                 ]

@@ -1,14 +1,12 @@
 module Cv.Cv exposing (..)
 
 import Cv.CvUtils exposing (circle, workDateHeader)
-import Debug exposing (todo)
-import Element exposing (Element, alignTop, column, el, explain, fill, mouseOver, newTabLink, padding, paddingEach, paragraph, rgb255, rgba255, row, shrink, spacing, spacingXY, text, textColumn, width, wrappedRow)
+import Element exposing (Element, alignTop, el, fill, mouseOver, newTabLink, paddingEach, paragraph, rgb255, rgba255, row, spacingXY, text, textColumn, width, wrappedRow)
 import Element.Border as Border
-import Element.Events exposing (onMouseEnter)
-import Element.Font exposing (bold, color, underline)
+import Element.Font exposing (bold, color)
 import Messages exposing (Msg(..))
 import ViewUtils.FontUtils exposing (fontSizeLarge, fontSizeMedium, fontSizeSmall)
-import ViewUtils.Palette exposing (greyScaleDark1, greyScaleLight1)
+import ViewUtils.Palette exposing (greyScaleDark1)
 import ViewUtils.ViewUtils exposing (centeredSectionHeader, edges)
 
 
@@ -34,7 +32,7 @@ stdLink { url, label } =
 cv : Float -> Element Msg
 cv screenWidth =
     textColumn [ width fill, paddingEach { top = 0, right = 0, bottom = 180, left = 0 } ]
-        [ centeredSectionHeader "CV"
+        [ centeredSectionHeader "Resume"
 
         -- Bekk
         , row [ width fill ]
