@@ -71,9 +71,14 @@ collapseId3 =
     "collapse-transition-3"
 
 
+collapseId4 =
+    "collapse-transition-4"
+
+
 initialCollapseTransitions : List CollapseTransition
 initialCollapseTransitions =
     [ { elementId = collapseId1, maybeHeight = Nothing, isOpen = False }
     , { elementId = collapseId2, maybeHeight = Nothing, isOpen = False }
     , { elementId = collapseId3, maybeHeight = Nothing, isOpen = False }
+    , { elementId = collapseId4, maybeHeight = Nothing, isOpen = False }
     ]

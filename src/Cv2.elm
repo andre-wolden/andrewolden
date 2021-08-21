@@ -4,7 +4,7 @@ import Components.CollapseTransition.Collapse exposing (collapse)
 import Html exposing (Attribute, Html, a, div, text)
 import Html.Attributes exposing (class, href, rel, target)
 import Messages exposing (Msg)
-import Model exposing (Model, collapseId1, collapseId2, collapseId3)
+import Model exposing (Model, collapseId1, collapseId2, collapseId3, collapseId4)
 import String exposing (fromInt)
 import Svg
 import Svg.Attributes as SvgA
@@ -94,7 +94,24 @@ cv model =
                         [ div [ class "left" ] [ smallCircle ]
                         , div []
                             [ div [] [ text "NAV - Arbeids- og velferdsetaten" ]
-                            , infoText "January 2020 - now"
+                            , infoText "June 2021 - now"
+                            , infoText "Team Familie"
+                            , collapse
+                                ( collapseId4, model.collapseTransitions )
+                                [ class "marginTopS" ]
+                                [ info [] "SHORT INTRODUCTION" [ text "Application forms for child benefits and related support functions. React frontends and Kotlin/Java/Python microservices backends." ]
+                                , info [ class "marginTopM" ] "TECHNOLOGIES" [ text "React, Typescript, Jest, Node, Express, Kotlin, Kafka, Docker" ]
+                                , descriptionHeader [ class "marginTopM" ] "OPEN SOURCE REPOSITORIES"
+                                , div [] [ newTabLink "https://github.com/navikt/familie-ba-soknad" "familie-ba-soknad" ]
+                                , div [ class "paddingBottomL" ] [ newTabLink "https://github.com/navikt/familie-ba-soknad-api" "familie-ba-soknad-api" ]
+                                ]
+                            ]
+                        ]
+                    , div [ class "cv-project-wrapper marginBottomXL" ]
+                        [ div [ class "left" ] [ smallCircle ]
+                        , div []
+                            [ div [] [ text "NAV - Arbeids- og velferdsetaten" ]
+                            , infoText "January 2020 - May 2021"
                             , infoText "Team Sykdom i familien"
                             , collapse
                                 ( collapseId1, model.collapseTransitions )
