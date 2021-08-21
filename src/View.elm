@@ -2,9 +2,8 @@ module View exposing (..)
 
 import Basics
 import Browser.Dom exposing (Viewport)
-import Components.Burger exposing (burger)
 import Components.Menubar.Menubar exposing (hMax, menubarHeader)
-import Components.Menubar.MenubarUtils exposing (calculateViewData)
+import Components.Menubar.MenubarUtils exposing (calculateViewData, minContentHeightAttrForFunctioningMenubar)
 import CvV2.Cv exposing (cv)
 import Element exposing (Element, el)
 import Element.Font as Font
@@ -17,6 +16,7 @@ import String exposing (fromInt)
 import Types exposing (Route(..))
 import ViewUtils.Palette exposing (greyScaleDark4)
 import ViewUtils.ViewTypes exposing (ViewData)
+import Views.IntroPageContent exposing (introPageContent)
 
 
 
@@ -29,13 +29,13 @@ view model =
         Just route ->
             case route of
                 Resume ->
-                    resumePage model
+                    div [ Html.Attributes.class "block" ] [ cv model ]
 
                 PersonalProjects ->
                     div [] [ text "personal projects" ]
 
         Nothing ->
-            div [] [ text "home" ]
+            introPage model
 
 
 type alias ViewConfig =
@@ -54,8 +54,8 @@ maybeViewConfigOf { viewport, maybeY, initialH, fontSizeFunc } =
         |> andThen (\tmp -> map (\fsf -> { viewport = tmp.viewport, y = tmp.y, initialH = tmp.initialH, fontSizeF = fsf }) fontSizeFunc)
 
 
-resumePage : Model -> Html Msg
-resumePage model =
+introPage : Model -> Html Msg
+introPage model =
     case maybeViewConfigOf model of
         Nothing ->
             Element.layout [] Element.none
@@ -68,30 +68,18 @@ resumePage model =
             in
             div []
                 [ Element.layout (textFont ++ menubarHeader viewData fontSizeF model.basePath) (el [] (Element.text ""))
+                , div
+                    [ Html.Attributes.class "container"
+                    , Html.Attributes.style "margin-top" (inFrontMarginTop viewport.scene.width)
+                    , minContentHeightAttrForFunctioningMenubar viewData
+                    , Html.Attributes.style "height" "auto"
+                    ]
+                    [ div
+                        [ Html.Attributes.class "block"
 
-                --(column
-                --    [ clip
-                --    , paddingEach { top = floor (hMax viewport.scene.width) + 300, right = 0, bottom = 0, left = 0 }
-                --    , Element.width (fill |> maximum (Math.floor wContentMax))
-                --    , centerX
-                --    ]
-                --    [ html <| div [ Html.Attributes.class "dotted block" ] [ Cv.cv model ]
-                --    , introductionSection viewData
-                --    , cv viewData.w
-                --    , swSkillz
-                --    , stuffToShowOff viewData.w
-                --    , about
-                --    , contact
-                --    ]
-                --)
-                --, CollapseAnimator.example model
-                --, Transition.example model
-                --, Html.div
-                --    []
-                --    [ Html.div [] [ Html.text aboutText ] ]
-                , div [ Html.Attributes.class "container", Html.Attributes.style "margin-top" (inFrontMarginTop viewport.scene.width) ]
-                    [ burger
-                    , div [ Html.Attributes.class "block" ] [ cv model ]
+                        --, Html.Attributes.style "border" "1px dotted green"
+                        ]
+                        [ introPageContent viewData ]
                     ]
                 ]
 
