@@ -1,13 +1,14 @@
 module Cv2 exposing (..)
 
 import Components.CollapseTransition.Collapse exposing (collapse)
-import Html exposing (Attribute, Html, a, div, text)
-import Html.Attributes exposing (class, href, rel, target)
+import Html exposing (Attribute, Html, div, text)
+import Html.Attributes exposing (class)
 import Messages exposing (Msg)
 import Model exposing (Model, collapseId1, collapseId2, collapseId3, collapseId4)
 import String exposing (fromInt)
 import Svg
 import Svg.Attributes as SvgA
+import ViewUtils.HtmlViewUtils exposing (newTabLink)
 
 
 largeCircleColor =
@@ -69,11 +70,6 @@ workPlaces attributes workplaces =
     workplaces
         |> List.map (\wp -> div [ class "cv-content-wrapper marginTopL" ] [ div [ class "left" ] [ largeCircle ], div [ class "right" ] [ wp ] ])
         |> div []
-
-
-newTabLink : String -> String -> Html Msg
-newTabLink link txt =
-    a [ href link, target "_blank", rel "noreferrer noopener" ] [ text txt ]
 
 
 cv : Model -> Html Msg

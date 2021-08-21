@@ -52,7 +52,7 @@ collapse ( collapseId, listOfCts ) attributes content =
                             let
                                 -- px/s
                                 speed =
-                                    500
+                                    1000
 
                                 time =
                                     fromFloat (height / speed)
@@ -81,6 +81,7 @@ collapse ( collapseId, listOfCts ) attributes content =
                     [ Html.button
                         [ Html.Events.onClick (toggle elementId maybeHeight)
                         , Html.Attributes.class "button"
+                        , Html.Attributes.class "collapse"
                         ]
                         [ Html.text <|
                             if isOpen then
