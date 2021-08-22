@@ -2,6 +2,7 @@ module View exposing (..)
 
 import Basics
 import Browser.Dom exposing (Viewport)
+import Components.Burger exposing (burger)
 import Components.Menubar.Menubar exposing (hMax, menubarHeader)
 import Components.Menubar.MenubarUtils exposing (calculateViewData, minContentHeightAttrForFunctioningMenubar)
 import CvV2.Cv exposing (cv)
@@ -23,8 +24,8 @@ import Views.IntroPageContent exposing (introPageContent)
 -- , Element.explain Debug.todo
 
 
-view : Model -> Html Msg
-view model =
+router : Model -> ViewData -> Html Msg
+router model viewData =
     case model.route.route of
         Just route ->
             case route of
@@ -35,7 +36,7 @@ view model =
                     div [] [ text "personal projects" ]
 
         Nothing ->
-            introPage model
+            introPageContent viewData
 
 
 type alias ViewConfig =
@@ -54,8 +55,8 @@ maybeViewConfigOf { viewport, maybeY, initialH, fontSizeFunc } =
         |> andThen (\tmp -> map (\fsf -> { viewport = tmp.viewport, y = tmp.y, initialH = tmp.initialH, fontSizeF = fsf }) fontSizeFunc)
 
 
-introPage : Model -> Html Msg
-introPage model =
+view : Model -> Html Msg
+view model =
     case maybeViewConfigOf model of
         Nothing ->
             Element.layout [] Element.none
@@ -79,7 +80,9 @@ introPage model =
 
                         --, Html.Attributes.style "border" "1px dotted green"
                         ]
-                        [ introPageContent viewData ]
+                        [ burger
+                        , router model viewData
+                        ]
                     ]
                 ]
 
