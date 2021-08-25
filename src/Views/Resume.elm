@@ -76,7 +76,7 @@ resume : Model -> Html Msg
 resume model =
     div
         []
-        [ div [ class "titleXXL" ]
+        [ div [ class "titleXXL marginTopM" ]
             [ text "Resume"
             ]
         , workPlaces []

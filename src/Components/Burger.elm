@@ -16,7 +16,7 @@ burger =
 
 backToIntroPage : Html Msg
 backToIntroPage =
-    div []
-        [ i [ class "fa fa-long-arrow-left" ] []
-        , a [ href "/" ] [ text "Back" ]
+    div [ class "backToIntroPageWrapper" ]
+        [ div [] [ i [ class "fa fa-long-arrow-left fa-2x" ] [] ]
+        , div [ class "getSomeSpacing" ] [ a [ href "/" ] [ text "BACK" ] ]
         ]

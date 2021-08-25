@@ -31,14 +31,14 @@ router model viewData =
         Just route ->
             case route of
                 Resume ->
-                    div [ Html.Attributes.class "block" ]
+                    div [ class "block" ]
                         [ backToIntroPage
                         , resume model
                         ]
 
                 PersonalProjects ->
                     div
-                        []
+                        [ class "block" ]
                         [ backToIntroPage
                         , stuffToShowOff
                         ]

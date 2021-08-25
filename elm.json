@@ -19,7 +19,8 @@
             "jonathanfishbein1/elm-field": "5.0.0",
             "jonathanfishbein1/linear-algebra": "9.0.0",
             "mdgriffith/elm-animator": "1.1.1",
-            "mdgriffith/elm-ui": "1.1.8"
+            "mdgriffith/elm-ui": "1.1.8",
+            "stephenreddek/elm-emoji": "1.0.0"
         },
         "indirect": {
             "elm/bytes": "1.0.8",

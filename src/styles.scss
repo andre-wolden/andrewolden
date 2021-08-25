@@ -113,6 +113,24 @@ $font-normal-color: #212529;
 .paddingBottomXXL {
   padding-bottom: 80px;
 }
+.marginBottomXXL {
+  margin-bottom: 80px;
+}
+
+.alignRight {
+  text-align: right;
+}
+
+.backToIntroPageWrapper {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  color: rgb(33, 37, 41);
+
+  .getSomeSpacing {
+    margin-left: 0.5rem;
+  }
+}
 
 .cv-content-wrapper {
   display: flex;
@@ -150,11 +168,11 @@ $font-normal-color: #212529;
     text-align: justify;
     text-justify: inter-word;
   }
-
-
-
 }
 
+.underscore {
+  text-decoration: underline;
+}
 
 .example-component {
   background-color: green;

@@ -1,6 +1,7 @@
 module Views.IntroPageContent exposing (..)
 
-import Html exposing (Html, a, div, h2, h4, i, text)
+import Emoji exposing (text_)
+import Html exposing (Html, a, div, h2, h4, i, p, text)
 import Html.Attributes exposing (class, href)
 import Messages exposing (Msg(..))
 import ViewUtils.HtmlViewUtils exposing (newTabLink)
@@ -12,7 +13,8 @@ introPageContent { w, h, y, hMB, hMBMin } =
     div []
         [ div [ class "block" ]
             [ h2 [] [ text "Hi !" ]
-            , div [] [ text "I'm a software developer located in Oslo. I enjoy coding, studying korean, chess, math, skateboarding and MTG." ]
+            , div [ class "paddingBottomM" ] [ text "I'm a software developer located in Oslo. I enjoy coding, studying korean, chess, math, skateboarding and MTG." ]
+            , div [ class "alignRight" ] [ text "...and beer, and country music.", text_ "😅" ]
             ]
         , div [ class "block" ]
             [ h4 [] [ text "Some things to see on this page:" ]
@@ -21,32 +23,32 @@ introPageContent { w, h, y, hMB, hMBMin } =
             ]
         , div [ class "block" ]
             [ h4 [] [ text "Links to external stuff:" ]
-            , div []
+            , div [ class "backToIntroPageWrapper" ]
                 [ i [ class "fab fa-github fa-2x" ] []
-                , newTabLink "https://github.com/woldena" "Github"
+                , p [ class "getSomeSpacing" ] [ newTabLink "https://github.com/woldena" "Github" ]
                 ]
-            , div []
+            , div [ class "backToIntroPageWrapper" ]
                 [ i [ class "fab fa-gitlab fa-2x" ] []
-                , newTabLink "https://gitlab.com/wolden.andre" "Gitlab"
+                , p [ class "getSomeSpacing" ] [ newTabLink "https://gitlab.com/wolden.andre" "Gitlab" ]
                 ]
-            , div []
+            , div [ class "backToIntroPageWrapper" ]
                 [ i [ class "fab fa-linkedin fa-2x" ] []
-                , newTabLink "https://www.linkedin.com/in/andr%C3%A9-wolden-26a56767" "LinkedIn"
+                , p [ class "getSomeSpacing" ] [ newTabLink "https://www.linkedin.com/in/andr%C3%A9-wolden-26a56767" "LinkedIn" ]
                 ]
             ]
-        , div [ class "block" ]
+        , div [ class "block paddingBottomXXL" ]
             [ h4 [] [ text "Most relevant mentions of technologies that I use:" ]
-            , div []
-                [ text "Frontend: "
-                , text "Elm, React, Typescript"
+            , div [ class "marginTopL" ]
+                [ p [ class "underscore" ] [ text "Frontend: " ]
+                , p [] [ text "Elm, React, Typescript" ]
                 ]
-            , div []
-                [ text "Backend: "
-                , text "Java, Kotlin, Node, Python, Postgres"
+            , div [ class "marginTopL" ]
+                [ p [ class "underscore" ] [ text "Backend: " ]
+                , p [] [ text "Java, Kotlin, Node, Python, Postgres" ]
                 ]
-            , div []
-                [ text "Tools and platforms:"
-                , text "Webpack, Jest, Docker, Kubernetes, Nginx, Heroku, GCP"
+            , div [ class "marginTopL" ]
+                [ p [ class "underscore" ] [ text "Tools and platforms:" ]
+                , p [] [ text "Webpack, Jest, Docker, Kubernetes, Nginx, Heroku, GCP" ]
                 ]
             ]
         ]

@@ -1,6 +1,7 @@
 module Views.StuffToShowOff exposing (..)
 
 import Html exposing (..)
+import Html.Attributes exposing (class)
 import Messages exposing (Msg)
 import ViewUtils.HtmlViewUtils exposing (newTabLink)
 
@@ -8,11 +9,13 @@ import ViewUtils.HtmlViewUtils exposing (newTabLink)
 stuffToShowOff : Html Msg
 stuffToShowOff =
     div []
-        [ text "Stuff to show off"
-        , div [] [ text "This is not an extensive list. For example work for customers that wish to keep their repositories private is not mentioned here." ]
+        [ div [ class "titleXXL marginTopM" ]
+            [ text "A collection of things"
+            ]
+        , div [ class "marginTopM" ] [ text "This is a collection of things which I have worked on in my spare time. Both for fun, and to practice." ]
 
         -- www.andrewolden.com THIS PAGE
-        , h3 [] [ text "andrewolden.com" ]
+        , h3 [ class "marginTopM" ] [ text "andrewolden.com" ]
         , div [] [ text "Made with elm, in particluar to practice and test out the use of elm-ui." ]
 
         -- Private kubernetes cluster
