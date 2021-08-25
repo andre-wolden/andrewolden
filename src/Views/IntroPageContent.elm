@@ -12,10 +12,7 @@ introPageContent { w, h, y, hMB, hMBMin } =
     div []
         [ div [ class "block" ]
             [ h2 [] [ text "Hi !" ]
-            ]
-        , div [ class "block" ]
-            [ div [] [ text "I'm a software developer located in Oslo. I enjoy coding, studying korean, chess, math, skateboarding and MTG." ]
-            , div [] [ text "I'm 35 years old and live with my wife and two awesome children." ]
+            , div [] [ text "I'm a software developer located in Oslo. I enjoy coding, studying korean, chess, math, skateboarding and MTG." ]
             ]
         , div [ class "block" ]
             [ h4 [] [ text "Some things to see on this page:" ]
@@ -31,6 +28,10 @@ introPageContent { w, h, y, hMB, hMBMin } =
             , div []
                 [ i [ class "fab fa-gitlab fa-2x" ] []
                 , newTabLink "https://gitlab.com/wolden.andre" "Gitlab"
+                ]
+            , div []
+                [ i [ class "fab fa-linkedin fa-2x" ] []
+                , newTabLink "https://www.linkedin.com/in/andr%C3%A9-wolden-26a56767" "LinkedIn"
                 ]
             ]
         , div [ class "block" ]

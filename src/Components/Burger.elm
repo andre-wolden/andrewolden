@@ -1,7 +1,7 @@
 module Components.Burger exposing (backToIntroPage, burger)
 
-import Html exposing (Html, a, div, li, text, ul)
-import Html.Attributes exposing (href)
+import Html exposing (Html, a, div, i, li, text, ul)
+import Html.Attributes exposing (class, href)
 import Messages exposing (Msg(..))
 
 
@@ -17,6 +17,6 @@ burger =
 backToIntroPage : Html Msg
 backToIntroPage =
     div []
-        [ text "<-"
+        [ i [ class "fa fa-long-arrow-left" ] []
         , a [ href "/" ] [ text "Back" ]
         ]

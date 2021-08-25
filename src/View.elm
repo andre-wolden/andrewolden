@@ -83,12 +83,7 @@ view model =
                     , minContentHeightAttrForFunctioningMenubar viewData
                     , style "height" "auto"
                     ]
-                    [ div
-                        [ class "block"
-                        ]
-                        [ router model viewData
-                        ]
-                    ]
+                    [ router model viewData ]
                 ]
 
 

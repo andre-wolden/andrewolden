@@ -197,7 +197,7 @@ resume model =
                         ]
                     ]
                 ]
-            , div []
+            , div [ class "paddingBottomXXL" ]
                 [ div [ class "workplace-title" ] [ text "August 2007 - July 2012" ]
                 , info [ class "marginTopM" ] "UNIVERSITY" [ text "NTNU (Norwegian University of Science and Technology)" ]
                 , info [ class "marginTopM" ] "PROGRAMME" [ text "Mechanical Engineering" ]
