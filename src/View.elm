@@ -2,14 +2,13 @@ module View exposing (..)
 
 import Basics
 import Browser.Dom exposing (Viewport)
-import Components.Burger exposing (burger)
+import Components.Burger exposing (backToIntroPage, burger)
 import Components.Menubar.Menubar exposing (hMax, menubarHeader)
 import Components.Menubar.MenubarUtils exposing (calculateViewData, minContentHeightAttrForFunctioningMenubar)
-import CvV2.Cv exposing (cv)
 import Element exposing (Element, el)
 import Element.Font as Font
 import Html exposing (Html, div, text)
-import Html.Attributes
+import Html.Attributes exposing (class, style)
 import Maybe exposing (andThen, map)
 import Messages exposing (Msg(..))
 import Model exposing (Model)
@@ -18,6 +17,8 @@ import Types exposing (Route(..))
 import ViewUtils.Palette exposing (greyScaleDark4)
 import ViewUtils.ViewTypes exposing (ViewData)
 import Views.IntroPageContent exposing (introPageContent)
+import Views.Resume exposing (resume)
+import Views.StuffToShowOff exposing (stuffToShowOff)
 
 
 
@@ -30,10 +31,17 @@ router model viewData =
         Just route ->
             case route of
                 Resume ->
-                    div [ Html.Attributes.class "block" ] [ cv model ]
+                    div [ Html.Attributes.class "block" ]
+                        [ backToIntroPage
+                        , resume model
+                        ]
 
                 PersonalProjects ->
-                    div [] [ text "personal projects" ]
+                    div
+                        []
+                        [ backToIntroPage
+                        , stuffToShowOff
+                        ]
 
         Nothing ->
             introPageContent viewData
@@ -70,18 +78,15 @@ view model =
             div []
                 [ Element.layout (textFont ++ menubarHeader viewData fontSizeF model.basePath) (el [] (Element.text ""))
                 , div
-                    [ Html.Attributes.class "container"
-                    , Html.Attributes.style "margin-top" (inFrontMarginTop viewport.scene.width)
+                    [ class "container"
+                    , style "margin-top" (inFrontMarginTop viewport.scene.width)
                     , minContentHeightAttrForFunctioningMenubar viewData
-                    , Html.Attributes.style "height" "auto"
+                    , style "height" "auto"
                     ]
                     [ div
-                        [ Html.Attributes.class "block"
-
-                        --, Html.Attributes.style "border" "1px dotted green"
+                        [ class "block"
                         ]
-                        [ burger
-                        , router model viewData
+                        [ router model viewData
                         ]
                     ]
                 ]

@@ -1,4 +1,4 @@
-module CvV2.Cv exposing (..)
+module Views.Resume exposing (..)
 
 import Components.CollapseTransition.Collapse exposing (collapse)
 import Html exposing (Attribute, Html, div, text)
@@ -72,8 +72,8 @@ workPlaces attributes workplaces =
         |> div []
 
 
-cv : Model -> Html Msg
-cv model =
+resume : Model -> Html Msg
+resume model =
     div
         []
         [ div [ class "titleXXL" ]
