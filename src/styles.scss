@@ -196,3 +196,14 @@ $font-normal-color: #212529;
   //color: rgb(108, 117, 125);
   color: rgb(173, 181, 189);
 }
+
+.internal-links-block-wrapper {
+  div {
+    margin: 0.5rem;
+  }
+}
+
+.external-links-block-wrapper {
+  display: flex;
+  justify-content: space-evenly;
+}
