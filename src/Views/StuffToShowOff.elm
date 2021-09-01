@@ -81,6 +81,7 @@ stuffToShowOff =
                     Bekk publishes a functional christmas calendar in december with a new article about functional programming for each of the days up until the 24th.
                     I wrote about making Minesweeper in Elm.
                     """
+                , newTabLink "https://functional.christmas/2019/4" "https://functional.christmas/2019/4"
                 ]
             ]
         ]
