@@ -13,7 +13,10 @@ introPageContent { w, h, y, hMB, hMBMin } =
     div []
         [ div [ class "block" ]
             [ h2 [] [ text "Hi !" ]
-            , div [ class "paddingBottomM" ] [ text "I'm a software developer located in Oslo. I enjoy coding, studying korean, chess, math, skateboarding and MTG." ]
+            , div [ class "paddingBottomM" ]
+                [ text <|
+                    """I work as a software developer, and I live in Oslo. I enjoy coding, studying korean, chess, math, skateboarding and MTG."""
+                ]
             , div [ class "alignRight" ] [ text "...and beer, and country music.", text_ "😅" ]
             ]
         , div [ class "block" ]
