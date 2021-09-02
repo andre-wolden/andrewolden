@@ -220,8 +220,8 @@ calculateViewData viewport y initialH =
     { w = w, h = h, y = y, hMB = hMB, hMBMin = hMBMin }
 
 
-minContentHeightAttrForFunctioningMenubar : ViewData -> Html.Attribute msg
-minContentHeightAttrForFunctioningMenubar viewData =
+minContentHeightAttr : ViewData -> Html.Attribute msg
+minContentHeightAttr viewData =
     let
         minHeight =
             floor <| minimumContentHeight viewData.h viewData.hMBMin

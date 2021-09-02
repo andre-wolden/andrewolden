@@ -3,7 +3,7 @@ module View exposing (..)
 import Basics
 import Browser.Dom exposing (Viewport)
 import Components.Burger exposing (backToIntroPage)
-import Components.Menubar.FlyingHeader exposing (calculateViewData, hMax, menubarHeader, minContentHeightAttrForFunctioningMenubar)
+import Components.Menubar.FlyingHeader exposing (calculateViewData, hMax, menubarHeader, minContentHeightAttr)
 import Element exposing (Element, el)
 import Element.Font as Font
 import Html exposing (Html, div)
@@ -79,7 +79,7 @@ view model =
                 , div
                     [ class "container"
                     , style "margin-top" (inFrontMarginTop viewport.scene.width)
-                    , minContentHeightAttrForFunctioningMenubar viewData
+                    , minContentHeightAttr viewData
                     , style "height" "auto"
                     ]
                     [ router model viewData ]
