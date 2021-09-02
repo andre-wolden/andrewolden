@@ -13,8 +13,6 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-key: ${{ runner.os }}-mycache-v1-${{ hashFiles(...) }}
-
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -24,6 +22,8 @@ jobs:
     strategy:
       matrix:
         node-version: [14.15]
+
+    key: ${{ runner.os }}-mycache-v1-${{ hashFiles(...) }}
 
 
     # Steps represent a sequence of tasks that will be executed as part of the job
