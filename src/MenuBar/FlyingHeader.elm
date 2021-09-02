@@ -1,4 +1,4 @@
-module Components.Menubar.FlyingHeader exposing (..)
+module Menubar.FlyingHeader exposing (..)
 
 import Basics as Math
 import Browser.Dom exposing (Viewport)

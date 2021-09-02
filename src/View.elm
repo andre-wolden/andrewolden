@@ -3,12 +3,12 @@ module View exposing (..)
 import Basics
 import Browser.Dom exposing (Viewport)
 import Components.Burger exposing (backToIntroPage)
-import Components.Menubar.FlyingHeader exposing (calculateViewData, hMax, menubarHeader, minContentHeightAttr)
 import Element exposing (Element, el)
 import Element.Font as Font
 import Html exposing (Html, div)
 import Html.Attributes exposing (class, style)
 import Maybe exposing (andThen, map)
+import Menubar.FlyingHeader exposing (calculateViewData, hMax, menubarHeader, minContentHeightAttr)
 import Messages exposing (Msg(..))
 import Model exposing (Model)
 import String exposing (fromInt)
