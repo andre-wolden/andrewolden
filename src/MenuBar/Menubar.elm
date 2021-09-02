@@ -1,4 +1,4 @@
-module Components.Menubar.Menubar exposing (..)
+module Menubar.Menubar exposing (..)
 
 import Basics as Math
 import Element exposing (Attr, Attribute, Element, Length, centerX, clip, el, height, image, inFront, moveDown, moveLeft, moveRight, none, paddingXY, px, rgb255, text, width)

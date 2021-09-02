@@ -1,4 +1,4 @@
-module Components.Menubar.MenubarUtils exposing (..)
+module Menubar.MenubarUtils exposing (..)
 
 import Browser.Dom exposing (Viewport)
 import Html exposing (Attribute)
