@@ -31,8 +31,8 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - run: yarn
-      - run: yarn run prod-funkoa
+#      - run: yarn
+#      - run: yarn run prod-funkoa
       - run: echo "Lets see whats here"
       - run: ls -la
 
