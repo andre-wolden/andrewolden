@@ -25,9 +25,9 @@ stuffToShowOff =
                     andrewolden.com is made using Elm.
                     I chose Elm to get in some more functional programming practice,
                     and at the same time test out elm-ui.
-                    The repository is at
+                    The repository is
                     """
-                , newTabLink "https://github.com/woldena/andrewolden" "https://github.com/woldena/andrewolden"
+                , newTabLink "https://github.com/woldena/andrewolden" "here"
                 ]
             ]
 
@@ -40,26 +40,29 @@ stuffToShowOff =
                     I built a Kubernetes cluster at home. It's running on a couple of Raspberry Pi's.
                     The reason for doing that was again to get hands on practice, but also because I wanted to have
                     a free place to run any hobby app that I wanted.
-                    So often I wanted to have something running somewhere. Often I would pay about 10$ a month choosing to run it on Heroku
+                    Often I want to have something running somewhere. I would pay about 10$ a month choosing to run it on Heroku
                     But I just got a headache thinking about whether I would keep paying for it each month or not
                     I just didn't want to have to think about it anymore.
-                    I've started writing an article about it.
-                    It's not finished, but if you're interested you can find the article at
+                    I've started writing an article about setting up the cluster.
+                    It's not finished, but if you're interested you can find the article
                     """
-                , newTabLink "https://www.funkoa.com/articles" "https://www.funkoa.com/articles"
+                , newTabLink "https://www.funkoa.com/articles" "here"
                 ]
             ]
 
         -- Funkoa (served by nginx running in the cluster
         , div [ class "block" ]
             [ h3 [] [ text "Funkoa" ]
-            , newTabLink "https://www.funkoa.com" "https://www.funkoa.com"
+            , div [ class "marginBottomS" ]
+                [ text "Link to page: "
+                , newTabLink "https://www.funkoa.com" "https://www.funkoa.com"
+                ]
             , div []
                 [ text
                     """
-                    This website is a simple frontend served by an nginx container which is running in my Kubernetes cluster.
+                    A simple React frontend served by nginx, and runs in my Raspberry Pi Kubernetes cluster.
                     The purpose of making the app was to see that I was able to use Traefik in my cluster to get tls (https) working.
-                    And also to get any other app available at a subpath of the domain.
+                    And also to get any other hobby app available at a subpath of the domain.
                     """
                 ]
             ]
@@ -67,21 +70,21 @@ stuffToShowOff =
         -- Minesweeper in elm (served by the cluster)
         , div [ class "block" ]
             [ h3 [] [ text "Minesweeper" ]
-            , newTabLink "https://www.funkoa.com/minesweeper" "https://www.funkoa.com/minesweeper"
-            , div [] [ text "My version of Minesweeper made with Elm. Currently hosted in my private cluster." ]
+            , div [] [ text "My version of Minesweeper made with Elm. Currently hosted in my private cluster " ]
+            , newTabLink "https://www.funkoa.com/minesweeper" "here"
             ]
 
         -- Minesweeper article, Bekk functional christmas
         , div [ class "block marginBottomXXL" ]
             [ h3 [] [ text "Minesweeper article" ]
-            , newTabLink "" ""
             , div []
                 [ text <|
                     """
-                    Bekk publishes a functional christmas calendar in december with a new article about functional programming for each of the days up until the 24th.
-                    I wrote about making Minesweeper in Elm.
+                    Bekk publishes a functional christmas calendar in december
+                    with a new article about functional programming for each of the days up until the 24th.
+                    I wrote about making Minesweeper in Elm. You can read it
                     """
-                , newTabLink "https://functional.christmas/2019/4" "https://functional.christmas/2019/4"
+                , newTabLink "https://functional.christmas/2019/4" "here"
                 ]
             ]
         ]

@@ -96,10 +96,12 @@ resume model =
                                 ( collapseId4, model.collapseTransitions )
                                 [ class "marginTopS" ]
                                 [ info [] "SHORT INTRODUCTION" [ text "Application forms for child benefits and related support functions. React frontends and Kotlin/Java/Python microservices backends." ]
-                                , info [ class "marginTopM" ] "TECHNOLOGIES" [ text "React, Typescript, Jest, Node, Express, Kotlin, Kafka, Docker" ]
+                                , info [ class "marginTopM" ] "TECHNOLOGIES" [ text "React, Typescript, Jest, Node, Express, Kotlin, Spring, Postgres, Kafka, Docker" ]
                                 , descriptionHeader [ class "marginTopM" ] "OPEN SOURCE REPOSITORIES"
                                 , div [] [ newTabLink "https://github.com/navikt/familie-ba-soknad" "familie-ba-soknad" ]
-                                , div [ class "paddingBottomL" ] [ newTabLink "https://github.com/navikt/familie-ba-soknad-api" "familie-ba-soknad-api" ]
+                                , div [] [ newTabLink "https://github.com/navikt/familie-ba-soknad-api" "familie-ba-soknad-api" ]
+                                , div [] [ newTabLink "https://github.com/navikt/familie-ba-sak" "familie-ba-sak" ]
+                                , div [ class "paddingBottomL" ] [ newTabLink "https://github.com/navikt/familie-ba-sak" "familie-ba-sak-frontend" ]
                                 ]
                             ]
                         ]
