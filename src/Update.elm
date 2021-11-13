@@ -1,16 +1,15 @@
 module Update exposing (..)
 
-import Animator
 import Browser exposing (UrlRequest(..))
 import Browser.Navigation as Nav
-import Commands exposing (cmdGetHeightElmCollapse1, cmdGetHeightElmCollapse2, cmdGetHeightOfElement, cmdGetViewport)
-import Components.CollapseAnimator.Collapse exposing (animator1, animator2)
+import Commands exposing (cmdGetHeightOfElement, cmdGetViewport)
 import Components.CollapseTransition.Collapse exposing (CollapseTransition)
 import Messages exposing (Msg(..))
 import Model exposing (Model)
 import Url
-import Utils exposing (focusSearchBox)
-import ViewportAndSceneUtils exposing (getFontSizeFormula)
+import Url.Parser exposing (parse)
+import Utils exposing (focusSearchBox, routeParser)
+import ViewUtils.ViewportAndSceneUtils exposing (getFontSizeFormula)
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -35,54 +34,6 @@ update message model =
             ( { model | maybeY = String.toFloat y }
             , Cmd.none
             )
-
-        Tick1 newTime ->
-            ( model
-                |> Animator.update newTime animator1
-              -- (5)  Updating our model using our animator and the current time.
-            , Cmd.none
-            )
-
-        GetHeightOfElmCollapse1 ->
-            ( model, cmdGetHeightElmCollapse1 model.elmCollapse1 )
-
-        ToggleElmCollapse1 maybeHeightFloat ->
-            let
-                elmCollapse1 =
-                    model.elmCollapse1
-
-                updatedElmCollapse1 =
-                    { elmCollapse1
-                        | isOpen =
-                            Animator.go Animator.quickly (not (Animator.current elmCollapse1.isOpen)) elmCollapse1.isOpen
-                        , maybeElementHeight = maybeHeightFloat
-                    }
-            in
-            ( { model | elmCollapse1 = updatedElmCollapse1 }, Cmd.none )
-
-        Tick2 newTime ->
-            ( model
-                |> Animator.update newTime animator2
-              -- (5)  Updating our model using our animator and the current time.
-            , Cmd.none
-            )
-
-        GetHeightOfElmCollapse2 ->
-            ( model, cmdGetHeightElmCollapse2 model.elmCollapse2 )
-
-        ToggleElmCollapse2 maybeHeightFloat ->
-            let
-                elmCollapse2 =
-                    model.elmCollapse2
-
-                updatedElmCollapse2 =
-                    { elmCollapse2
-                        | isOpen =
-                            Animator.go Animator.quickly (not (Animator.current elmCollapse2.isOpen)) elmCollapse2.isOpen
-                        , maybeElementHeight = maybeHeightFloat
-                    }
-            in
-            ( { model | elmCollapse2 = updatedElmCollapse2 }, Cmd.none )
 
         ToggleCollapseTransition elementId ->
             let
@@ -111,13 +62,13 @@ update message model =
         LinkClicked urlRequest ->
             case urlRequest of
                 Internal url ->
-                    ( model, Nav.pushUrl model.key (Url.toString url) )
+                    ( { model | testString = url.path }, Nav.pushUrl model.key (Url.toString url) )
 
                 External href ->
-                    ( model, Nav.load href )
+                    ( { model | testString = "href external thingy" }, Nav.load href )
 
         UrlChanged url ->
-            ( { model | url = url }
+            ( { model | route = { url = url, route = parse routeParser url } }
             , Cmd.none
             )
 

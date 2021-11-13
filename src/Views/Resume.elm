@@ -1,13 +1,14 @@
-module Cv2 exposing (..)
+module Views.Resume exposing (..)
 
 import Components.CollapseTransition.Collapse exposing (collapse)
-import Html exposing (Attribute, Html, a, div, text)
-import Html.Attributes exposing (class, href, rel, target)
+import Html exposing (Attribute, Html, div, text)
+import Html.Attributes exposing (class)
 import Messages exposing (Msg)
-import Model exposing (Model, collapseId1, collapseId2, collapseId3)
+import Model exposing (Model, collapseId1, collapseId2, collapseId3, collapseId4)
 import String exposing (fromInt)
 import Svg
 import Svg.Attributes as SvgA
+import ViewUtils.HtmlViewUtils exposing (newTabLink)
 
 
 largeCircleColor =
@@ -71,12 +72,12 @@ workPlaces attributes workplaces =
         |> div []
 
 
-cv : Model -> Html Msg
-cv model =
+resume : Model -> Html Msg
+resume model =
     div
         []
-        [ div [ class "titleXXL" ]
-            [ text "CV"
+        [ div [ class "titleXXL marginTopM" ]
+            [ text "Resume"
             ]
         , workPlaces []
             [ div []
@@ -89,7 +90,26 @@ cv model =
                         [ div [ class "left" ] [ smallCircle ]
                         , div []
                             [ div [] [ text "NAV - Arbeids- og velferdsetaten" ]
-                            , infoText "January 2020 - now"
+                            , infoText "June 2021 - now"
+                            , infoText "Team Familie"
+                            , collapse
+                                ( collapseId4, model.collapseTransitions )
+                                [ class "marginTopS" ]
+                                [ info [] "SHORT INTRODUCTION" [ text "Application forms for child benefits and related support functions. React frontends and Kotlin/Java/Python microservices backends." ]
+                                , info [ class "marginTopM" ] "TECHNOLOGIES" [ text "React, Typescript, Jest, Node, Express, Kotlin, Spring, Postgres, Kafka, Docker" ]
+                                , descriptionHeader [ class "marginTopM" ] "OPEN SOURCE REPOSITORIES"
+                                , div [] [ newTabLink "https://github.com/navikt/familie-ba-soknad" "familie-ba-soknad" ]
+                                , div [] [ newTabLink "https://github.com/navikt/familie-ba-soknad-api" "familie-ba-soknad-api" ]
+                                , div [] [ newTabLink "https://github.com/navikt/familie-ba-sak" "familie-ba-sak" ]
+                                , div [ class "paddingBottomL" ] [ newTabLink "https://github.com/navikt/familie-ba-sak" "familie-ba-sak-frontend" ]
+                                ]
+                            ]
+                        ]
+                    , div [ class "cv-project-wrapper marginBottomXL" ]
+                        [ div [ class "left" ] [ smallCircle ]
+                        , div []
+                            [ div [] [ text "NAV - Arbeids- og velferdsetaten" ]
+                            , infoText "January 2020 - May 2021"
                             , infoText "Team Sykdom i familien"
                             , collapse
                                 ( collapseId1, model.collapseTransitions )
@@ -97,9 +117,9 @@ cv model =
                                 [ info [] "SHORT INTRODUCTION" [ text "Different application forms in some way related to attendance allowance. Several react based application forms, and Kotlin based backends. Application form data is validated before it is put on a Kafka topic ready to be evaluated." ]
                                 , info [ class "marginTopM" ] "TECHNOLOGIES" [ text "React, Typescript, Formik, Gatsby, Sanity, Kotlin, Kafka, Docker, Nais (nais.io, built on Kubernetes)" ]
                                 , descriptionHeader [ class "marginTopM" ] "OPEN SOURCE REPOSITORIES"
-                                , div [] [ a [ href "https://github.com/navikt/sykdom-i-familien" ] [ text "sykdom-i-familien" ] ]
-                                , div [] [ a [ href "https://github.com/navikt/omsorgsdager-kalkulator" ] [ text "omsorgsdager-kalkulator" ] ]
-                                , div [ class "paddingBottomL" ] [ a [ href "https://github.com/navikt/omsorgspengerutbetaling-arbeidstaker-soknad" ] [ text "arbeidstaker" ] ]
+                                , div [] [ newTabLink "https://github.com/navikt/sykdom-i-familien" "sykdom-i-familien" ]
+                                , div [] [ newTabLink "https://github.com/navikt/omsorgsdager-kalkulator" "omsorgsdager-kalkulator" ]
+                                , div [ class "paddingBottomL" ] [ newTabLink "https://github.com/navikt/omsorgspengerutbetaling-arbeidstaker-soknad" "arbeidstaker" ]
                                 ]
                             ]
                         ]
@@ -115,9 +135,9 @@ cv model =
                                 [ info [] "SHORT INTRODUCTION" [ text "Application form for financial assistance. React frontend and Java backend. Users can log in with Idporten. Each submitted application is validated and transmitted to the correct municipality based on the user’s current andress." ]
                                 , info [ class "marginTopM" ] "TECHNOLOGIES" [ text "React, Typescript, Redux, Java, Docker, nais.io, Kubernetes" ]
                                 , descriptionHeader [ class "marginTopM" ] "OPEN SOURCE REPOSITORIES"
-                                , div [] [ a [ href "https://github.com/navikt/sosialhjelp-soknad" ] [ text "sosialhjelp-soknad" ] ]
-                                , div [] [ a [ href "https://github.com/navikt/sosialhjelp-innsyn" ] [ text "sosialhjelp-innsyn" ] ]
-                                , div [ class "paddingBottomL" ] [ a [ href "https://github.com/navikt/sosialhjelp-woldena-tm" ] [ text "sosialhjelp-woldena-tm" ] ]
+                                , div [] [ newTabLink "https://github.com/navikt/sosialhjelp-soknad" "sosialhjelp-soknad" ]
+                                , div [] [ newTabLink "https://github.com/navikt/sosialhjelp-innsyn" "sosialhjelp-innsyn" ]
+                                , div [ class "paddingBottomL" ] [ newTabLink "https://github.com/navikt/sosialhjelp-woldena-tm" "sosialhjelp-woldena-tm" ]
                                 ]
                             ]
                         ]
@@ -179,13 +199,13 @@ cv model =
                         ]
                     ]
                 ]
-            , div []
+            , div [ class "paddingBottomXXL" ]
                 [ div [ class "workplace-title" ] [ text "August 2007 - July 2012" ]
                 , info [ class "marginTopM" ] "UNIVERSITY" [ text "NTNU (Norwegian University of Science and Technology)" ]
                 , info [ class "marginTopM" ] "PROGRAMME" [ text "Mechanical Engineering" ]
                 , info [ class "marginTopM" ] "MAIN PROFILE" [ text "Energy, Process and Fluids Engineering" ]
                 , info [ class "marginTopM" ] "DESCRIPTION" [ text "Specialized in fluid mechanics and multiphase flow. Master's Thesis working for the Multiphase Flow Lab at KAIST (Korea Advanced Institute of Science and Technology)" ]
-                , info [ class "marginTopM" ] "THESIS" [ a [ rel "noreferrer noopener", target "_blank", href "https://ntnuopen.ntnu.no/ntnu-xmlui/bitstream/handle/11250/234896/566557_FULLTEXT01.pdf?sequence=2" ] [ text "Evaluation of Split Ratio for Plug Flow at a Meso-Scale T-Junction" ] ]
+                , info [ class "marginTopM" ] "THESIS" [ newTabLink "https://ntnuopen.ntnu.no/ntnu-xmlui/bitstream/handle/11250/234896/566557_FULLTEXT01.pdf?sequence=2" "Evaluation of Split Ratio for Plug Flow at a Meso-Scale T-Junction" ]
                 ]
             ]
         ]

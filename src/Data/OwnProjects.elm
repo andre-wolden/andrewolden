@@ -1,6 +1,6 @@
 module Data.OwnProjects exposing (..)
 
-import ViewTypes exposing (ProjectDescription)
+import ViewUtils.ViewTypes exposing (ProjectDescription)
 
 
 ownProjectsTitle =

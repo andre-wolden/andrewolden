@@ -1,4 +1,4 @@
-module ViewConstants exposing (..)
+module ViewUtils.ViewConstants exposing (..)
 
 
 wContentMax : Float

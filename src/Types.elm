@@ -13,3 +13,8 @@ type alias Expands =
     { exampleExpand : Timeline Bool
     , example2Expand : Bool
     }
+
+
+type Route
+    = Resume
+    | PersonalProjects

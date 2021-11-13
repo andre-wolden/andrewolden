@@ -4,8 +4,8 @@ import Element exposing (Attribute, Element, centerX, column, paddingEach, parag
 import Element.Border as Border
 import Element.Font exposing (center, size)
 import Messages exposing (Msg)
-import ViewTypes exposing (ViewData)
 import ViewUtils.FontUtils exposing (fontSizeLarge)
+import ViewUtils.ViewTypes exposing (ViewData)
 
 
 dotted : List (Element.Attribute msg)

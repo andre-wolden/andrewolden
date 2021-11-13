@@ -1,8 +1,6 @@
 module Subscriptions exposing (subscriptions)
 
-import Animator
 import Browser.Events as E
-import Components.CollapseAnimator.Collapse exposing (animator1, animator2)
 import Messages exposing (Msg(..))
 import Model exposing (Model)
 import Platform.Sub exposing (batch)
@@ -10,12 +8,10 @@ import Ports exposing (messageReceiver)
 
 
 subscriptions : Model -> Sub Msg
-subscriptions model =
+subscriptions _ =
     batch
         [ resizeSub
         , messageReceiver RecieveY
-        , Animator.toSubscription Tick1 model animator1
-        , Animator.toSubscription Tick2 model animator2
         ]
 
 

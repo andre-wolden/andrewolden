@@ -15,49 +15,50 @@ type alias ElmCollapse =
     }
 
 
-initialElmCollapse1 : ElmCollapse
-initialElmCollapse1 =
-    { collapseId = "elm-collapse-1"
-    , isOpen = init False
-    , maybeElementHeight = Nothing
-    , onPress =
-        \maybeElementHeight ->
-            case maybeElementHeight of
-                Nothing ->
-                    GetHeightOfElmCollapse1
 
-                Just height ->
-                    ToggleElmCollapse1 (Just height)
-    , label =
-        \isOpen ->
-            Html.text <|
-                if isOpen then
-                    "vis mindre"
-
-                else
-                    "vis mer"
-    }
-
-
-initialElmCollapse2 : ElmCollapse
-initialElmCollapse2 =
-    { collapseId = "elm-collapse-2"
-    , isOpen = init False
-    , maybeElementHeight = Nothing
-    , onPress =
-        \maybeElementHeight ->
-            case maybeElementHeight of
-                Nothing ->
-                    GetHeightOfElmCollapse2
-
-                Just height ->
-                    ToggleElmCollapse2 (Just height)
-    , label =
-        \isOpen ->
-            Html.text <|
-                if isOpen then
-                    "vis mindre"
-
-                else
-                    "vis mer"
-    }
+--initialElmCollapse1 : ElmCollapse
+--initialElmCollapse1 =
+--    { collapseId = "elm-collapse-1"
+--    , isOpen = init False
+--    , maybeElementHeight = Nothing
+--    , onPress =
+--        \maybeElementHeight ->
+--            case maybeElementHeight of
+--                Nothing ->
+--                    GetHeightOfElmCollapse1
+--
+--                Just height ->
+--                    ToggleElmCollapse1 (Just height)
+--    , label =
+--        \isOpen ->
+--            Html.text <|
+--                if isOpen then
+--                    "vis mindre"
+--
+--                else
+--                    "vis mer"
+--    }
+--
+--
+--initialElmCollapse2 : ElmCollapse
+--initialElmCollapse2 =
+--    { collapseId = "elm-collapse-2"
+--    , isOpen = init False
+--    , maybeElementHeight = Nothing
+--    , onPress =
+--        \maybeElementHeight ->
+--            case maybeElementHeight of
+--                Nothing ->
+--                    GetHeightOfElmCollapse2
+--
+--                Just height ->
+--                    ToggleElmCollapse2 (Just height)
+--    , label =
+--        \isOpen ->
+--            Html.text <|
+--                if isOpen then
+--                    "vis mindre"
+--
+--                else
+--                    "vis mer"
+--    }

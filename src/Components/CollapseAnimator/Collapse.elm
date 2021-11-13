@@ -10,58 +10,59 @@ import Messages exposing (Msg(..))
 import Model exposing (Model)
 
 
-animator1 : Animator.Animator Model
-animator1 =
-    Animator.animator
-        |> Animator.Css.watching
-            -- we tell the animator how
-            -- to get the checked timeline using .checked
-            (\model ->
-                let
-                    ec1 =
-                        model.elmCollapse1
-                in
-                ec1.isOpen
-            )
-            -- and we tell the animator how
-            -- to update that timeline as well
-            (\updatedIsOpen model ->
-                let
-                    a =
-                        model.elmCollapse1
 
-                    b =
-                        { a | isOpen = updatedIsOpen }
-                in
-                { model | elmCollapse1 = b }
-            )
-
-
-animator2 : Animator.Animator Model
-animator2 =
-    Animator.animator
-        |> Animator.Css.watching
-            -- we tell the animator how
-            -- to get the checked timeline using .checked
-            (\model ->
-                let
-                    ec2 =
-                        model.elmCollapse2
-                in
-                ec2.isOpen
-            )
-            -- and we tell the animator how
-            -- to update that timeline as well
-            (\updatedIsOpen model ->
-                let
-                    a =
-                        model.elmCollapse2
-
-                    b =
-                        { a | isOpen = updatedIsOpen }
-                in
-                { model | elmCollapse2 = b }
-            )
+--animator1 : Animator.Animator Model
+--animator1 =
+--    Animator.animator
+--        |> Animator.Css.watching
+--            -- we tell the animator how
+--            -- to get the checked timeline using .checked
+--            (\model ->
+--                let
+--                    ec1 =
+--                        model.elmCollapse1
+--                in
+--                ec1.isOpen
+--            )
+--            -- and we tell the animator how
+--            -- to update that timeline as well
+--            (\updatedIsOpen model ->
+--                let
+--                    a =
+--                        model.elmCollapse1
+--
+--                    b =
+--                        { a | isOpen = updatedIsOpen }
+--                in
+--                { model | elmCollapse1 = b }
+--            )
+--
+--
+--animator2 : Animator.Animator Model
+--animator2 =
+--    Animator.animator
+--        |> Animator.Css.watching
+--            -- we tell the animator how
+--            -- to get the checked timeline using .checked
+--            (\model ->
+--                let
+--                    ec2 =
+--                        model.elmCollapse2
+--                in
+--                ec2.isOpen
+--            )
+--            -- and we tell the animator how
+--            -- to update that timeline as well
+--            (\updatedIsOpen model ->
+--                let
+--                    a =
+--                        model.elmCollapse2
+--
+--                    b =
+--                        { a | isOpen = updatedIsOpen }
+--                in
+--                { model | elmCollapse2 = b }
+--            )
 
 
 collapse : ElmCollapse -> Html Msg -> Html Msg

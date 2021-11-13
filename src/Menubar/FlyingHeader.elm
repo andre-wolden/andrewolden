@@ -1,15 +1,17 @@
-module Components.Header.Menubar exposing (..)
+module Menubar.FlyingHeader exposing (..)
 
 import Basics as Math
-import Components.Burger exposing (burger)
-import Debug exposing (todo)
-import Element exposing (Attr, Attribute, Element, Length, centerX, centerY, clip, el, explain, height, image, inFront, moveDown, moveLeft, moveRight, moveUp, none, paddingXY, px, rgb255, text, width)
+import Browser.Dom exposing (Viewport)
+import Element exposing (Attr, Attribute, Element, Length, centerX, clip, el, height, image, inFront, moveDown, moveLeft, moveRight, none, paddingXY, px, rgb255, text, width)
 import Element.Background exposing (color)
 import Element.Border as Border
 import Element.Font as Font
+import Html
+import Html.Attributes
 import Messages exposing (Msg)
-import ViewConstants exposing (picturePercentage, wContent)
-import ViewTypes exposing (FontSizeFunc, ViewData)
+import String exposing (fromInt)
+import ViewUtils.ViewConstants exposing (cHMax, cMBMin, cMBMinDelta, cWMax, picturePercentage, wContent)
+import ViewUtils.ViewTypes exposing (FontSizeFunc, ViewData)
 import ViewUtils.ViewUtils exposing (bottomLine)
 
 
@@ -22,8 +24,6 @@ menubarHeader viewData fontSizeFunc basePath =
     [ whiteBackgroundBox viewData |> inFront
     , title viewData fontSizeFunc |> inFront
     , picture viewData basePath |> inFront
-
-    --, burger |> inFront
     ]
 
 
@@ -172,3 +172,69 @@ whiteBackgroundColor =
 coolBackgroundColor : Attr decorative msg
 coolBackgroundColor =
     color (rgb255 233 196 106)
+
+
+calculateViewData : Viewport -> Float -> Float -> ViewData
+calculateViewData viewport y initialH =
+    let
+        wScene : Float
+        wScene =
+            viewport.scene.width
+
+        hScene : Float
+        hScene =
+            initialH
+
+        w : Float
+        w =
+            if wScene < cWMax then
+                wScene
+
+            else
+                cWMax
+
+        h : Float
+        h =
+            if hScene < cHMax then
+                hScene
+
+            else
+                cHMax
+
+        hMBMin : Float
+        hMBMin =
+            cMBMin + cMBMinDelta * (h / cHMax) * (w / cWMax)
+
+        hMBtemp : Float
+        hMBtemp =
+            h - y
+
+        hMB : Float
+        hMB =
+            if hMBtemp >= hMBMin then
+                hMBtemp
+
+            else
+                hMBMin
+    in
+    { w = w, h = h, y = y, hMB = hMB, hMBMin = hMBMin }
+
+
+minContentHeightAttr : ViewData -> Html.Attribute msg
+minContentHeightAttr viewData =
+    let
+        minHeight =
+            floor <| minimumContentHeight viewData.h viewData.hMBMin
+
+        fixMeScalable =
+            minHeight - 80
+
+        minHeightString =
+            fromInt fixMeScalable
+    in
+    Html.Attributes.style "min-height" <| minHeightString ++ "px"
+
+
+minimumContentHeight : Float -> Float -> Float
+minimumContentHeight viewportHeight menubarMinHeight =
+    viewportHeight - menubarMinHeight

@@ -6,6 +6,8 @@ import Http exposing (Error(..))
 import Messages exposing (Msg(..))
 import Regex
 import Task
+import Types exposing (Route(..))
+import Url.Parser exposing ((</>), Parser, oneOf, s, string)
 
 
 httpErrorToString : Http.Error -> String
@@ -75,3 +77,11 @@ getBasePath host =
 
     else
         "/"
+
+
+routeParser : Parser (Route -> a) a
+routeParser =
+    oneOf
+        [ Url.Parser.map Resume (s "resume")
+        , Url.Parser.map PersonalProjects (s "personal-projects")
+        ]
