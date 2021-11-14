@@ -45,10 +45,10 @@ hMax wContent =
     let
         max : Float
         max =
-            (10 / 8) * wContent + 300
+            (10 / 8) * wContent + 200
     in
-    if max > 900 then
-        900
+    if max > cHMax then
+        cHMax
 
     else
         max

@@ -14,6 +14,7 @@ import Model exposing (Model)
 import String exposing (fromInt)
 import Types exposing (Route(..))
 import ViewUtils.Palette exposing (greyScaleDark4)
+import ViewUtils.ViewConstants exposing (cHMax)
 import ViewUtils.ViewTypes exposing (ViewData)
 import Views.IntroPageContent exposing (introPageContent)
 import Views.Resume exposing (resume)
@@ -79,6 +80,7 @@ view model =
                 , div
                     [ class "container"
                     , style "margin-top" (inFrontMarginTop viewport.scene.width)
+                    , style "margin-bottom" (inFrontMarginTop viewport.scene.width)
                     , minContentHeightAttr viewData
                     , style "height" "auto"
                     ]

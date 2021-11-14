@@ -22,7 +22,7 @@ cWMax =
 
 cHMax : Float
 cHMax =
-    1024
+    1440
 
 
 cMBMin : Float
